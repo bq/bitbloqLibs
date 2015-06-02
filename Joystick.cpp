@@ -1,23 +1,23 @@
 #include "Joystick.h"
 //****** JOYSTICK ******//
-Joystick::Joystick(int pinX, int pinY, int pinButton){
+Joystick::Joystick(float pinX, float pinY, float pinButton){
   _pinX = pinX;
   _pinY = pinY;
   _pinButton = pinButton;
 }
-int * Joystick::read(){
-  int * position = (int*)malloc(3*sizeof(int));
+float * Joystick::read(){
+  float * position = (float*)malloc(3*sizeof(float));
   position[0] = Joystick::readPinX();
   position[1] = Joystick::readPinY();
   position[2] = Joystick::readPinButton();
   return position;
 }
-int Joystick::readPinX(){
+float Joystick::readPinX(){
   return analogRead(_pinX);
 }
-int Joystick::readPinY(){
+float Joystick::readPinY(){
   return analogRead(_pinY);
 }
-int Joystick::readPinButton(){
+float Joystick::readPinButton(){
   return digitalRead(_pinButton);
 }

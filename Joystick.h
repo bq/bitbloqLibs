@@ -5,15 +5,15 @@
 class Joystick
 {
 public:
-	Joystick(int pinX, int pinY, int pinButton);
-	int * read();
-	int readPinX();
-	int readPinY();
-	int readPinButton();
+	Joystick(float pinX, float pinY, float pinButton);
+	float * read();
+	float readPinX();
+	float readPinY();
+	float readPinButton();
 private:
-	int _pinX;
-	int _pinY;
-	int _pinButton;
+	float _pinX;
+	float _pinY;
+	float _pinButton;
 };
 
 #endif //JOYSTICK_H
