@@ -1,5 +1,5 @@
 #include <ButtonPad.h>
-
+#include <Wire.h>
 ButtonPad myPad(A0);
 
 void setup(){

@@ -13,7 +13,7 @@ ButtonPad::ButtonPad(int pin){
   _key=-1;
   _oldkey=-1;
 }
-ButtonPad ::ButtonPad(int pin, int num_keys, int * adc_key_val){
+ButtonPad::ButtonPad(int pin, int num_keys, int * adc_key_val){
   _pin = pin;
   _num_keys = num_keys;
   _adc_key_val = adc_key_val;
