@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <Servo.h>
 #include <bqSoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 Joystick myJoystick(A1,A2,4);
 
@@ -10,6 +11,12 @@ void setup(){
 }
 void loop(){
   float * joystick_position = myJoystick.read();
-  Serial.println("\n------\nJoystick:\nX axis:"+ String(joystick_position[0])+"\nY axis:"+ String(joystick_position[1])+"\nButton:"+ String(joystick_position[2])+"\n------\n");
+  Serial.print("\n------\nJoystick:\nX axis:");
+  Serial.println(joystick_position[0]);
+  Serial.print("\nY axis:");
+  Serial.println(joystick_position[1]);
+  Serial.print("\nButton:");
+  Serial.println(joystick_position[2]);
+  Serial.println("------");
   delay(500);
 }
