@@ -1,5 +1,10 @@
 #include <ButtonPad.h>
+
+
+#include <Servo.h>
 #include <Wire.h>
+#include <SoftwareSerial.h>
+
 ButtonPad myPad(A0);
 
 void setup(){

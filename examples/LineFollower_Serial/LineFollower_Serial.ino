@@ -1,5 +1,9 @@
 #include <LineFollower.h>
 
+#include <Servo.h>
+#include <Wire.h>
+#include <SoftwareSerial.h>
+
 LineFollower myLineFollower(11,12);
 
 void setup(){

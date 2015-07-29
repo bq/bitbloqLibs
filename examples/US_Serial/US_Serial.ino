@@ -1,5 +1,9 @@
 #include <US.h>
 
+#include <Servo.h>
+#include <Wire.h>
+#include <SoftwareSerial.h>
+
 US myUS(9,8);
 
 void setup(){
