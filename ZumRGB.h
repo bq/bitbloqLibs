@@ -17,8 +17,6 @@ class ZumRGB
     void crossFade(int redValue,int greenValue,int blueValue);
     //void crossFade(int color[3]);
 
-    int calculateStep(int prevValue, int endValue);
-    int calculateVal(int step, int val, int i);
     
   private:
     int _redPin;
@@ -31,6 +29,8 @@ class ZumRGB
 
     int _wait = 10; // 10ms internal delay. Increase for slower fades
 
+    int calculateStep(int prevValue, int endValue);
+    int calculateVal(int step, int val, int i);
 };
 
 #endif //ZUMRGB_H

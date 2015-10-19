@@ -14,7 +14,7 @@ long US::TP_init()
   digitalWrite(_pinTrigger, HIGH);
   delayMicroseconds(10);
   digitalWrite(_pinTrigger, LOW);
-  long microseconds = pulseIn(_pinEcho ,HIGH);
+  long microseconds = pulseIn(_pinEcho ,HIGH, 100000);
   return microseconds;
 }
 float US::read(){

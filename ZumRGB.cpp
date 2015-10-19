@@ -6,10 +6,14 @@ ZumRGB::ZumRGB(int redPin,int greenPin,int bluePin){
     _greenPin = greenPin;
     _bluePin = bluePin;
   
+    pinMode(_redPin,OUTPUT);
+    pinMode(_greenPin,OUTPUT);
+    pinMode(_bluePin,OUTPUT);
+
     _R = 0;
     _G = 0;
     _B = 0;
-
+    ZumRGB::setRGBWait(2);
   
 }
 
@@ -48,14 +52,14 @@ void ZumRGB::setRGBWait(int newWait){
 void ZumRGB::crossFade(int redValue,int greenValue,int blueValue){
 
 
-  int stepR = calculateStep(_R, redValue);
-  int stepG = calculateStep(_G, greenValue); 
-  int stepB = calculateStep(_B, blueValue);
+  int stepR = ZumRGB::calculateStep(_R, redValue);
+  int stepG = ZumRGB::calculateStep(_G, greenValue); 
+  int stepB = ZumRGB::calculateStep(_B, blueValue);
 
   for (int i = 0; i <= 1020; i++) {
-    _R = calculateVal(stepR, _R, i);
-    _G = calculateVal(stepG, _G, i);
-    _B = calculateVal(stepB, _B, i);
+    _R = ZumRGB::calculateVal(stepR, _R, i);
+    _G = ZumRGB::calculateVal(stepG, _G, i);
+    _B = ZumRGB::calculateVal(stepB, _B, i);
 
      analogWrite(_redPin, _R);
      analogWrite(_greenPin, _G);
