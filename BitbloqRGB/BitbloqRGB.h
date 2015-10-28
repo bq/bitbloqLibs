@@ -27,7 +27,7 @@ class ZumRGB
     int _G;
     int _B;
 
-    int _wait = 10; // 10ms internal delay. Increase for slower fades
+    int _wait; // 10ms internal delay. Increase for slower fades
 
     int calculateStep(int prevValue, int endValue);
     int calculateVal(int step, int val, int i);
