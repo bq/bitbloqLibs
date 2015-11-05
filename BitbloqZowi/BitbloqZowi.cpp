@@ -176,6 +176,9 @@ void Zowi::setRestState(bool state){
 //---------------------------------------------------------
 void Zowi::jump(float steps, int T){
 
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 2000, 1000, 400);
+
   int up[]={90,90,150,30};
   _moveServos(T,up);
   int down[]={90,90,90,90};
@@ -310,7 +313,7 @@ void Zowi::bend (int steps, int T, int dir){
 void Zowi::shakeLeg (int steps,int T,int dir){
 
   //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
-  T = Zowi::parseT(T, 3000, 2000, 1400);
+  T = Zowi::parseT(T, 3000, 2000, 1600);
 
 
   //This variable change the amount of shakes
@@ -371,6 +374,10 @@ void Zowi::updown(float steps, int T, int h){
   //-- Feet amplitude and offset are the same
   //-- Initial phase for the right foot is -90, so that it starts
   //--   in one extreme position (not in the middle)
+
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 2000, 1000, 400);
+
   int A[4]= {0, 0, h, h};
   int O[4] = {0, 0, h, -h};
   double phase_diff[4] = {0, 0, DEG2RAD(-90), DEG2RAD(90)};
@@ -391,6 +398,10 @@ void Zowi::swing(float steps, int T, int h){
 
   //-- Both feets are in phase. The offset is half the amplitude
   //-- It causes the robot to swing from side to side
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 2000, 1000, 400);
+
+
   int A[4]= {0, 0, h, h};
   int O[4] = {0, 0, h/2, -h/2};
   double phase_diff[4] = {0, 0, DEG2RAD(0), DEG2RAD(0)};
@@ -411,6 +422,10 @@ void Zowi::tiptoeSwing(float steps, int T, int h){
 
   //-- Both feets are in phase. The offset is not half the amplitude in order to tiptoe
   //-- It causes the robot to swing from side to side
+
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 1500, 900, 400);
+
   int A[4]= {0, 0, h, h};
   int O[4] = {0, 0, h, -h};
   double phase_diff[4] = {0, 0, 0, 0};
@@ -434,6 +449,10 @@ void Zowi::jitter(float steps, int T, int h){
   //-- Initial phase for the right foot is -90, so that it starts
   //--   in one extreme position (not in the middle)
   //-- h is constrained to avoid hit the feets
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 1500, 500, 200);
+
+
   h=min(25,h);
   int A[4]= {h, h, 0, 0};
   int O[4] = {0, 0, 0, 0};
@@ -457,6 +476,9 @@ void Zowi::ascendingTurn(float steps, int T, int h){
   //-- Initial phase for the right foot is -90, so that it starts
   //--   in one extreme position (not in the middle)
   //-- h is constrained to avoid hit the feets
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 1500, 900, 400);
+
   h=min(13,h);
   int A[4]= {h, h, h, h};
   int O[4] = {0, 0, h+4, -h+4};
@@ -486,7 +508,10 @@ void Zowi::moonwalker(float steps, int T, int h, int dir){
   //--  is 60 degrees.
   //--  Both amplitudes are equal. The offset is half the amplitud plus a little bit of
   //-   offset so that the robot tiptoe lightly
- 
+   //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 1800, 900, 600);
+
+
   int A[4]= {0, 0, h, h};
   int O[4] = {0, 0, h/2+2, -h/2 -2};
   int phi = -dir * 90;
@@ -506,6 +531,8 @@ void Zowi::moonwalker(float steps, int T, int h, int dir){
 //--     dir:  Direction: LEFT / RIGHT
 //-----------------------------------------------------------
 void Zowi::crusaito(float steps, int T, int h, int dir){
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 1800, 900, 600);
 
   int A[4]= {25, 25, h, h};
   int O[4] = {0, 0, h/2+ 4, -h/2 - 4};
@@ -525,6 +552,9 @@ void Zowi::crusaito(float steps, int T, int h, int dir){
 //--    dir: direction: FOREWARD, BACKWARD
 //---------------------------------------------------------
 void Zowi::flapping(float steps, int T, int h, int dir){
+
+  //-- In case a 0,1,2 is passed as T, it is parsed into low-medium-high speed values for each movement.
+  T = Zowi::parseT(T, 1500, 1000, 600);
 
   int A[4]= {12, 12, h, h};
   int O[4] = {0, 0, h - 10, -h + 10};
