@@ -5,11 +5,10 @@
 //-- (c) Juan Gonzalez-Gomez (Obijuan), Dec 2011
 //-- GPL license
 //--------------------------------------------------------------
-#include <Servo.h>
-
 #ifndef Oscillator_h
 #define Oscillator_h
 
+#include <Servo.h>
 
 //-- Macro for converting from degrees to radians
 #ifndef DEG2RAD
@@ -21,12 +20,14 @@ class Oscillator
   public:
     Oscillator(int trim=0) {_trim=trim;};
     void attach(int pin, bool rev =false);
+    void detach();
     
     void SetA(unsigned int A) {_A=A;};
     void SetO(unsigned int O) {_O=O;};
     void SetPh(double Ph) {_phase0=Ph;};
     void SetT(unsigned int T);
     void SetTrim(int trim){_trim=trim;};
+    int getTrim() {return _trim;};
     void SetPosition(int position); 
     void Stop() {_stop=true;};
     void Play() {_stop=false;};
@@ -65,5 +66,3 @@ class Oscillator
 };
 
 #endif
-
-
