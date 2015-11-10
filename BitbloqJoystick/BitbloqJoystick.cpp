@@ -10,6 +10,7 @@ float * Joystick::read(){
   position[0] = Joystick::readPinX();
   position[1] = Joystick::readPinY();
   position[2] = Joystick::readPinButton();
+  free (position);
   return position;
 }
 float Joystick::readPinX(){
