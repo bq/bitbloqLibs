@@ -6,10 +6,10 @@
 class Encoder{
 
 public:
-  Encoder();
+  Encoder(void (*f)());
   // Encoder(int saPin, int sbPin, int kPin);
   long read();
-  void updateEncoder();
+  void update();
 
 private:
   int sum;

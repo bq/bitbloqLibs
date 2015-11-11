@@ -6,8 +6,8 @@ class US
 {
 public:
 	US();
-	void init(int pinTrigger, int pinEcho);
 	US(int pinTrigger, int pinEcho);
+	void init(int pinTrigger, int pinEcho);
 	float read();
 
 private:
