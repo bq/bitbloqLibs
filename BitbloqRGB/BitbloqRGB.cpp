@@ -2,7 +2,7 @@
 
 //****** ZumRGB ******//
 ZumRGB::ZumRGB(int redPin,int greenPin,int bluePin){
-    _wait = 10
+    _wait = 10;
     _redPin = redPin;
     _greenPin = greenPin;
     _bluePin = bluePin;
