@@ -1,16 +1,15 @@
 #include "BitbloqEncoder.h"
 
 
-Encoder::Encoder (void (*f)()) {
+Encoder::Encoder (void (*f)(), int kPin, int saPin, int sbPin) {
 	Encoder::sum = 0;
 
 	Encoder::encoderValue = 0;
 	Encoder::lastEncoded = 3;
 
-
-	Encoder::saPin = 2;
-	Encoder::sbPin = 3;
-	Encoder::kPin = 4;
+	Encoder::saPin = saPin;
+	Encoder::sbPin = sbPin;
+	Encoder::kPin = kPin;
 
 	pinMode(Encoder::saPin, INPUT); 
 	pinMode(Encoder::sbPin, INPUT);

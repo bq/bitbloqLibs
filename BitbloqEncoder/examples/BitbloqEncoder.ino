@@ -1,6 +1,6 @@
 #include <BitbloqEncoder.h>
 
-Encoder encoder (encoderUpdaterWrapper);
+Encoder encoder (encoderUpdaterWrapper, 4, 3, 2);
 
 void setup()
 {

@@ -6,7 +6,7 @@
 class Encoder{
 
 public:
-  Encoder(void (*f)());
+  Encoder(void (*f)(),int kPin, int saPin, int sbPin);
   // Encoder(int saPin, int sbPin, int kPin);
   long read();
   void update();
