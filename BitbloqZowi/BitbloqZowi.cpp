@@ -594,11 +594,11 @@ int Zowi::getNoise(){
   int noiseReadings = 0;
   int numReadings = 2;
 
-  
+  noiseLevel = analogRead(pinNoiseSensor);
 
     for(int i=0; i<numReadings; i++){
         noiseReadings += analogRead(pinNoiseSensor);
-        delay(2); // delay in between reads for stability
+        delay(4); // delay in between reads for stability
     }
 
     noiseLevel = noiseReadings / numReadings;
