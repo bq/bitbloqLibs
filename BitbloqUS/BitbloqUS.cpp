@@ -34,5 +34,6 @@ float US::read(){
   if (distance == 0){
     distance = 999;
   }
+  delay(30);
   return distance;
 }
