@@ -7,12 +7,13 @@ class US
 public:
 	US();
 	US(int pinTrigger, int pinEcho);
-	void init(int pinTrigger, int pinEcho);
+	void init(int pinTrigger, int pinEcho, unsigned long timeOut = 58000);
 	float read();
 
 private:
 	int _pinTrigger;
 	int _pinEcho;
+	unsigned long _timeOut;
 	long TP_init();
 
 };
