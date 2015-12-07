@@ -34,7 +34,11 @@ float US::read(){
   long distance;
   distance = microseconds/29/2;
   if (distance == 0){
-    distance = _timeOut*29*2;
+    distance = _timeOut/29/2;
   }
   return distance;
+}
+
+void setTimeOut(unsigned long timeOut){
+  _timeOut = timeOut;
 }
