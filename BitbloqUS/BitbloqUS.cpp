@@ -4,14 +4,15 @@
 US::US(){
 }
 
-US::US(int pinTrigger, int pinEcho){
-  US::init(pinTrigger,pinEcho);
+US::US(int pinTrigger, int pinEcho, unsigned long timeOut){
+  US::init(pinTrigger,pinEcho, unsigned long timeOut);
 }
 
-void US::init(int pinTrigger, int pinEcho)
+void US::init(int pinTrigger, int pinEcho, unsigned long timeOut)
 {
   _pinTrigger = pinTrigger;
   _pinEcho = pinEcho;
+  _timeOut = timeOut;
   pinMode( _pinTrigger , OUTPUT );
   pinMode( _pinEcho , INPUT );
 }
@@ -23,7 +24,8 @@ long US::TP_init()
     digitalWrite(_pinTrigger, HIGH);
     delayMicroseconds(10);
     digitalWrite(_pinTrigger, LOW);
-    long microseconds = pulseIn(_pinEcho,HIGH,40000); //40000
+    long microseconds = pulseIn(_pinEcho,HIGH,_timeOut);
+    delay(29);
     return microseconds;
 }
 
@@ -32,8 +34,11 @@ float US::read(){
   long distance;
   distance = microseconds/29/2;
   if (distance == 0){
-    distance = 999;
+    distance = _timeOut/29/2;
   }
-  delay(30);
   return distance;
+}
+
+void setTimeOut(unsigned long timeOut){
+  _timeOut = timeOut;
 }

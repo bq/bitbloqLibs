@@ -31,8 +31,8 @@ void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int Noise
   
   for (int i = 0; i < 4; i++) servo_position[i] = 90;
 
-  //US sensor init with the pins:
-  us.init(USTrigger, USEcho);
+  //US sensor init with the pins and the timeOut (= Max distance in cm * 29 * 2):
+  us.init(USTrigger, USEcho, 15000);
 
   //Buzzer & noise sensor pins: 
   pinBuzzer = Buzzer;
