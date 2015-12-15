@@ -5,7 +5,7 @@ US::US(){
 }
 
 US::US(int pinTrigger, int pinEcho, unsigned long timeOut){
-  US::init(pinTrigger,pinEcho, unsigned long timeOut);
+  US::init(pinTrigger,pinEcho, timeOut);
 }
 
 void US::init(int pinTrigger, int pinEcho, unsigned long timeOut)
@@ -39,6 +39,6 @@ float US::read(){
   return distance;
 }
 
-void setTimeOut(unsigned long timeOut){
+void US::setTimeOut(unsigned long timeOut){
   _timeOut = timeOut;
 }
