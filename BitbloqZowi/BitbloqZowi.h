@@ -42,6 +42,9 @@
 class Zowi
 {
   public:
+    //-- Zowi constructors
+    Zowi(char *ID="ZOWI_BITBLOQ");
+
     //-- Zowi initialization
     void init(int YL=PIN_YL, int YR=PIN_YR, int RL=PIN_RL, int RR=PIN_RR, bool load_calibration = true, int NoiseSensor=PIN_NoiseSensor, int Buzzer=PIN_Buzzer, int USTrigger=PIN_Trigger, int USEcho=PIN_Echo);
 
@@ -101,6 +104,11 @@ class Zowi
     //-- Gestures
     void playGesture(int gesture);
 
+    //-- App
+    void requestName();
+    void requestBattery();
+    void requestProgramId();
+
  
   private:
     
@@ -121,6 +129,8 @@ class Zowi
     float increment[4];
 
     bool isZowiResting;
+
+    char *programID;
 
     unsigned long int getMouthShape(int number);
     unsigned long int getAnimShape(int anim, int index);
