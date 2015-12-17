@@ -8,6 +8,10 @@
 
 #include "BitbloqZowi.h"
 
+Zowi::Zowi(char *ID){
+   programID = ID;
+}
+
 void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int NoiseSensor, int Buzzer, int USTrigger, int USEcho) {
   
   servo_pins[0] = YL;
@@ -40,6 +44,14 @@ void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int Noise
 
   pinMode(Buzzer,OUTPUT);
   pinMode(NoiseSensor,INPUT);
+
+  Serial.begin(115200);
+  requestName();
+  delay(50);
+  requestProgramId();
+  delay(50);
+  requestBattery();
+  delay(50);
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1208,3 +1220,50 @@ void Zowi::playGesture(int gesture){
 
   }
 }    
+
+
+///////////////////////////////////////////////////////////////////
+//-- APP --------------------------------------------------------//
+///////////////////////////////////////////////////////////////////
+
+void Zowi::requestName(){
+
+    home(); //stop if necessary
+
+    char actualZowiName[11] = "";
+    int i = 5;
+
+    while(char(EEPROM.read(i))!='\0' && i<11){
+      actualZowiName[strlen(actualZowiName)] = char(EEPROM.read(i++));
+    }
+
+
+    Serial.print(F("&&"));
+    Serial.print(F("E "));
+    Serial.print(actualZowiName);
+    Serial.println(F("%%"));
+}
+
+
+void Zowi::requestBattery(){
+
+    home();  //stop if necessary
+
+    double batteryLevel = getBatteryLevel();
+
+    Serial.print(F("&&"));
+    Serial.print(F("B "));
+    Serial.print(batteryLevel);
+    Serial.println(F("%%"));
+}
+
+
+void Zowi::requestProgramId(){
+
+    home();   //stop if necessary
+
+    Serial.print(F("&&"));
+    Serial.print(F("I "));
+    Serial.print(programID);
+    Serial.println(F("%%"));
+}
