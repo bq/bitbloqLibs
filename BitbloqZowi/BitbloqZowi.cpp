@@ -12,7 +12,7 @@ Zowi::Zowi(char *ID){
    programID = ID;
 }
 
-void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int NoiseSensor, int Buzzer, int USTrigger, int USEcho) {
+void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int AButton, int BButton, int NoiseSensor, int Buzzer, int USTrigger, int USEcho) {
   
   servo_pins[0] = YL;
   servo_pins[1] = YR;
@@ -45,6 +45,11 @@ void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int Noise
   pinMode(Buzzer,OUTPUT);
   pinMode(NoiseSensor,INPUT);
 
+  //Button pins:
+  pinMode(AButton,INPUT);
+  pinMode(BButton,INPUT);
+
+  //App send:
   Serial.begin(115200);
   requestName();
   delay(50);
