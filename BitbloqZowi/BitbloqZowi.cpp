@@ -1238,7 +1238,7 @@ void Zowi::requestName(){
     char actualZowiName[11] = "";
     int i = 5;
 
-    while(char(EEPROM.read(i))!='\0' && i<11){
+    while(char(EEPROM.read(i))!='\0' && i<16){
       actualZowiName[strlen(actualZowiName)] = char(EEPROM.read(i++));
     }
 
