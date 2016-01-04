@@ -75,7 +75,7 @@ void Evolution::detachHead(){
 ///////////////////////////////////////////////////////////////////
 //-- BASIC MOTION FUNCTIONS -------------------------------------//
 ///////////////////////////////////////////////////////////////////
-void Evolution::moveHead(int head_target, int time){
+void Evolution::turnHead(int head_target, int time){
 
   attachHead();
 
@@ -126,7 +126,7 @@ void Evolution::home(){
 
   if(!getRestHeadState()){
 
-    moveHead(HEAD_CENTER);   //Move the head at default position in half a second
+    turnHead(HEAD_CENTER);   //Move the head at default position in half a second
 
     detachHead();
   }

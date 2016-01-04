@@ -48,7 +48,7 @@ class Evolution
     void detachHead();
 
     //-- Predetermined Motion Functions
-    void moveHead( int head_target, int time=500);
+    void turnHead( int head_target, int time=500);
     void oscillateHead(int A, int O, int T, double phase_diff, float cycles=1);
     void move(int WL, int WR);
 
