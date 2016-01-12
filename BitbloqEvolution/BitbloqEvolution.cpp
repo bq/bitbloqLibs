@@ -219,6 +219,29 @@ int Evolution::getLine(int side){
   return digitalRead(PIN_LFR);
 }
 
+bool Evolution::getLightRange(int side, int range){
+
+  int read;
+
+  if (side > 0){
+    read = analogRead(PIN_LDRL);
+  }
+  else {
+    read = analogRead(PIN_LDRR);
+  }
+
+  if (read >= MEDIUM_HIGH_LIGHT && range == HIGH_LIGHT){
+    return true;
+  }
+  else if (read >= LOW_MEDIUM_LIGHT && range == MEDIUM_LIGHT){
+    return true;
+  }
+  else if (range == LOW_LIGHT) {
+    return true;
+  }
+
+  return false;
+}
 
 ///////////////////////////////////////////////////////////////////
 //-- SOUNDS -----------------------------------------------------//

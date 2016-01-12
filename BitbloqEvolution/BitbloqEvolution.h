@@ -23,6 +23,13 @@
 #define MEDIUM_SPEED 22
 #define HIGH_SPEED   90
 
+#define LOW_MEDIUM_LIGHT  267 //800*1/3
+#define MEDIUM_HIGH_LIGHT 533 //800*2/3
+
+#define LOW_LIGHT    0
+#define MEDIUM_LIGHT 1
+#define HIGH_LIGHT   2
+
 #define PIN_LFL      2
 #define PIN_LFR      3
 #define PIN_Trigger  4
@@ -70,6 +77,7 @@ class Evolution
     float getDistance(); //US sensor
     int getLight(int side); //LDR sensors
     int getLine(int side); //LineFollower sensors
+    bool getLightRange(int side, int range); //LDR sensor range
 
     //-- Sounds
     void _tone (float noteFrequency, long noteDuration, int silentDuration=1);
