@@ -230,13 +230,13 @@ bool Evolution::getLightRange(int side, int range){
     read = analogRead(PIN_LDRR);
   }
 
-  if (read >= MEDIUM_HIGH_LIGHT && range == HIGH_LIGHT){
+  if (read > MEDIUM_HIGH_LIGHT && range == HIGH_LIGHT){
     return true;
   }
-  else if (read >= LOW_MEDIUM_LIGHT && range == MEDIUM_LIGHT){
+  else if (read <= MEDIUM_HIGH_LIGHT && read >= LOW_MEDIUM_LIGHT && range == MEDIUM_LIGHT){
     return true;
   }
-  else if (range == LOW_LIGHT) {
+  else if (read < LOW_MEDIUM_LIGHT && range == LOW_LIGHT) {
     return true;
   }
 
