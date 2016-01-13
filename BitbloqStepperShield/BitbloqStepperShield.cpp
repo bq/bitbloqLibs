@@ -30,8 +30,8 @@ void StepperShield::init(){
   pinMode(PIN_STEPPER2DIR, OUTPUT);
   pinMode(PIN_STEPPER2EN, OUTPUT);
 
-  pinMode(PIN_STEPPER1FAULT, INPUT);
-  pinMode(PIN_STEPPER2FAULT, INPUT);
+  pinMode(PIN_STEPPER1FAULT, INPUT_PULLUP);
+  pinMode(PIN_STEPPER2FAULT, INPUT_PULLUP);
 
   digitalWrite(PIN_STEPPER1EN, HIGH);  //Disable both steppers
   digitalWrite(PIN_STEPPER2EN, HIGH);
@@ -75,9 +75,9 @@ void StepperShield::step(int stepper, float deg, bool dir, float rpm){
   digitalWrite(PIN_STEPPER1DIR, dir);  //establish the direction
   digitalWrite(PIN_STEPPER2DIR, dir);
 
-  int steps = abs(deg * revsteps / 360);  //calculate the number of steps needed
+  unsigned long steps = abs(deg * revsteps * MICROSTEPS / 360);  //calculate the number of steps needed
 
-  unsigned long  stephalfmicrodelay = 60000000 / (2 * revsteps * rpm);  //calculate the delay needed to reach the speed (divided by two)
+  unsigned long  stephalfmicrodelay = 60000000 / (2 * MICROSTEPS * revsteps * rpm);  //calculate the delay needed to reach the speed (divided by two)
   if (stephalfmicrodelay<2) stephalfmicrodelay = 2;  //limit the maxmimum speed
 
   unsigned long lasthalfsteptime = 0;

@@ -2,15 +2,17 @@
 #define BitbloqStepperShield_h
 
 
-#define CW              true
-#define CCW             false
+#define CW              0
+#define CCW             1
 
 #define STEPPER1        1
 #define STEPPER2        2
 #define STEPPER1_2      0
 
-#define PIN_STEPPER1FAULT 6
-#define PIN_STEPPER2FAULT 7
+#define MICROSTEPS      32
+
+#define PIN_STEPPER2FAULT 6
+#define PIN_STEPPER1FAULT 7
 #define PIN_STEPPER2EN    8
 #define PIN_STEPPER2DIR   9
 #define PIN_STEPPER2STEP  10
