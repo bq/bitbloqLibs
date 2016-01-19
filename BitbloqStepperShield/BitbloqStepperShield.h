@@ -32,7 +32,7 @@ class StepperShield {
     void setrevsteps(int steps_rev);
     void setrevsteps(double deg_step);
 
-    void step(int stepper, float deg, bool dir, float rpm);
+    void step(byte stepper, float deg, bool dir, float rpm);
 
   private:
     int revsteps;

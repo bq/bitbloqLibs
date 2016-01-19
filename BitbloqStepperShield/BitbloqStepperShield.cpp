@@ -70,7 +70,7 @@ void StepperShield::setrevsteps(double deg_step){
  *   dir: direction of the movement [CW, CCW]
  *   rpm: speed of the movement in revolutions per minute
  */
-void StepperShield::step(int stepper, float deg, bool dir, float rpm){
+void StepperShield::step(byte stepper, float deg, bool dir, float rpm){
 
   digitalWrite(PIN_STEPPER1DIR, dir);  //establish the direction
   digitalWrite(PIN_STEPPER2DIR, dir);
