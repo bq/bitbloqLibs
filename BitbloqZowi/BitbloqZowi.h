@@ -80,7 +80,7 @@ class Zowi
     void ascendingTurn(float steps=1, int T=900, int h=20);
 
     void moonwalker(float steps=1, int T=900, int h=20, int dir=LEFT);
-    void crusaito(float steps=1, int T=900, int h=20, int dir=FORWARD);
+    void crusaito(float steps=1, int T=900, int h=20, int dir=LEFT);
     void flapping(float steps=1, int T=1000, int h=20, int dir=FORWARD);
 
     //-- Sensors functions

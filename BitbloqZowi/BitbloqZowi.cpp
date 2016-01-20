@@ -300,7 +300,7 @@ void Zowi::bend (int steps, int T, int dir){
   T=max(T, 600);
 
   //Changes in the parameters if right direction is chosen 
-  if(dir==-1)
+  if(dir==RIGHT)
   {
     bend1[2]=180-35;
     bend1[3]=180-58;
@@ -341,7 +341,7 @@ void Zowi::shakeLeg (int steps,int T,int dir){
   int homes[4]={90, 90, 90, 90};
 
   //Changes in the parameters if left leg is chosen
-  if(dir==1)      
+  if(dir==LEFT)      
   {
     shake_leg1[2]=180-35;
     shake_leg1[3]=180-58;
