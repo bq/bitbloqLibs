@@ -33,9 +33,11 @@
 #define PIN_YR 3 //servo[1]
 #define PIN_RL 4 //servo[2]
 #define PIN_RR 5 //servo[3]
-#define PIN_Buzzer  10
+#define PIN_AButton 6
+#define PIN_BButton 7
 #define PIN_Trigger 8
 #define PIN_Echo    9
+#define PIN_Buzzer  10
 #define PIN_NoiseSensor A6
 
 
@@ -46,7 +48,7 @@ class Zowi
     Zowi(char *ID="ZOWI_BITBLOQ");
 
     //-- Zowi initialization
-    void init(int YL=PIN_YL, int YR=PIN_YR, int RL=PIN_RL, int RR=PIN_RR, bool load_calibration = true, int NoiseSensor=PIN_NoiseSensor, int Buzzer=PIN_Buzzer, int USTrigger=PIN_Trigger, int USEcho=PIN_Echo);
+    void init(int YL=PIN_YL, int YR=PIN_YR, int RL=PIN_RL, int RR=PIN_RR, bool load_calibration = true, int AButton=PIN_AButton, int BButton=PIN_BButton, int NoiseSensor=PIN_NoiseSensor, int Buzzer=PIN_Buzzer, int USTrigger=PIN_Trigger, int USEcho=PIN_Echo);
 
     //-- Attach & detach functions
     void attachServos();
