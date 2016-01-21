@@ -8,7 +8,11 @@
 
 #include "BitbloqZowi.h"
 
-void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int NoiseSensor, int Buzzer, int USTrigger, int USEcho) {
+Zowi::Zowi(char *ID){
+   programID = ID;
+}
+
+void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int AButton, int BButton, int NoiseSensor, int Buzzer, int USTrigger, int USEcho) {
   
   servo_pins[0] = YL;
   servo_pins[1] = YR;
@@ -31,8 +35,8 @@ void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int Noise
   
   for (int i = 0; i < 4; i++) servo_position[i] = 90;
 
-  //US sensor init with the pins:
-  us.init(USTrigger, USEcho);
+  //US sensor init with the pins and the timeOut (= Max distance in cm * 29 * 2):
+  us.init(USTrigger, USEcho, 15000);
 
   //Buzzer & noise sensor pins: 
   pinBuzzer = Buzzer;
@@ -40,6 +44,19 @@ void Zowi::init(int YL, int YR, int RL, int RR, bool load_calibration, int Noise
 
   pinMode(Buzzer,OUTPUT);
   pinMode(NoiseSensor,INPUT);
+
+  //Button pins:
+  pinMode(AButton,INPUT);
+  pinMode(BButton,INPUT);
+
+  //App send:
+  Serial.begin(115200);
+  requestName();
+  delay(50);
+  requestProgramId();
+  delay(50);
+  requestBattery();
+  delay(50);
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -288,7 +305,7 @@ void Zowi::bend (int steps, int T, int dir){
   T=max(T, 600);
 
   //Changes in the parameters if right direction is chosen 
-  if(dir==-1)
+  if(dir==RIGHT)
   {
     bend1[2]=180-35;
     bend1[3]=180-58;
@@ -329,7 +346,7 @@ void Zowi::shakeLeg (int steps,int T,int dir){
   int homes[4]={90, 90, 90, 90};
 
   //Changes in the parameters if left leg is chosen
-  if(dir==1)      
+  if(dir==LEFT)      
   {
     shake_leg1[2]=180-35;
     shake_leg1[3]=180-58;
@@ -1208,3 +1225,50 @@ void Zowi::playGesture(int gesture){
 
   }
 }    
+
+
+///////////////////////////////////////////////////////////////////
+//-- APP --------------------------------------------------------//
+///////////////////////////////////////////////////////////////////
+
+void Zowi::requestName(){
+
+    home(); //stop if necessary
+
+    char actualZowiName[11] = "";
+    int i = 5;
+
+    while(char(EEPROM.read(i))!='\0' && i<16){
+      actualZowiName[strlen(actualZowiName)] = char(EEPROM.read(i++));
+    }
+
+
+    Serial.print(F("&&"));
+    Serial.print(F("E "));
+    Serial.print(actualZowiName);
+    Serial.println(F("%%"));
+}
+
+
+void Zowi::requestBattery(){
+
+    home();  //stop if necessary
+
+    double batteryLevel = getBatteryLevel();
+
+    Serial.print(F("&&"));
+    Serial.print(F("B "));
+    Serial.print(batteryLevel);
+    Serial.println(F("%%"));
+}
+
+
+void Zowi::requestProgramId(){
+
+    home();   //stop if necessary
+
+    Serial.print(F("&&"));
+    Serial.print(F("I "));
+    Serial.print(programID);
+    Serial.println(F("%%"));
+}
