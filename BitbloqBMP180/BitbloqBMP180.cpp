@@ -19,7 +19,7 @@ void BMP180::init(){
 }
 
 
-float BMP180::readTemperature(){
+float BMP180::getTemperature(){
   float temp;
 
   temp = (TemperatureCompensation() + 8)>>4;
@@ -28,7 +28,7 @@ float BMP180::readTemperature(){
   return temp;
 }
 
-float BMP180::readPressure(){
+float BMP180::getPressure(){
   long PressureCompensation, x1, x2, x3, b3, b6, p;
   unsigned long b4, b7;
 
@@ -68,8 +68,8 @@ float BMP180::readPressure(){
   return (float) p;
 }
 
-float BMP180::readAltitude(){
-  return 44307.69396 * (1.0 - pow(readPressure()/sealevelPressure, 0.190284));
+float BMP180::getAltitude(){
+  return 44307.69396 * (1.0 - pow(getPressure()/sealevelPressure, 0.190284));
 }
 
 

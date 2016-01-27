@@ -16,9 +16,9 @@ class BMP180{
 
     void init();
 
-    float readTemperature();
-    float readPressure();
-    float readAltitude();
+    float getTemperature();
+    float getPressure();
+    float getAltitude();
 
     void setSealevelPressure(float pressure);
 
