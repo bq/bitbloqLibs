@@ -26,9 +26,9 @@ void ZumRGB::setRGBcolor(int redValue,int greenValue,int blueValue){
     _G = greenValue;
     _B = blueValue;
 
-    SoftPWMSet(_redPin, _R);
-    SoftPWMSet(_greenPin, _G);
-    SoftPWMSet(_bluePin, _B);
+    analogWrite(_redPin, _R);
+    analogWrite(_greenPin, _G);
+    analogWrite(_bluePin, _B);
     delay(_wait); // Pause for optional '_wait' milliseconds before resuming the loop
 }
 
@@ -38,9 +38,9 @@ void ZumRGB::setRGBcolor(int redValue,int greenValue,int blueValue){
 //     _G = color[1];
 //     _B = color[2];
 
-//     SoftPWMSet(_redPin, _R);
-//     SoftPWMSet(_greenPin, _G);
-//     SoftPWMSet(_bluePin, _B);
+//     analogWrite(_redPin, _R);
+//     analogWrite(_greenPin, _G);
+//     analogWrite(_bluePin, _B);
 //     //delay(_wait); // Pause for optional '_wait' milliseconds before resuming the loop
 // }
 
@@ -63,9 +63,9 @@ void ZumRGB::crossFade(int redValue,int greenValue,int blueValue){
     _G = ZumRGB::calculateVal(stepG, _G, i);
     _B = ZumRGB::calculateVal(stepB, _B, i);
 
-     SoftPWMSet(_redPin, _R);
-     SoftPWMSet(_greenPin, _G);
-     SoftPWMSet(_bluePin, _B);
+     analogWrite(_redPin, _R);
+     analogWrite(_greenPin, _G);
+     analogWrite(_bluePin, _B);
 
     delay(_wait); // Pause for '_wait' milliseconds before resuming the loop
 
