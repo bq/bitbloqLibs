@@ -1,5 +1,4 @@
 #include "BitbloqRGB.h"
-#include "BitbloqSoftPWM.h"
 
 //****** ZumRGB ******//
 ZumRGB::ZumRGB(int redPin,int greenPin,int bluePin){
