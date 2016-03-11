@@ -1,9 +1,16 @@
 #include "BitbloqLineFollower.h"
 //****** LINEFOLLOWER ******//
 LineFollower::LineFollower(int pinLeft, int pinRight){
+	LineFollower::init(pinLeft,pinRight);
+}
+
+void LineFollower::init(int pinLeft, int pinRight){
   _pinLeft = pinLeft;
   _pinRight = pinRight;
+  pinMode(pinLeft,INPUT);
+  pinMode(pinRight,INPUT);
 }
+
 int * LineFollower::read(){
   int * position = (int*)malloc(2*sizeof(int));
   position[0] = LineFollower::readLeftSensor();
