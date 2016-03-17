@@ -11,12 +11,20 @@ void LineFollower::init(int pinLeft, int pinRight){
   pinMode(pinRight,INPUT);
 }
 
-int * LineFollower::read(){
-  int * position = (int*)malloc(2*sizeof(int));
-  position[0] = LineFollower::readLeftSensor();
-  position[1] = LineFollower::readRightSensor();
+float * LineFollower::read(){
+  float * position = (float*)malloc(2*sizeof(float));
+  position[0] = (float) LineFollower::readLeftSensor();
+  position[1] = (float) LineFollower::readRightSensor();
   return position;
 }
+
+// int * LineFollower::read(){
+//   int * position = (int *)malloc(2*sizeof(int));
+//   position[0] = LineFollower::readLeftSensor();
+//   position[1] = LineFollower::readRightSensor();
+//   return position;
+// }
+
 int LineFollower::readLeftSensor(){
   return digitalRead(_pinLeft);
 }

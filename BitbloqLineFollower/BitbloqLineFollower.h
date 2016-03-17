@@ -8,7 +8,8 @@ public:
 	LineFollower();
 	LineFollower(int pinLeft, int pinRight);
 	void init (int pinLeft, int pinRight);
-	int * read();
+	float * read();
+	// int * read();
 	int readLeftSensor();
 	int readRightSensor();
 private:
