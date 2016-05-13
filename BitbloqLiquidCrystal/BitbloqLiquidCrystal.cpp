@@ -20,6 +20,8 @@
 //    I/D = 1; Increment by 1 
 //    S = 0; No shift 
 //
+//  Language options follows ISO 639-1 (two letter identification)
+//
 // Note, however, that resetting the Arduino doesn't reset the LCD, so we
 // can't assume that its in that state when a sketch starts (and the
 // LiquidCrystal constructor is called).
@@ -131,7 +133,13 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
   begin(16, 1);  
 }
 
-void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
+void LiquidCrystal::begin(uint8_t cols, uint8_t lines, LanguageEnum language, uint8_t dotsize) {
+  
+  //languaje setings for special chars
+  _language = language;
+  createCustomChars();
+
+  
   // check if i2c
   if (_i2cAddr != 255) {
     _i2c.begin(_i2cAddr);
@@ -139,7 +147,6 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
     _i2c.pinMode(1, OUTPUT); // backlight														//	6pin
     _i2c.digitalWrite(1, HIGH); // backlight
 
-    
     _i2c.pinMode(_rs_pin, OUTPUT);
     _i2c.pinMode(_enable_pin, OUTPUT);
   } else if (_SPIclock != 255) {
@@ -413,3 +420,162 @@ void LiquidCrystal::write8bits(uint8_t value) {
   
   pulseEnable();
 }
+
+
+
+/***********************************************
+ *                Custom chars                 *
+ ***********************************************/
+
+/******************************
+ *    Spanish Custom Chars    *
+ ******************************/
+
+ // exclamation Mark --> ¡
+byte exclamationMark[8] = {
+    B00000,
+    B00100,
+    B00000,
+    B00000,
+    B00100,
+    B00100,
+    B00100,
+    B00100
+};
+
+// question Mark --> ¿
+byte questionMark[8] = { 
+    B00000,
+    B00100,
+    B00000,
+    B00100,
+    B01000,
+    B10000,
+    B10001,
+    B01110
+};
+
+// 'a' stressed vowel -->  á
+byte vowelA[8] = {
+    B00010,
+    B00100,
+    B00000,
+    B01110,
+    B00001,
+    B01111,
+    B10001,
+    B01111
+};
+
+// 'e' stressed vowel -->  é
+byte vowelE[8] = {
+    B00010,
+    B00100,
+    B00000,
+    B01110,
+    B10001,
+    B11111,
+    B10000,
+    B01110
+};
+
+// 'i' stressed vowel -->  í
+byte vowelI[8] = {
+    B00010,
+    B00100,
+    B00000,
+    B01100,
+    B00100,
+    B00100,
+    B00100,
+    B01110
+};
+
+// 'o' stressed vowel -->  ó
+byte vowelO[8] = {
+    B00010,
+    B00100,
+    B00000,
+    B01110,
+    B10001,
+    B10001,
+    B10001,
+    B01110
+};
+
+// 'u' stressed vowel -->  ú
+byte vowelU[8] = {
+    B00010,
+    B00100,
+    B00000,
+    B10001,
+    B10001,
+    B10001,
+    B10011,
+    B01101
+};
+
+// spanish n -->  letter ñ
+byte letterN[8] = {
+    B00101,
+    B01010,
+    B00000,
+    B10110,
+    B11001,
+    B10001,
+    B10001,
+    B10001
+};
+
+/******************************
+ *   Custom Chars Functions   *
+ ******************************/
+
+void LiquidCrystal::specialWrite(String userStr)
+{
+  switch (_language)
+  {
+      case ES:
+            for (int i=0; i< userStr.length(); i++)
+            {
+              //Switch case only allows chars (up to 127 number, but not the rest) from simple ascii, the ones we want are not allowed
+              
+              if (&userStr[i] == "¡") write(0);
+              else if (&userStr[i] == "?") write(1);
+              else if (&userStr[i] == "á") write(2);
+              else if (&userStr[i] == "é") write(3);
+              else if (&userStr[i] == "í") write(4);
+              else if (&userStr[i] == "ó") write(5);
+              else if (&userStr[i] == "ú") write(6);
+              else if (&userStr[i] == "ñ") write(7);
+              else write(userStr[i]);
+              
+            }
+            break;
+      case IT:
+            break;
+      //etc
+  }
+
+}
+
+void LiquidCrystal::createCustomChars()
+{
+  //Codes for the representation of names of languages came from ISO 639-1
+  switch (_language){
+    case ES: 
+            createChar(0,exclamationMark);
+            createChar(1,questionMark);
+            createChar(2,vowelA);
+            createChar(3,vowelE);
+            createChar(4,vowelI);
+            createChar(5,vowelO);
+            createChar(6,vowelU);
+            createChar(7,letterN);
+            break;
+    case IT:
+            break;
+    //etc
+  }
+}
+
