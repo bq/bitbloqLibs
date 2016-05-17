@@ -230,8 +230,8 @@ void LiquidCrystal::beginLanguage(uint8_t cols, uint8_t rows, LanguageEnum langu
 	Serial.println("Funcion beginLanguage");
   //languaje setings for special chars
   _language = language;
+  begin(cols,rows,charsize);  
   createCustomChars();
-  begin(cols,rows,charsize);
 }
 
 /********** high level commands, for the user! */
@@ -427,7 +427,10 @@ void LiquidCrystal::write8bits(uint8_t value) {
 }
 
 
-
+void LiquidCrystal::print(String userStr) 
+{
+  specialWrite(userStr);
+}
 /***********************************************
  *                Custom chars                 *
  ***********************************************/
@@ -556,6 +559,8 @@ void LiquidCrystal::specialWrite(String userStr)
       case IT:
             break;
       //etc
+      default: 
+                Print::print(userStr);
   }
 
 }
@@ -588,5 +593,5 @@ void LiquidCrystal::createCustomChars()
     case IT:
             break;
     //etc
-  }
+    }
 }

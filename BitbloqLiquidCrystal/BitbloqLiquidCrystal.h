@@ -86,6 +86,8 @@ public:
   void autoscroll();
   void noAutoscroll();
 
+  void print(String userStr);
+
   //function to use custom characters automatically detected by library
   void specialWrite(String userStr);
 
