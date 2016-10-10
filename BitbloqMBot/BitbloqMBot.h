@@ -3,6 +3,7 @@ class MeBuzzer;
 class MeUltrasonicSensor;
 class MeLightSensor;
 class MeDCMotor;
+class MeLineFollower;
 
 class MBot
 {
@@ -17,6 +18,7 @@ class MBot
 	    int getDistance(int port);
 	    int getButtonStatus();
 	    int getLightSensor();
+	    int getLineFollower(int port);
 	    void move(int direction, int speed);
 
 	private:
@@ -26,4 +28,5 @@ class MBot
 		MeLightSensor* lightSensor;
 		MeDCMotor* leftMotor;
 		MeDCMotor* rightMotor;
+		MeLineFollower* lineFollower;
 };
