@@ -46,7 +46,7 @@ void MBot::tone(int note, int beat){
 
 int MBot::getDistance(int port){
 	ultrasonicSensor = new MeUltrasonicSensor(port);
-	return ultrasonicSensor.distanceCm();
+	return ultrasonicSensor->distanceCm();
 }
 
 int MBot::getButtonStatus(){
@@ -54,7 +54,7 @@ int MBot::getButtonStatus(){
 }
 
 int MBot::getLightSensor(){
-	return lightSensor.read();
+	return lightSensor->read();
 }
 
 void MBot::move(int direction, int speed){
@@ -73,7 +73,7 @@ void MBot::move(int direction, int speed){
 		leftSpeed = speed;
 		rightSpeed = -speed;
 	}
-	leftMotor.run(leftSpeed);
-	rightMotor.run(rightSpeed);
+	leftMotor->run(leftSpeed);
+	rightMotor->run(rightSpeed);
 
 }

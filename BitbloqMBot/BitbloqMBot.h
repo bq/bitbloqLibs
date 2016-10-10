@@ -13,8 +13,8 @@ class MBot
 
 	    void init();
 	    void setLed(int led, int red, int green, int blue);
-	    void tome();
-	    int getDistance();
+	    void tone(int note, int beat);
+	    int getDistance(int port);
 	    int getButtonStatus();
 	    int getLightSensor();
 	    void move(int direction, int speed);
