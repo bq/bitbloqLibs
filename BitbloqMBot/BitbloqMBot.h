@@ -63,6 +63,6 @@ class MBot
 		MeLightSensor* lightSensor;
 		MeDCMotor* leftMotor;
 		MeDCMotor* rightMotor;
-s};
+};
 
 #endif
