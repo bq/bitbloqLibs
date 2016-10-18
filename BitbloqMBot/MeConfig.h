@@ -94,7 +94,7 @@
 #define MeConfig_H
 
 #include <utility/Servo.h>
-#include <utility/Wire.h>
+#include <utility/MBotWire.h>
 #include <utility/EEPROM.h>
 #include <utility/MBotSoftwareSerial.h>
 #include <utility/SPI.h>
