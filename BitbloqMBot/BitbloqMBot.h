@@ -22,7 +22,7 @@ class MBot
 {
 
 	public:
-		MBot(); //public constructor
+		MBot(int lineFollowerPort = 2); //public constructor
 		virtual ~MBot(); //virtual public destructor
         
         /**
@@ -91,6 +91,9 @@ class MBot
         
 
 	private:
+    
+    void portsInit();
+    
 	BitbloqMeRGBLed* boardLeds;
 
         const int buzzerPin; ///pin where the buzzer is connected. It is hardwired on the board (D8)
@@ -98,8 +101,8 @@ class MBot
         const int buttonPin; ///pin where the buzzer is connected. It is hardwired on the board (A7)
         const int usTriggerPin;
         const int usEchoPin;
-        const int rightLineFollowerPin;
-        const int leftLineFollowerPin;
+        int rightLineFollowerPin;
+        int leftLineFollowerPin;
         const int rightDCMotorDir;
         const int rightDCMotorPWM;
         const int leftDCMotorDir;
@@ -110,6 +113,12 @@ class MBot
         BitbloqDCMotor* rightDCMotor;
         BitbloqDCMotor* leftDCMotor;
         BitbloqMeRGBLed* rgbLED;
+        
+        struct Port{
+            int s1,s2;
+        };
+        
+        Port ports[5];
         
 };
 

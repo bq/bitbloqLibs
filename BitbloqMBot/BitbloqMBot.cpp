@@ -6,25 +6,49 @@
 #include <BitbloqDCMotor.h>
 
 
-MBot::MBot():
+MBot::MBot(int lineFollowerPort = 2):
         buzzerPin(8),
         lightSensorPin(A6),
         buttonPin(A7),
         usSensor(NULL),
         usTriggerPin(A2),
         usEchoPin(A3),
-        rightLineFollowerPin(9),
-        leftLineFollowerPin(10),
-        leftDCMotorDir(6),
-        leftDCMotorPWM(7),
+        //rightLineFollowerPin(9),
+        //leftLineFollowerPin(10),
+        leftDCMotorDir(4),
+        leftDCMotorPWM(5),
         rightDCMotorDir(6),
         rightDCMotorPWM(7),
         rgbLEDPin(13)
 {
+    //init ports stuct
+    portsInit();
+    
+    rightLineFollowerPin = ports[lineFollowerPort].s1;
+    leftLineFollowerPin = ports[lineFollowerPort].s2;
 	boardLeds = new BitbloqMeRGBLed(rgbLEDPin,24);
     leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
     rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
 }
+
+void MBot::portsInit(){
+    ports[0].s1 = 0;
+    ports[0].s2 = 0;
+    
+    ports[1].s1 = 11;
+    ports[1].s2 = 12;
+    
+    ports[2].s1 = 9;
+    ports[2].s2 = 10;
+    
+    ports[3].s1 = A2;
+    ports[3].s2 = A3;
+    
+    ports[4].s1 = A0;
+    ports[4].s2 = A1;
+}
+    
+    
 
 MBot::~MBot(){
 	
