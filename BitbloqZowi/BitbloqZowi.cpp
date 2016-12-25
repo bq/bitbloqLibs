@@ -623,6 +623,29 @@ int Zowi::getNoise(){
     return noiseLevel;
 }
 
+//---------------------------------------------------------
+//-- Zowi getSensor: return zowi's sensors data
+//---------------------------------------------------------
+
+float Zowi::getSensor(String sensorName){
+  float result = 0;
+  switch(sensorName){
+    case "buttonA":
+      result = digitalRead(PIN_AButton);
+    break;
+    case "buttonB":
+      result = digitalRead(PIN_BButton);
+    break;
+    case "sound":
+      result = getDistance();
+    break;
+    case "us":
+      result = getNoise();
+    break;
+  }
+  return result;
+}
+
 
 //---------------------------------------------------------
 //-- Zowi getBatteryLevel: return battery voltage percent
