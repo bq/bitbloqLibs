@@ -19,13 +19,13 @@ void US::init(int pinTrigger, int pinEcho, unsigned long timeOut)
 
 long US::TP_init()
 {
-    pinMode(_pinTrigger,OUTPUT);
+    pinMode(_pinTrigger,OUTPUT); // this is required for those cases in which echo and trigger pin are the same
     digitalWrite(_pinTrigger, LOW);
     delayMicroseconds(2);
     digitalWrite(_pinTrigger, HIGH);
     delayMicroseconds(10);
     digitalWrite(_pinTrigger, LOW);
-    pinMode(_pinEcho,INPUT);
+    pinMode(_pinEcho,INPUT); // this is required for those cases in which echo and trigger pin are the same
     long microseconds = pulseIn(_pinEcho,HIGH,_timeOut);
     delay(29);
     return microseconds;

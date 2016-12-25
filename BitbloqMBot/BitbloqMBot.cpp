@@ -23,7 +23,7 @@ MBot::MBot(int lineFollowerPort, int USPort):
     rightLineFollowerPin = ports[lineFollowerPort].s1;
     leftLineFollowerPin = ports[lineFollowerPort].s2;
 	
-    usTriggerPin = ports[USPort].s2;
+    usTriggerPin = ports[USPort].s2; /// this is weird. There are two components, but only one signal.
     usEchoPin = ports[USPort].s2;
     
     boardLeds = new BitbloqMeRGBLed(rgbLEDPin,24);
