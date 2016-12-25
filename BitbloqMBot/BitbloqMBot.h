@@ -22,7 +22,7 @@ class MBot
 {
 
 	public:
-		MBot(int lineFollowerPort = 2); //public constructor
+		MBot(int lineFollowerPort = 2, int USPort = 3); //public constructor
 		virtual ~MBot(); //virtual public destructor
         
         /**
@@ -50,7 +50,7 @@ class MBot
 		 * gets distance measured by US sensor
 		 * @return distance in cm
          */
-		int readDistance();
+		int readUSMeasuredDistance();
 
 
 		/**
@@ -99,8 +99,8 @@ class MBot
         const int buzzerPin; ///pin where the buzzer is connected. It is hardwired on the board (D8)
         const int lightSensorPin; ///pin where the light sensor is connected. It is hardwired on the board (A6) 
         const int buttonPin; ///pin where the buzzer is connected. It is hardwired on the board (A7)
-        const int usTriggerPin;
-        const int usEchoPin;
+        int usTriggerPin;
+        int usEchoPin;
         int rightLineFollowerPin;
         int leftLineFollowerPin;
         const int rightDCMotorDir;

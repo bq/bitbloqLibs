@@ -6,27 +6,27 @@
 #include <BitbloqDCMotor.h>
 
 
-MBot::MBot(int lineFollowerPort = 2):
+MBot::MBot(int lineFollowerPort = 2, int USPort = 3):
         buzzerPin(8),
         lightSensorPin(A6),
         buttonPin(A7),
         usSensor(NULL),
-        usTriggerPin(A2),
-        usEchoPin(A3),
-        //rightLineFollowerPin(9),
-        //leftLineFollowerPin(10),
         leftDCMotorDir(4),
         leftDCMotorPWM(5),
         rightDCMotorDir(6),
         rightDCMotorPWM(7),
         rgbLEDPin(13)
 {
-    //init ports stuct
+    //initialize ports stuct
     portsInit();
     
     rightLineFollowerPin = ports[lineFollowerPort].s1;
     leftLineFollowerPin = ports[lineFollowerPort].s2;
-	boardLeds = new BitbloqMeRGBLed(rgbLEDPin,24);
+	
+    usTriggerPin = ports[USPort].s2;
+    usEchoPin = ports[USPort].s1;
+    
+    boardLeds = new BitbloqMeRGBLed(rgbLEDPin,24);
     leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
     rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
 }
@@ -110,7 +110,7 @@ void MBot::playTone(int note, int beat){
 	tone(buzzerPin, note, beat);
 }
 
-int MBot::readDistance(){
+int MBot::readUSMeasuredDistance(){
 	return usSensor->read(); //in centimeters
 }
 
