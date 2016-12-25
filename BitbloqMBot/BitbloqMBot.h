@@ -11,10 +11,12 @@
 #ifndef BITBLOQMBOT_H
 #define BITBLOQMBOT_H
 
-class MeRGBLed;
-class MeBuzzer;
-class MeLightSensor;
-class MeDCMotor;
+
+//class predeclaration
+
+class US;
+class BitbloqDCMotor;
+class BitbloqMeRGBLed;
 
 class MBot
 {
@@ -22,9 +24,12 @@ class MBot
 	public:
 		MBot(); //public constructor
 		virtual ~MBot(); //virtual public destructor
+        
+        /**
+         * Sets pinmode of sensors and actuators (as in standard Arduino setup)
+         */
+        void setup();
 
-		void init();
-		
 		/**
 		 * Choose led and set color
 		 * @param led led number
@@ -33,36 +38,81 @@ class MBot
 		 * @param blue blue component of rgb color
 		 */
 		void setLed(int led, int red, int green, int blue);
-		void tone(int note, int beat);
+		
+        /**
+         * Play tone
+         * @param note note frequency
+         * @param beat time active
+         */
+        void playTone(int note, int beat);
+
 		/**
 		 * gets distance measured by US sensor
-		 * @param port port number
-		 * @return distance in cm*/
-		int getDistance(int port);
+		 * @return distance in cm
+         */
+		int readDistance();
+
+
 		/**
-		 * gets wether buttons is pressed or not
-		 * @return button status
+		 * gets button status (0, 1023)
+         * @return button status
 		 */
-		int getButtonStatus();
-		/**
+		int readButtonStatus() const;
+        
+        /**
+		 * gets wether buttons is pressed or not
+         * @return button is pressed (true false)
+		 */
+        bool isButtonPushed() const;
+		
+        /**
 		 * Gets LDR sensor measure (analog)
 		 * @return LDR reading
 		 */
-		int getLightSensor();
-		/**
-		 * gets IR sensor status (digital)
-		 * @param IR sensor pin
+		int readLightSensor() const;
+		
+        /**
+		 * gets right IR sensor status (digital)
+		 * @return IR sensor status
+		 */		
+        int readRightLineFollowerSensor() const;
+        
+        
+        /**
+		 * gets left IR sensor status (digital)
 		 * @return IR sensor status
 		 */
-		int getLineFollower(int port);
-		void move(int direction, int speed);
+        int readLeftLineFollowerSensor() const;
+        
+        
+        void move(int direction, int speed);
+        void setRightMotorSpeed(int speed);
+        void setLeftMotorSpeed(int speed);
+        
 
 	private:
-		MeRGBLed* boardLeds;
-		MeBuzzer* buzzer;
-		MeLightSensor* lightSensor;
-		MeDCMotor* leftMotor;
-		MeDCMotor* rightMotor;
+	BitbloqMeRGBLed* boardLeds;
+
+        const int buzzerPin; ///pin where the buzzer is connected. It is hardwired on the board (D8)
+        const int lightSensorPin; ///pin where the light sensor is connected. It is hardwired on the board (A6) 
+        const int buttonPin; ///pin where the buzzer is connected. It is hardwired on the board (A7)
+        const int usTriggerPin;
+        const int usEchoPin;
+        const int rightLineFollowerPin;
+        const int leftLineFollowerPin;
+        const int rightDCMotorDir;
+        const int rightDCMotorPWM;
+        const int leftDCMotorDir;
+        const int leftDCMotorPWM;
+        const int rgbLEDPin;
+                
+        US* usSensor;
+        BitbloqDCMotor* rightDCMotor;
+        BitbloqDCMotor* leftDCMotor;
+        BitbloqMeRGBLed* rgbLED;
+        
 };
 
-#endif
+#endif       
+
+
