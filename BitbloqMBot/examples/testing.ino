@@ -11,9 +11,13 @@ void setup() {
 
 void loop() {
 
+  //Check Button
   Serial.print("Button Status (1-pushed): ");
   Serial.println(mbot.isButtonPushed());
+  
+  //Check LDR
+  Serial.print("LDR value: ");
+  Serial.println(mbot.readLightSensor());
   delay(1000);
-  // put your main code here, to run repeatedly:
-
+  
 }
