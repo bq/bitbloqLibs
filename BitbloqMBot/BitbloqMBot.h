@@ -105,15 +105,17 @@ class MBot
         const int buzzerPin; ///pin where the buzzer is connected. It is hardwired on the board (D8)
         const int lightSensorPin; ///pin where the light sensor is connected. It is hardwired on the board (A6) 
         const int buttonPin; ///pin where the buzzer is connected. It is hardwired on the board (A7)
-        int usTriggerPin;
-        int usEchoPin;
-        int rightLineFollowerPin;
-        int leftLineFollowerPin;
+        int usTriggerPin; ///set from port using ports array.
+        int usEchoPin; ///set from port using ports array.
+        int rightLineFollowerPin; ///set from port using ports array.
+        int leftLineFollowerPin; ///set from port using ports array.
         const int rightDCMotorDir;
         const int rightDCMotorPWM;
         const int leftDCMotorDir;
         const int leftDCMotorPWM;
-        const int rgbLEDPin;
+        const int rgbLEDPin; 
+        const int IRTransmitter; ///IR transmitter hardwired to board (D3)
+        const int IRReceiver; ///IR receiver hardwired to board (D2)
                 
         US* usSensor;
         BitbloqDCMotor* rightDCMotor;

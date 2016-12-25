@@ -13,9 +13,11 @@ MBot::MBot(int lineFollowerPort, int USPort):
         usSensor(NULL),
         leftDCMotorDir(4),
         leftDCMotorPWM(5),
-        rightDCMotorDir(6),
-        rightDCMotorPWM(7),
-        rgbLEDPin(13)
+        rightDCMotorDir(7),
+        rightDCMotorPWM(6),
+        rgbLEDPin(13),
+        IRTransmitter(3),
+        IRReceiver(2)
 {
     //initialize ports stuct
     portsInit();
@@ -79,11 +81,15 @@ void MBot::setup(){
     pinMode(lightSensorPin,INPUT);
     pinMode(buttonPin,INPUT);
     pinMode(leftLineFollowerPin,INPUT);
-    pinMode(rightLineFollowerPin, OUTPUT);
+    pinMode(rightLineFollowerPin, INPUT);
     
     //initialize usSensor
     usSensor = new US(usTriggerPin,usEchoPin);
     
+    
+    //IR Comms
+    pinMode(IRTransmitter,OUTPUT);
+    pinMode(IRReceiver,INPUT);
     
     //actuators
     pinMode(buzzerPin,OUTPUT);
