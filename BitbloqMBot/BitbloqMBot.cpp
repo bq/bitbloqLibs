@@ -70,11 +70,11 @@ void MBot::setup(){
 }
 
 int MBot::readLeftLineFollowerSensor() const{
-    return analogRead(leftLineFollowerPin);
+    return digitalRead(leftLineFollowerPin);
 }
 
 int MBot::readRightLineFollowerSensor() const {
-    return analogRead(rightLineFollowerPin);
+    return digitalRead(rightLineFollowerPin);
 }
 
 void MBot::setLed(int led, int red, int green, int blue){
