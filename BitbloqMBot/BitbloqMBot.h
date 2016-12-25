@@ -50,7 +50,13 @@ class MBot
 		 * gets distance measured by US sensor
 		 * @return distance in cm
          */
-		int readUSMeasuredDistance();
+		int readUSMeasuredDistanceCM() const;
+        
+        /**
+		 * gets distance measured by US sensor
+		 * @return distance in inches
+         */
+        int readUSMeasuredDistanceIN() const;
 
 
 		/**
