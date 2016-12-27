@@ -1,6 +1,8 @@
+#include <BitbloqMCore.h>
+
 #include <BitbloqMBot.h>
 
-MBot mbot;
+BitbloqMBot mbot;
 
 void setup() {
   // put your setup code here, to run once:
@@ -43,6 +45,12 @@ void loop() {
     mbot.setRightMotorSpeed(0);
     mbot.setLeftMotorSpeed(0);
   } 
+
+  //Check RGBLeds
+  mbot.setLed(0,255,255,255);
+
+
+  
   delay(1000);
   
 
