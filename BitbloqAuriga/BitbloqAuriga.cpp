@@ -50,10 +50,12 @@ void BitbloqAuriga::playTone(int note, int beat){
 }
 
 int BitbloqAuriga::readTemperature(){
-        //TODO
+    return analogRead(temperatureSensorPin);
+    //TODO
 }
 
 int BitbloqAuriga::readSoundLevel() const{
+    return analogRead(soundSensorPin);
     //TODO
 }
     
