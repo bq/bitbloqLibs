@@ -69,7 +69,7 @@ public:
      * get power status
      * @return power status 0 to 1023
      */ 
-    int readPowerStatus();
+    int readPowerStatus() const;
     
     /**
      * gets Temperature
@@ -81,7 +81,7 @@ public:
      * gets sound level
      * @return sounds level
      */
-    int readSoundLevel(); 
+    int readSoundLevel() const; 
     
     /**
      * Port struct for MCore plugs
@@ -96,10 +96,9 @@ public:
         int s1, s2;
     };
 
-    const Port ports[5];
+    const Port ports[11];
 
 protected:
-    // void portsInit();
 
     BitbloqMeRGBLed* boardLeds;
 
