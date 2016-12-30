@@ -4,45 +4,20 @@
 
 
 BitbloqAuriga::BitbloqAuriga():
-        buzzerPin(8),
-        lightSensorPin(A6),
-        buttonPin(A7),
-        leftDCMotorDir(4),
-        leftDCMotorPWM(5),
-        rightDCMotorDir(7),
-        rightDCMotorPWM(6),
-        rgbLEDPin(2),
-        IRTransmitter(3),
-        IRReceiver(2),
-        ports({Port(0,0),Port(11,12),Port(9,10),Port(A2,A3),Port(A0,A1)})
+        powerSensorPin(A4),
+        lightSensor1Pin(A3),
+        lightSensor2Pin(A2),
+        soundSensorPin(A1),
+        temperatureSensorPin(A0),
+        RGBLedsPin(D44),
+        buzzerPin(D45),
+        ports({Port(0,0),Port(4,5),Port(2,3),Port(6,7),Port(8,9),Port(17,16),
+            Port(A15,A10),Port(A14,A9),Port(A13,A8),Port(A12,A7),Port(A11,A6)})
 {
-    //initialize ports struct
-   // portsInit();
-    
-    boardLeds = new BitbloqMeRGBLed(rgbLEDPin,2);
+    boardLeds = new BitbloqMeRGBLed(rgbLEDPin,12);
 }
 
-//~ void BitbloqAuriga::portsInit(){
-    //~ ports[0].s1 = 0;
-    //~ ports[0].s2 = 0;
-    
-    //~ ports[1].s1 = 11;
-    //~ ports[1].s2 = 12;
-    
-    //~ ports[2].s1 = 9;
-    //~ ports[2].s2 = 10;
-    
-    //~ ports[3].s1 = A2;
-    //~ ports[3].s2 = A3;
-    
-    //~ ports[4].s1 = A0;
-    //~ ports[4].s2 = A1;
-//~ }
-    
-    
-
-BitbloqAuriga::~BitbloqAuriga(){
-	
+BitbloqAuriga::~BitbloqAuriga(){	
 	//check that all of them are not NULL pointers, delete and set to NULL
 	if (boardLeds != NULL){
 		delete boardLeds;
@@ -51,16 +26,17 @@ BitbloqAuriga::~BitbloqAuriga(){
 }
 
 void BitbloqAuriga::setup(){
-    //sensors
-    pinMode(lightSensorPin,INPUT);
-    pinMode(buttonPin,INPUT);
     
-    //IR Comms
-    pinMode(IRTransmitter,OUTPUT);
-    pinMode(IRReceiver,INPUT);
-    
-    //actuators
-    pinMode(buzzerPin,OUTPUT);
+    pinMode(powerSensorPin,INPUT);
+    pinMode(lightSensor1Pin,INPUT);
+    pinMode(lightSensor2Pin,INPUT);
+    pinMode(soundSensorPin,INPUT);
+    pinMode(temperatureSensorPin,INPUT);
+    pinMOde(buzzerPin,OUTPUT);
+}
+
+int BitbloqAuriga::readPowerStatus(){
+    return analogRead(powerSensorPin);
 }
 
 void BitbloqAuriga::setLed(int led, int red, int green, int blue){
@@ -72,16 +48,19 @@ void BitbloqAuriga::playTone(int note, int beat){
 	tone(buzzerPin, note, beat);
 }
 
-
-int BitbloqAuriga::readButtonStatus() const{
-	return analogRead(A7);
+int BitbloqAuriga::readTemperature(){
+        //TODO
 }
 
-bool BitbloqAuriga::isButtonPushed() const{
-    if (readButtonStatus() == 0) return true;
-    else return false;
+int BitbloqAuriga::readSoundLevel(){
+    //TODO
 }
     
-int BitbloqAuriga::readLightSensor() const{
-	return analogRead(lightSensorPin);
+int BitbloqAuriga::readLightSensor(int number) const{
+    if (number==1)
+        return analogRead(lightSensorPin1);
+    if (number==2)
+        return analogRead(lightSensorPin2);
+        
+    return 0;
 }
