@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "BitbloqAuriga.h"
-#include "BitbloqMeRGBLed.h"
+#include <BitbloqMeRGBLed.h>
 
 
 BitbloqAuriga::BitbloqAuriga():

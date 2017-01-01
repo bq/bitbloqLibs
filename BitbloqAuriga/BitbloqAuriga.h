@@ -24,9 +24,7 @@
 #ifndef BITBLOQAURIGA_H
 #define BITBLOQAURIGA_H
 
-
 // class predeclaration
-
 class BitbloqMeRGBLed;
 
 class BitbloqAuriga
@@ -111,6 +109,7 @@ protected:
     const int buzzerPin;
     
     BitbloqMeRGBLed* rgbLED;
+
 };
 
 #endif
