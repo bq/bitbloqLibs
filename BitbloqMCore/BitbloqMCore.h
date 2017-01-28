@@ -89,9 +89,19 @@ public:
         }
         int s1, s2;
     };
+    
+    /**
+     * returns port data
+     */
+    Port getPort(int p, int s){ 
+        //no valid port
+        if(p<1 || p>4 || s<1 || s>2) return Port(-1,-1);
+        //valid port
+        if (s==1) return ports[p].s1;
+        if (s==2) return ports[p].s2;
+    }
 
-    const Port ports[5];
-
+    
 protected:
     // void portsInit();
 
@@ -101,15 +111,19 @@ protected:
     const int lightSensorPin; /// pin where the light sensor is connected. It is hardwired on the
                               /// board (A6)
     const int buttonPin; /// pin where the buzzer is connected. It is hardwired on the board (A7)
-    const int rightDCMotorDir;
-    const int rightDCMotorPWM;
-    const int leftDCMotorDir;
-    const int leftDCMotorPWM;
+    const int DCMotor1Dir;
+    const int DCMotor1PWM;
+    const int DCMotor2Dir;
+    const int DCMotor2PWM;
     const int rgbLEDPin;
     const int IRTransmitter; /// IR transmitter hardwired to board (D3)
     const int IRReceiver; /// IR receiver hardwired to board (D2)
 
     BitbloqMeRGBLed* rgbLED;
+    
+private:
+    const Port ports[5];
+
 };
 
 #endif

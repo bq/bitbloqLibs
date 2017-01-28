@@ -15,9 +15,7 @@ BitbloqMBotRanger::BitbloqMBotRanger(int lineFollowerPort, int USPort):
 	
     usTriggerPin = ports[USPort].s1; /// this is weird. There are two components, but only one signal.
     usEchoPin = ports[USPort].s1;
-    
-    
-    
+        
     //leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
     //rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
 }
