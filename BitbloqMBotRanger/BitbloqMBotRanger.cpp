@@ -10,14 +10,20 @@ BitbloqMBotRanger::BitbloqMBotRanger(int lineFollowerPort, int USPort):
         BitbloqAuriga(),
         usSensor(NULL)
 {
-    rightLineFollowerPin = ports[lineFollowerPort].s1;
-    leftLineFollowerPin = ports[lineFollowerPort].s2;
+    rightLineFollowerPin = getPinFromPort(lineFollowerPort,1);
+    leftLineFollowerPin = getPinFromPort(lineFollowerPort,2);
 	
-    usTriggerPin = ports[USPort].s1; /// this is weird. There are two components, but only one signal.
-    usEchoPin = ports[USPort].s1;
+    usTriggerPin = getPinFromPort(USPort,1); /// this is weird. There are two components, but only one signal.
+    usEchoPin = getPinFromPort(USPort,1);
         
     //leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
     //rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
+}
+
+BitbloqMBotRanger::BitbloqMBotRanger():
+        BitbloqAuriga(),
+        usSensor(NULL){
+    //TODO
 }
 
 
@@ -40,6 +46,19 @@ BitbloqMBotRanger::~BitbloqMBotRanger(){
 //        rightDCMotor=NULL;
 //    }
 }
+
+
+void BitbloqMBotRanger::setLineFollowerPort(int port){
+    rightLineFollowerPin = getPinFromPort(port,1);
+    leftLineFollowerPin = getPinFromPort(port,2);
+}
+
+void BitbloqMBotRanger::setUSPort(int port){
+    usTriggerPin = getPinFromPort(port,2); /// this is weird. There are two components, but only one signal.
+    usEchoPin = getPinFromPort(port,2);
+}
+
+
 
 void BitbloqMBotRanger::setup(){
     BitbloqAuriga::setup();

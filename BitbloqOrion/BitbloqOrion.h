@@ -61,7 +61,7 @@ public:
     /**
      * returns port data
      */
-    Port getPort(int p, int s){ 
+    int getPinFromPort(int p, int s)
         //no valid port
         if(p<1 || p>8 || s<1 || s>2) return Port(-1,-1);
         //valid port

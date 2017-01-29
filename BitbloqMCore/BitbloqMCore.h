@@ -27,7 +27,6 @@
 
 // class predeclaration
 
-class BitbloqDCMotor;
 class BitbloqMeRGBLed;
 
 class BitbloqMCore
@@ -93,9 +92,9 @@ public:
     /**
      * returns port data
      */
-    Port getPort(int p, int s){ 
+    int getPinFromPort(int p, int s){ 
         //no valid port
-        if(p<1 || p>4 || s<1 || s>2) return Port(-1,-1);
+        if(p<1 || p>4 || s<1 || s>2) return -1;
         //valid port
         if (s==1) return ports[p].s1;
         if (s==2) return ports[p].s2;

@@ -36,8 +36,13 @@ class BitbloqMBotRanger:public BitbloqAuriga
 {
 
 public:
-    BitbloqMBotRanger(int lineFollowerPort = 6, int USPort = 7); // public constructor
+    BitbloqMBotRanger(int lineFollowerPort, int USPort); // public constructor
+    BitbloqMBotRanger();
     virtual ~BitbloqMBotRanger(); // virtual public destructor
+
+    void setLineFollowerPort(int port);
+    void setUSPort(int port);
+
 
     /**
      * Sets pinmode of sensors and actuators (as in standard Arduino setup)

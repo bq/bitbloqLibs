@@ -1,7 +1,7 @@
 //#include <BitbloqMCore.h>
 #include <BitbloqMBotRanger.h>
 
-BitbloqMBotRanger mbot;
+BitbloqMBotRanger mbot(6,7);
 
 void setup() {
   // put your setup code here, to run once:
