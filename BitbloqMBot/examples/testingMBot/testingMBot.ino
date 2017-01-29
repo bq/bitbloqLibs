@@ -5,9 +5,10 @@ BitbloqMBot mbot;
 
 void setup() {
   // put your setup code here, to run once:
+  mbot.setLineFollowerPort(2);
+  mbot.setUSPort(5);
   mbot.setup();
   Serial.begin(9600);
-
 }
 
 void loop() {
@@ -47,11 +48,8 @@ void loop() {
 
   //Check RGBLeds
   mbot.setLed(0,255,255,255);
-
-
   
-  delay(1000);
-  
+  delay(1000);  
 
 }
 

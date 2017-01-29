@@ -1,12 +1,26 @@
+/*
+ * BitbloqMBot.h
+ *
+ * Copyright 2016 Alberto Valero <alberto.valero@bq.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ *
+ */
 
-/******************************************************************************
-* MakeBlock BitbloqMBot control library for Bitbloq
-*
-*
-* @author Tomas Calvo - tomas.calvo@bq.com
-* @author Alberto Valero - alberto.valero@bq.com
-*
-******************************************************************************/
 
 #ifndef BITBLOQMBOT_H
 #define BITBLOQMBOT_H
@@ -17,14 +31,17 @@
 
 class US;
 class BitbloqDCMotor;
-class BitbloqMeRGBLed;
 
 class BitbloqMBot:public BitbloqMCore
 {
 
 public:
-    BitbloqMBot(int lineFollowerPort = 2, int USPort = 3); // public constructor
+    BitbloqMBot(int lineFollowerPort, int USPort); // public constructor
+    BitbloqMBot(); // public constructor
     virtual ~BitbloqMBot(); // virtual public destructor
+    
+    void setLineFollowerPort(int port);
+    void setUSPort(int port);
 
     /**
      * Sets pinmode of sensors and actuators (as in standard Arduino setup)
@@ -62,9 +79,6 @@ public:
 
 
 private:
-
-    BitbloqMeRGBLed* boardLeds;
-
     int usTriggerPin; /// set from port using ports array.
     int usEchoPin; /// set from port using ports array.
     int rightLineFollowerPin; /// set from port using ports array.

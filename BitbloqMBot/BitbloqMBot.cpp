@@ -1,7 +1,28 @@
+/*
+ * BitbloqMBot.cpp
+ *
+ * Copyright 2016 Alberto Valero <alberto.valero@bq.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ *
+ */
+
 #include "Arduino.h"
 #include "BitbloqMBot.h"
-#include "BitbloqMeRGBLed.h"
-
 #include <BitbloqUS.h>
 #include <BitbloqDCMotor.h>
 
@@ -10,14 +31,22 @@ BitbloqMBot::BitbloqMBot(int lineFollowerPort, int USPort):
         BitbloqMCore(),
         usSensor(NULL)
 {
-    rightLineFollowerPin = ports[lineFollowerPort].s1;
-    leftLineFollowerPin = ports[lineFollowerPort].s2;
+    rightLineFollowerPin = getPinFromPort(lineFollowerPort,1);
+    leftLineFollowerPin = getPinFromPort(lineFollowerPort,2);
 	
-    usTriggerPin = ports[USPort].s2; /// this is weird. There are two components, but only one signal.
-    usEchoPin = ports[USPort].s2;
+    usTriggerPin = getPinFromPort(USPort,2); /// this is weird. There are two components, but only one signal.
+    usEchoPin = getPinFromPort(USPort,2);
     
-    leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
-    rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
+    leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
+    rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
+}
+
+BitbloqMBot::BitbloqMBot():
+        BitbloqMCore(),
+        usSensor(NULL)
+{
+    leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
+    rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
 }
 
 
@@ -39,6 +68,16 @@ BitbloqMBot::~BitbloqMBot(){
         delete rightDCMotor;
         rightDCMotor=NULL;
     }
+}
+
+void BitbloqMBot::setLineFollowerPort(int port){
+    rightLineFollowerPin = getPinFromPort(port,1);
+    leftLineFollowerPin = getPinFromPort(port,2);
+}
+
+void BitbloqMBot::setUSPort(int port){
+    usTriggerPin = getPinFromPort(port,2); /// this is weird. There are two components, but only one signal.
+    usEchoPin = getPinFromPort(port,2);
 }
 
 void BitbloqMBot::setup(){
