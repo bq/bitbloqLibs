@@ -103,6 +103,18 @@ int BitbloqMBot::readRightLineFollowerSensor() const{
     return digitalRead(rightLineFollowerPin);
 }
 
+int BitbloqMBot::readLineFollowerSensor() const{
+    if(digitalRead(rightLineFollowerPin) && digitalRead(leftLineFollowerPin)){
+        return 3;
+    }else if(digitalRead(rightLineFollowerPin)){
+        return 2;
+    }else if(digitalRead(leftLineFollowerPin)){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
 int BitbloqMBot::readUSMeasuredDistanceCM() const{
 	return usSensor->read(); //in centimeters
 }

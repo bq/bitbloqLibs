@@ -73,6 +73,12 @@ public:
      */
     int readLeftLineFollowerSensor() const;
 
+    /**
+     * gets IR sensor status (digital)
+     * @return IR sensor status, 0 both, 1 left, 2 right
+     */
+    int readLineFollowerSensor() const;
+
     void move(int direction, int speed);
     void setRightMotorSpeed(int speed);
     void setLeftMotorSpeed(int speed);
