@@ -14,7 +14,7 @@ BitbloqMCore::BitbloqMCore():
         rgbLEDPin(2),
         IRTransmitter(3),
         IRReceiver(2),
-        ports({Port(0,0),Port(11,12),Port(9,10),Port(A2,A3),Port(A0,A1)})
+        ports({Port(-1,-1),Port(11,12),Port(9,10),Port(A2,A3),Port(A0,A1)})
 {
     
     boardLeds = new BitbloqMeRGBLed(rgbLEDPin,2);
