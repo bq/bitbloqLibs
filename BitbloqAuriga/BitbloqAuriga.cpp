@@ -11,7 +11,7 @@ BitbloqAuriga::BitbloqAuriga():
         soundSensorPin(A1),
         temperatureSensorPin(A0),
         RGBLedsPin(44),
-        buzzerPin(45),
+        buzzerPin(45)
 {
     boardLeds = new BitbloqMeRGBLed(RGBLedsPin,12);
 }

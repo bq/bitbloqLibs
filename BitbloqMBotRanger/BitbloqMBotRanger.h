@@ -26,18 +26,14 @@
 
 #include <BitbloqAuriga.h>
 
-// class predeclaration
-
-class US;
-//class BitbloqDCMotor;
-class BitbloqMeRGBLed;
+#include <BitbloqUS.h>
+#include <BitbloqMeRGBLed.h>
 
 class BitbloqMBotRanger:public BitbloqAuriga
 {
 
 public:
-    BitbloqMBotRanger(int lineFollowerPort, int USPort); // public constructor
-    BitbloqMBotRanger();
+    BitbloqMBotRanger(int lineFollowerPort=-1, int USPort=-1); // public constructor
     virtual ~BitbloqMBotRanger(); // virtual public destructor
 
     void setLineFollowerPort(int port);
@@ -74,18 +70,6 @@ public:
      */
     int readLeftLineFollowerSensor() const;
 
-    /** 
-    * gets left LDR sensor
-    * @return LDR sensor reading
-    */
-    int readLeftLightSensor() const;
-    
-    /** 
-    * gets right LDR sensor
-    * @return LDR sensor reading
-    */
-    int readRightLightSensor() const;
- 
  
 
     void move(int direction, int speed);
@@ -102,7 +86,7 @@ private:
     int rightLineFollowerPin; /// set from port using ports array.
     int leftLineFollowerPin; /// set from port using ports array.
 
-    US* usSensor;
+    BitbloqUltrasound* usSensor;
     //BitbloqDCMotor* rightDCMotor;
     //BitbloqDCMotor* leftDCMotor;
     

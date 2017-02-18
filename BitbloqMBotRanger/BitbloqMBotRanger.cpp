@@ -1,29 +1,29 @@
 #include "Arduino.h"
-#include "BitbloqMBotRanger.h"
-#include "BitbloqMeRGBLed.h"
 
-#include <BitbloqUS.h>
+#include "BitbloqMBotRanger.h"
 //#include <BitbloqDCMotor.h>
 
 
 BitbloqMBotRanger::BitbloqMBotRanger(int lineFollowerPort, int USPort):
         BitbloqAuriga(),
-        usSensor(NULL)
+        usSensor(NULL),
+        leftLineFollowerPin(-1),
+        rightLineFollowerPin(-1),
+        usTriggerPin(-1),
+        usEchoPin(-1)
 {
-    rightLineFollowerPin = getPinFromPort(lineFollowerPort,1);
-    leftLineFollowerPin = getPinFromPort(lineFollowerPort,2);
+    if (lineFollowerPort != -1){
+		rightLineFollowerPin = ports[lineFollowerPort][1];
+		leftLineFollowerPin = ports[lineFollowerPort][1];
+	}
 	
-    usTriggerPin = getPinFromPort(USPort,1); /// this is weird. There are two components, but only one signal.
-    usEchoPin = getPinFromPort(USPort,1);
+	if (USPort != -1){
+		usTriggerPin = ports[USPort][2]; /// this is weird. There are two components, but only one signal.
+		usEchoPin = ports[USPort][2];
+	}
         
     //leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
     //rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
-}
-
-BitbloqMBotRanger::BitbloqMBotRanger():
-        BitbloqAuriga(),
-        usSensor(NULL){
-    //TODO
 }
 
 
@@ -49,13 +49,13 @@ BitbloqMBotRanger::~BitbloqMBotRanger(){
 
 
 void BitbloqMBotRanger::setLineFollowerPort(int port){
-    rightLineFollowerPin = getPinFromPort(port,1);
-    leftLineFollowerPin = getPinFromPort(port,2);
+    rightLineFollowerPin = ports[port][1];
+    leftLineFollowerPin = ports[port][2];
 }
 
 void BitbloqMBotRanger::setUSPort(int port){
-    usTriggerPin = getPinFromPort(port,2); /// this is weird. There are two components, but only one signal.
-    usEchoPin = getPinFromPort(port,2);
+    usTriggerPin = ports[port][2]; /// this is weird. There are two components, but only one signal.
+    usEchoPin = ports[port][2];
 }
 
 
@@ -63,12 +63,18 @@ void BitbloqMBotRanger::setUSPort(int port){
 void BitbloqMBotRanger::setup(){
     BitbloqAuriga::setup();
 
-    //sensors
-    pinMode(leftLineFollowerPin,INPUT);
-    pinMode(rightLineFollowerPin, INPUT);
+    //set PinMode if pins are defined (otherwise pins = -1)
     
-    //initialize usSensor
-    usSensor = new US(usTriggerPin,usEchoPin);
+    if (leftLineFollowerPin != -1 && rightLineFollowerPin != -1){
+		pinMode(leftLineFollowerPin,INPUT);
+		pinMode(rightLineFollowerPin, INPUT);
+    }
+    
+    if (usTriggerPin != -1){
+		//initialize usSensor
+		usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
+		usSensor->setup();
+	}
         
     //dc motors setup
     //leftDCMotor->setup();
@@ -76,29 +82,21 @@ void BitbloqMBotRanger::setup(){
 }
 
 
-int BitbloqMBotRanger::readRightLightSensor() const{
-    readLightSensor(rightLightSensor);
-}
-
-int BitbloqMBotRanger::readLeftLightSensor() const{
-    readLightSensor(leftLightSensor);
-}
-
-
 int BitbloqMBotRanger::readLeftLineFollowerSensor() const{
-    return digitalRead(leftLineFollowerPin);
+    return (leftLineFollowerPin != -1 ? digitalRead(leftLineFollowerPin) : -1) ;
 }
 
 int BitbloqMBotRanger::readRightLineFollowerSensor() const{
-    return digitalRead(rightLineFollowerPin);
+    return (leftLineFollowerPin != -1 ? digitalRead(rightLineFollowerPin) : -1 );
 }
 
+
 int BitbloqMBotRanger::readUSMeasuredDistanceCM() const{
-	return usSensor->read(); //in centimeters
+	return (usSensor != NULL ? usSensor->readDistanceInCM(): - 1 ); //in centimeters
 }
 
 int BitbloqMBotRanger::readUSMeasuredDistanceIN() const{
-	return 0,393701*usSensor->read(); //in inches
+	return (usSensor != NULL ? usSensor->readDistanceInInches() : -1); //in inches
 }
     
 void BitbloqMBotRanger::move(int direction, int speed){

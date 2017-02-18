@@ -92,6 +92,7 @@ void BitbloqMBot::setup(){
     if (usTriggerPin != -1){
 		//initialize usSensor
 		usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
+		usSensor->setup();
 	}
         
     //dc motors setup
