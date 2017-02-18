@@ -31,9 +31,6 @@
 
 // class predeclaration
 
-class US;
-class BitbloqDCMotor;
-
 class BitbloqMBot:public BitbloqMCore
 {
 
@@ -91,7 +88,7 @@ private:
     int rightLineFollowerPin; /// set from port using ports array.
     int leftLineFollowerPin; /// set from port using ports array.
 
-    BitbloqUltraSound* usSensor;
+    BitbloqUltrasound* usSensor;
     BitbloqDCMotor* rightDCMotor;
     BitbloqDCMotor* leftDCMotor;
 };

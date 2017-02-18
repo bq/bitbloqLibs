@@ -48,7 +48,7 @@ void US::setTimeOut(unsigned long timeOut){
 BitbloqUltrasound::BitbloqUltrasound(int pinTrigger, int pinEcho, unsigned long timeOut):
 	_pinTrigger(pinTrigger),
 	_pinEcho(pinEcho),
-	_timeOut = timeOut
+	_timeOut(timeOut)
 	{
 }
 
@@ -83,11 +83,11 @@ float BitbloqUltrasound::read(){
   return distance;
 }
 
-float BitbloqUltraSound::readDistanceInCM(){
+float BitbloqUltrasound::readDistanceInCM(){
 	return read();
 }
 
-float BitbloqUltraSound::readDistanceInInches(){
+float BitbloqUltrasound::readDistanceInInches(){
 	return 0,393701*read();
 }
 
