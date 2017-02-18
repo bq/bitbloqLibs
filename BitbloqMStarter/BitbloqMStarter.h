@@ -25,19 +25,16 @@
 #ifndef BITBLOQMSTARTER_H
 #define BITBLOQMSTARTER_H
 
-#include <BitbloqMOrion.h>
+#include <BitbloqOrion.h>
 
-// class predeclaration
+#include <BitbloqUS.h>
+#include <BitbloqDCMotor.h>
 
-class US;
-class BitbloqDCMotor;
-
-class BitbloqMStarter:public BitbloqMOrion
+class BitbloqMStarter:public BitbloqOrion
 {
 
 public:
-    BitbloqMStarter(int lineFollowerPort, int USPort); // public constructor
-    BitbloqMStarter(); // public constructor
+    BitbloqMStarter(int lineFollowerPort = -1, int USPort = -1); // public constructor
     virtual ~BitbloqMStarter(); // virtual public destructor
     
     void setLineFollowerPort(int port);
@@ -84,7 +81,7 @@ private:
     int rightLineFollowerPin; /// set from port using ports array.
     int leftLineFollowerPin; /// set from port using ports array.
 
-    US* usSensor;
+    BitbloqUltrasound* usSensor;
     BitbloqDCMotor* rightDCMotor;
     BitbloqDCMotor* leftDCMotor;
 };

@@ -46,19 +46,6 @@ public:
      */
     void playTone(int note, int beat);
 
-    
-    /**
-     * Port struct for MCore plugs
-     */
-    struct Port
-    {
-        Port(int a, int b)
-        {
-            s1 = a;
-            s2 = b;
-        }
-        int s1, s2;
-    };
 
      //ports structure of MakeBlock Orion Board.
     static const Port ports[9];
