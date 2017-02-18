@@ -24,6 +24,7 @@
 #ifndef BITBLOQMCORE_H
 #define BITBLOQMCORE_H
 
+#include <BitbloqMPort.h>
 
 // class predeclaration
 
@@ -76,28 +77,18 @@ public:
              */
     int readLightSensor() const;
     
-    /**
-     * Port struct for MCore plugs
-     */
-    struct Port
-    {
-        Port(int a, int b)
-        {
-            s1 = a;
-            s2 = b;
-        }
-        int s1, s2;
-    };
+    
+     //ports structure of MCore Board.
+    static const Port ports[5];
     
     /**
      * returns port data
      */
-    int getPinFromPort(int p, int s){ 
+    static const int getPinFromPort(int p, int s){ 
         //no valid port
         if(p<1 || p>4 || s<1 || s>2) return -1;
         //valid port
-        if (s==1) return ports[p].s1;
-        if (s==2) return ports[p].s2;
+        return ports[p][s];
     }
 
     
@@ -120,8 +111,8 @@ protected:
 
     BitbloqMeRGBLed* rgbLED;
     
-private:
-    const Port ports[5];
+    
+   
 
 };
 

@@ -2,6 +2,8 @@
 #include "BitbloqMCore.h"
 #include "BitbloqMeRGBLed.h"
 
+//setting ports value
+const Port BitbloqMCore::ports[5] = {Port(-1,-1),Port(11,12),Port(9,10),Port(A2,A3),Port(A0,A1)};
 
 BitbloqMCore::BitbloqMCore():
         buzzerPin(8),
@@ -13,8 +15,7 @@ BitbloqMCore::BitbloqMCore():
         DCMotor1PWM(6),
         rgbLEDPin(2),
         IRTransmitter(3),
-        IRReceiver(2),
-        ports({Port(-1,-1),Port(11,12),Port(9,10),Port(A2,A3),Port(A0,A1)})
+        IRReceiver(2)
 {
     
     boardLeds = new BitbloqMeRGBLed(rgbLEDPin,2);
