@@ -1,3 +1,9 @@
+/**In this example, components that are plugged to the MCore Board
+ * are self-managed. Not using the MBot class.
+ * This is the way to do it when you plug MakeBlock components to the MCore board 
+ * which are not part of the out-of-the-box robot.
+ */
+
 #include <BitbloqMBot.h>
 #include <BitbloqMCore.h>
 const int irDer = BitbloqMCore::ports[2][1];
