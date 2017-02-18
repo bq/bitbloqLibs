@@ -25,10 +25,8 @@
 #define BITBLOQMCORE_H
 
 #include <BitbloqMPort.h>
+#include <BitbloqMeRGBLed.h>
 
-// class predeclaration
-
-class BitbloqMeRGBLed;
 
 class BitbloqMCore
 {
@@ -81,15 +79,6 @@ public:
      //ports structure of MCore Board.
     static const Port ports[5];
     
-    /**
-     * returns port data
-     */
-    static const int getPinFromPort(int p, int s){ 
-        //no valid port
-        if(p<1 || p>4 || s<1 || s>2) return -1;
-        //valid port
-        return ports[p][s];
-    }
 
     
 protected:

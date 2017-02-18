@@ -19,4 +19,22 @@ private:
 
 };
 
+class BitbloqUltraSound
+{
+public:
+	US(int pinTrigger, int pinEcho, unsigned long timeOut = 58000);
+	float read();
+	float readDistanceInCM();
+	float readDistanceInInches();
+	void setTimeOut(unsigned long timeOut);
+	void setup();
+
+private:
+	const int _pinTrigger;
+	const int _pinEcho;
+	unsigned long _timeOut;
+	long TP_init();
+
+};
+
 #endif //US_h

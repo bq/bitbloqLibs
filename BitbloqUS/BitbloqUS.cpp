@@ -44,3 +44,53 @@ float US::read(){
 void US::setTimeOut(unsigned long timeOut){
   _timeOut = timeOut;
 }
+
+BitbloqUltrasound::BitbloqUltrasound(int pinTrigger, int pinEcho, unsigned long timeOut):
+	_pinTrigger(pinTrigger),
+	_pinEcho(pinEcho),
+	_timeOut = timeOut
+	{
+}
+
+void BitbloqUltrasound::setup()
+{
+
+  pinMode( _pinTrigger , OUTPUT );
+  pinMode( _pinEcho , INPUT );
+}
+
+long BitbloqUltrasound::TP_init()
+{
+    pinMode(_pinTrigger,OUTPUT); // this is required for those cases in which echo and trigger pin are the same
+    digitalWrite(_pinTrigger, LOW);
+    delayMicroseconds(2);
+    digitalWrite(_pinTrigger, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(_pinTrigger, LOW);
+    pinMode(_pinEcho,INPUT); // this is required for those cases in which echo and trigger pin are the same
+    long microseconds = pulseIn(_pinEcho,HIGH,_timeOut);
+    delay(29);
+    return microseconds;
+}
+
+float BitbloqUltrasound::read(){
+  long microseconds = BitbloqUltrasound::TP_init();
+  long distance;
+  distance = microseconds/29/2;
+  if (distance == 0){
+    distance = _timeOut/29/2;
+  }
+  return distance;
+}
+
+float BitbloqUltraSound::readDistanceInCM(){
+	return read();
+}
+
+float BitbloqUltraSound::readDistanceInInches(){
+	return 0,393701*read();
+}
+
+void BitbloqUltrasound::setTimeOut(unsigned long timeOut){
+  _timeOut = timeOut;
+}

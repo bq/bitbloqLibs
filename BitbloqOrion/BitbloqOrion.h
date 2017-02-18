@@ -24,6 +24,8 @@
 #ifndef BITBLOQORION_H
 #define BITBLOQORION_H
 
+#include <BitbloqMPort.h>
+
 class BitbloqOrion
 {
 
@@ -58,16 +60,8 @@ public:
         int s1, s2;
     };
 
-    /**
-     * returns port data
-     */
-    int getPinFromPort(int p, int s)
-        //no valid port
-        if(p<1 || p>8 || s<1 || s>2) return Port(-1,-1);
-        //valid port
-        if (s==1) return ports[p].s1;
-        if (s==2) return ports[p].s2;
-    }
+     //ports structure of MakeBlock Orion Board.
+    static const Port ports[9];
 
 protected:
 
@@ -75,10 +69,7 @@ protected:
     const int DCMotor1Dir;
     const int DCMotor1PWM;
     const int DCMotor2Dir;
-    const int DCMotor2PWM;
-    
-private:
-    const Port ports[9];    
+    const int DCMotor2PWM;   
 };
 
 #endif

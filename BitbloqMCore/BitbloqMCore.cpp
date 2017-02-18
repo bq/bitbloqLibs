@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "BitbloqMCore.h"
-#include "BitbloqMeRGBLed.h"
+
 
 //setting ports value
 const Port BitbloqMCore::ports[5] = {Port(-1,-1),Port(11,12),Port(9,10),Port(A2,A3),Port(A0,A1)};

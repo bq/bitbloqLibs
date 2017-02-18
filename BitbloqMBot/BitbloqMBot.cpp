@@ -23,28 +23,27 @@
 
 #include "Arduino.h"
 #include "BitbloqMBot.h"
-#include <BitbloqUS.h>
-#include <BitbloqDCMotor.h>
+
 
 
 BitbloqMBot::BitbloqMBot(int lineFollowerPort, int USPort):
         BitbloqMCore(),
-        usSensor(NULL)
+        usSensor(NULL),
+        leftLineFollowerPin(-1),
+        rightLineFollowerPin(-1),
+        usTriggerPin(-1),
+        usEchoPin(-1)
 {
-    rightLineFollowerPin = getPinFromPort(lineFollowerPort,1);
-    leftLineFollowerPin = getPinFromPort(lineFollowerPort,2);
+	if (lineFollowerPort != -1){
+		rightLineFollowerPin = ports[lineFollowerPort][1];
+		leftLineFollowerPin = ports[lineFollowerPort][1];
+	}
 	
-    usTriggerPin = getPinFromPort(USPort,2); /// this is weird. There are two components, but only one signal.
-    usEchoPin = getPinFromPort(USPort,2);
+	if (USPort != -1){
+		usTriggerPin = ports[USPort][2]; /// this is weird. There are two components, but only one signal.
+		usEchoPin = ports[USPort][2];
+	}
     
-    leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
-    rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
-}
-
-BitbloqMBot::BitbloqMBot():
-        BitbloqMCore(),
-        usSensor(NULL)
-{
     leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
     rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
 }
@@ -71,24 +70,29 @@ BitbloqMBot::~BitbloqMBot(){
 }
 
 void BitbloqMBot::setLineFollowerPort(int port){
-    rightLineFollowerPin = getPinFromPort(port,1);
-    leftLineFollowerPin = getPinFromPort(port,2);
+    rightLineFollowerPin = ports[port][1];
+    leftLineFollowerPin = ports[port][2];
 }
 
 void BitbloqMBot::setUSPort(int port){
-    usTriggerPin = getPinFromPort(port,2); /// this is weird. There are two components, but only one signal.
-    usEchoPin = getPinFromPort(port,2);
+    usTriggerPin = ports[port][2]; /// this is weird. There are two components, but only one signal.
+    usEchoPin = ports[port][2];
 }
 
 void BitbloqMBot::setup(){
     BitbloqMCore::setup();
 
-    //sensors
-    pinMode(leftLineFollowerPin,INPUT);
-    pinMode(rightLineFollowerPin, INPUT);
+	//set PinMode if pins are defined (otherwise pins = -1)
     
-    //initialize usSensor
-    usSensor = new US(usTriggerPin,usEchoPin);
+    if (leftLineFollowerPin != -1 && rightLineFollowerPin != -1){
+		pinMode(leftLineFollowerPin,INPUT);
+		pinMode(rightLineFollowerPin, INPUT);
+    }
+    
+    if (usTriggerPin != -1){
+		//initialize usSensor
+		usSensor = new US(usTriggerPin,usEchoPin);
+	}
         
     //dc motors setup
     leftDCMotor->setup();
@@ -96,31 +100,20 @@ void BitbloqMBot::setup(){
 }
 
 int BitbloqMBot::readLeftLineFollowerSensor() const{
-    return digitalRead(leftLineFollowerPin);
+    return (leftLineFollowerPin != -1 ? digitalRead(leftLineFollowerPin) : -1) ;
 }
 
 int BitbloqMBot::readRightLineFollowerSensor() const{
-    return digitalRead(rightLineFollowerPin);
+    return (leftLineFollowerPin != -1 ? digitalRead(rightLineFollowerPin) : -1 );
 }
 
-int BitbloqMBot::readLineFollowerSensor() const{
-    if(digitalRead(rightLineFollowerPin) && digitalRead(leftLineFollowerPin)){
-        return 3;
-    }else if(digitalRead(rightLineFollowerPin)){
-        return 2;
-    }else if(digitalRead(leftLineFollowerPin)){
-        return 1;
-    }else{
-        return 0;
-    }
-}
 
 int BitbloqMBot::readUSMeasuredDistanceCM() const{
-	return usSensor->read(); //in centimeters
+	return (usSensor != NULL ? usSensor->readDistanceInCM(): - 1 ); //in centimeters
 }
 
 int BitbloqMBot::readUSMeasuredDistanceIN() const{
-	return 0,393701*usSensor->read(); //in inches
+	return (usSensor != NULL ? usSensor->readDistanceInInches() : -1); //in inches
 }
     
 void BitbloqMBot::move(int direction, int speed){

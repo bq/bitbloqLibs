@@ -24,8 +24,8 @@
 #ifndef BITBLOQAURIGA_H
 #define BITBLOQAURIGA_H
 
-// class predeclaration
-class BitbloqMeRGBLed;
+#include <BitbloqMPort.h>
+#include <BitbloqMeRGBLed.h>
 
 class BitbloqAuriga
 {
@@ -94,16 +94,9 @@ public:
         int s1, s2;
     };
     
-    /**
-     * returns port data
-     */
-    int getPinFromPort(int p, int s){
-        //no valid port
-        if(p<1 || p>10 || s<1 || s>2) return -1;
-        //valid port
-        if (s==1) return ports[p].s1;
-        if (s==2) return ports[p].s2;
-    }
+     //ports structure of MakeBlock Auriga Board.
+    static const Port ports[11];
+
 
 
 protected:
@@ -119,10 +112,6 @@ protected:
     const int buzzerPin;
     
     BitbloqMeRGBLed* rgbLED;
-
-private:
-    const Port ports[11];
-
 };
 
 #endif

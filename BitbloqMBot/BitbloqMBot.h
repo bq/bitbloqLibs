@@ -26,6 +26,8 @@
 #define BITBLOQMBOT_H
 
 #include <BitbloqMCore.h>
+#include <BitbloqUS.h>
+#include <BitbloqDCMotor.h>
 
 // class predeclaration
 
@@ -36,8 +38,7 @@ class BitbloqMBot:public BitbloqMCore
 {
 
 public:
-    BitbloqMBot(int lineFollowerPort, int USPort); // public constructor
-    BitbloqMBot(); // public constructor
+    BitbloqMBot(int lineFollowerPort=-1, int USPort=-1); // public constructor
     virtual ~BitbloqMBot(); // virtual public destructor
     
     void setLineFollowerPort(int port);
@@ -90,7 +91,7 @@ private:
     int rightLineFollowerPin; /// set from port using ports array.
     int leftLineFollowerPin; /// set from port using ports array.
 
-    US* usSensor;
+    BitbloqUltraSound* usSensor;
     BitbloqDCMotor* rightDCMotor;
     BitbloqDCMotor* leftDCMotor;
 };
