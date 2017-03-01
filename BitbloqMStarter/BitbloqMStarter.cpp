@@ -121,12 +121,12 @@ void BitbloqMStarter::move(int direction, int speed){
 	int leftSpeed = 0;
 	int rightSpeed = 0;
 	if(direction == 1){
-		leftSpeed = -speed; //forward
-		rightSpeed = speed;
-		
-	}else if(direction == 2){
-		leftSpeed = speed;
+		leftSpeed = speed; //forward 
 		rightSpeed = -speed;
+		
+	}else if(direction == 2){//backward
+		leftSpeed = -speed;
+		rightSpeed = speed;
 		
 	}else if(direction == 3){
 		leftSpeed = -speed; //right
