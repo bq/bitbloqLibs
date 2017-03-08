@@ -46,7 +46,7 @@ void loop() {
   } 
 
   //Check RGBLeds
-  mbot.setLed(0,255,255,255);
+  mbot.setLed(1,0,255,255);
   
   delay(1000);  
 

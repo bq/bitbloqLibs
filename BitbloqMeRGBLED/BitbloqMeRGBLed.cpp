@@ -3,12 +3,23 @@
 
 BitbloqMeRGBLed::BitbloqMeRGBLed(uint8_t _pin, uint8_t led_num):pin(_pin)
 {
+  setup(_pin, led_num);
+}
+
+BitbloqMeRGBLed::BitbloqMeRGBLed()
+{
+}
+
+void BitbloqMeRGBLed::setup(uint8_t _pin, uint8_t led_num)
+{
+  pin = _pin;
   pinMask       = digitalPinToBitMask(pin);
   ws2812_port   = portOutputRegister(digitalPinToPort(pin) );
   //set pinMode OUTPUT */
   pinMode(pin, OUTPUT);
   setNumber(led_num);
 }
+
 
 void BitbloqMeRGBLed::setNumber(uint8_t num_leds)
 {

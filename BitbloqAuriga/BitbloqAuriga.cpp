@@ -13,15 +13,11 @@ BitbloqAuriga::BitbloqAuriga():
         RGBLedsPin(44),
         buzzerPin(45)
 {
-    boardLeds = new BitbloqMeRGBLed(RGBLedsPin,12);
 }
 
 BitbloqAuriga::~BitbloqAuriga(){	
 	//check that all of them are not NULL pointers, delete and set to NULL
-	if (boardLeds != NULL){
-		delete boardLeds;
-		boardLeds = NULL;
-	}
+
 }
 
 void BitbloqAuriga::setup(){
@@ -32,6 +28,7 @@ void BitbloqAuriga::setup(){
     pinMode(soundSensorPin,INPUT);
     pinMode(temperatureSensorPin,INPUT);
     pinMode(buzzerPin,OUTPUT);
+    boardLeds.setup(RGBLedsPin,12);
 }
 
 int BitbloqAuriga::readPowerStatus() const{
@@ -40,8 +37,8 @@ int BitbloqAuriga::readPowerStatus() const{
 }
 
 void BitbloqAuriga::setLed(int led, int red, int green, int blue){
-	boardLeds->setColor(led, red, green, blue);
-	boardLeds->show();
+	boardLeds.setColor(led, red, green, blue);
+	boardLeds.show();
 }
 
 void BitbloqAuriga::playTone(int note, int beat){

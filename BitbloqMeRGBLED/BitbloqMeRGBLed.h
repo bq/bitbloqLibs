@@ -63,9 +63,11 @@ struct cRGB
 class BitbloqMeRGBLed
 {
     public:
+        BitbloqMeRGBLed();
         BitbloqMeRGBLed(uint8_t _pin, uint8_t led_num);
         virtual ~BitbloqMeRGBLed();
         
+        void setup(uint8_t _pin, uint8_t led_num);
         bool setColorAt(uint8_t index, uint8_t red, uint8_t green, uint8_t blue);
         bool setColor(uint8_t index, uint8_t red, uint8_t green, uint8_t blue);
         void show(void);
@@ -73,7 +75,7 @@ class BitbloqMeRGBLed
     private:
         uint16_t count_led;
         uint8_t *pixels;
-        const int pin;
+        int pin;
 
         void rgbled_sendarray_mask(uint8_t *array, uint16_t length, uint8_t pinmask, uint8_t *port);
 

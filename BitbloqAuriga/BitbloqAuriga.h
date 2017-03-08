@@ -89,7 +89,7 @@ public:
 
 protected:
 
-    BitbloqMeRGBLed* boardLeds;
+    BitbloqMeRGBLed boardLeds;
 
     const int powerSensorPin; 
     const int lightSensor1Pin;
@@ -99,7 +99,6 @@ protected:
     const int RGBLedsPin;
     const int buzzerPin;
     
-    BitbloqMeRGBLed* rgbLED;
 };
 
 #endif

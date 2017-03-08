@@ -79,12 +79,12 @@ public:
      //ports structure of MCore Board.
     static const Port ports[5];
     
-
+	BitbloqMeRGBLed boardLeds;
     
 protected:
     // void portsInit();
 
-    BitbloqMeRGBLed* boardLeds;
+    
 
     const int buzzerPin; /// pin where the buzzer is connected. It is hardwired on the board (D8)
     const int lightSensorPin; /// pin where the light sensor is connected. It is hardwired on the
@@ -97,8 +97,6 @@ protected:
     const int rgbLEDPin;
     const int IRTransmitter; /// IR transmitter hardwired to board (D3)
     const int IRReceiver; /// IR receiver hardwired to board (D2)
-
-    BitbloqMeRGBLed* rgbLED;
     
     
    

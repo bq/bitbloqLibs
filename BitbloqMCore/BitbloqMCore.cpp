@@ -13,22 +13,16 @@ BitbloqMCore::BitbloqMCore():
         DCMotor2PWM(5),
         DCMotor1Dir(7),
         DCMotor1PWM(6),
-        rgbLEDPin(2),
+        rgbLEDPin(13),
         IRTransmitter(3),
         IRReceiver(2)
 {
-    
-    boardLeds = new BitbloqMeRGBLed(rgbLEDPin,2);
+   
 }
 
 
 BitbloqMCore::~BitbloqMCore(){
-	
-	//check that all of them are not NULL pointers, delete and set to NULL
-	if (boardLeds != NULL){
-		delete boardLeds;
-		boardLeds = NULL;
-	}
+
 }
 
 void BitbloqMCore::setup(){
@@ -42,11 +36,12 @@ void BitbloqMCore::setup(){
     
     //actuators
     pinMode(buzzerPin,OUTPUT);
+    boardLeds.setup(rgbLEDPin,2);
 }
 
 void BitbloqMCore::setLed(int led, int red, int green, int blue){
-	boardLeds->setColor(led, red, green, blue);
-	boardLeds->show();
+	boardLeds.setColor(led, red, green, blue);
+	boardLeds.show();
 }
 
 void BitbloqMCore::playTone(int note, int beat){
