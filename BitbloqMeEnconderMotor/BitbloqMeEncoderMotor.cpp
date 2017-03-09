@@ -22,8 +22,8 @@
  * 
  * 
  */
-#include "MeEncoderMotor.h"
-#include "MeHostParser.h"
+#include "BitbloqMeEncoderMotor.h"
+#include <BitbloqMeHostParser/BitbloqMeHostParser.h>
 
 #define ENCODER_MOTOR_GET_PARAM     0x01
 #define ENCODER_MOTOR_SAVE_PARAM    0x02

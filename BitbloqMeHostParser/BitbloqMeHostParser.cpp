@@ -41,7 +41,7 @@
  *
  */
 
-#include "MeHostParser.h"
+#include "BitbloqMeHostParser.h"
 
 #define HEAD    0xA5
 #define TAIL    0x5A

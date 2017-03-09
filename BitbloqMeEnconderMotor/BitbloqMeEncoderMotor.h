@@ -28,8 +28,7 @@
 #define BITBLOQENCODERMOTOR_H
 
 #include <stdbool.h>
-#include "MeConfig.h"
-#include "MePort.h"
+#include "BitbloqMeConfig.h"
 
 ///@brief Class for Encoder Motor Driver
 class MeEncoderMotor{
