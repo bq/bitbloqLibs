@@ -28,13 +28,27 @@
 
 BitbloqDCMotor::BitbloqDCMotor(int _dirPin, int _pwmPin):
     dirPin(_dirPin),
-    pwmPin(_pwmPin)
+    pwmPin(_pwmPin),
+    enPin1(-1),
+    enPin2(-1)
 {
     
 }
 
+BitbloqDCMotor(int _enPin1, int _enPin2, int _pwmPin):
+	dirPin(-1),
+    pwmPin(_pwmPin),
+    enPin1(_enPin1),
+    enPin2(_enPin2)
+
+
 void BitbloqDCMotor::setup(){
-    pinMode(dirPin,OUTPUT);
+    
+    if (dirPin > 0) pinMode(dirPin,OUTPUT); //motors with direction pin
+    
+    if (enPin1 > 0) pinMode(enPin1,OUTPUT); //motors with 2 control pins
+    if (enPin2 > 0) pinMode(enPin2,OUTPUT);
+
     pinMode(pwmPin,OUTPUT);
 }
 
@@ -51,13 +65,21 @@ void BitbloqDCMotor::setSpeed(int _speed){
     }else{
         return;
     }
+    
     //control DC Motor
     if(speed >= 0)
     {
-        digitalWrite(dirPin,HIGH);
+		if(dirPin>0) digitalWrite(dirPin,HIGH); //motor with direction pin
+		if (enPin1 > 0 & enPin2 > 0){ //motor with two control pins
+			digitalWrite(enPin1,HIGH);
+			digitalWrite(enPin2,LOW);
+		}
         analogWrite(pwmPin,speed);
     }else{
-        digitalWrite(dirPin,LOW);
+		if(dirPin>0) digitalWrite(dirPin,LOW); //motor with direction pin
+		if (enPin1 > 0 & enPin2 > 0){ //motor with two control pins
+			digitalWrite(enPin1,LOW);
+			digitalWrite(enPin2,HIGH);
         analogWrite(pwmPin,-speed);
     }
 }
