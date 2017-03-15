@@ -25,6 +25,13 @@
 #include <Arduino.h>
 #include "BitbloqDCMotor.h"
 
+BitbloqDCMotor::BitbloqDCMotor():
+	dirPin(-1),
+	enPin1(-1),
+    enPin2(-1)
+{
+
+}
 
 BitbloqDCMotor::BitbloqDCMotor(int _dirPin, int _pwmPin):
     dirPin(_dirPin),
@@ -35,13 +42,26 @@ BitbloqDCMotor::BitbloqDCMotor(int _dirPin, int _pwmPin):
     
 }
 
+void BitbloqDCMotor::setup(int _dirPin, int _pwmPin){
+	dirPin = _dirPin;
+	pwmPin = _pwmPin;
+	setup();
+}
+
 BitbloqDCMotor::BitbloqDCMotor(int _enPin1, int _enPin2, int _pwmPin):
 	dirPin(-1),
     pwmPin(_pwmPin),
     enPin1(_enPin1),
     enPin2(_enPin2)
 {
+	
+}
 
+void BitbloqDCMotor::setup(int _enPin1, int _enPin2, int _pwmPin){
+	enPin1 = _enPin1;
+	enPin2 = _enPin2;
+	pwmPin = _pwmPin;
+	setup();
 }
 
 
@@ -83,7 +103,8 @@ void BitbloqDCMotor::setSpeed(int _speed){
 		if (enPin1 > 0 & enPin2 > 0){ //motor with two control pins
 			digitalWrite(enPin1,LOW);
 			digitalWrite(enPin2,HIGH);
-        }
+		}
         analogWrite(pwmPin,-speed);
-    }
+	}
+		
 }
