@@ -17,10 +17,10 @@ void loop() {
   
   //Check LDR
   Serial.print("LDR Left value: ");
-  Serial.println(mbot.readLeftLightSensor());
+  Serial.println(mbot.readLightSensor(1));
   
   Serial.print("LDR Right value: ");
-  Serial.println(mbot.readRightLightSensor());
+  Serial.println(mbot.readLightSensor(2));
 
   //testing sound
   Serial.print("Microphone: "); Serial.println(mbot.readSoundLevel());
@@ -41,8 +41,8 @@ void loop() {
 
   //Check DC Motor
   
-  //mbot.setRightMotorSpeed(200);
-  //mbot.setLeftMotorSpeed(200); 
+  mbot.setRightMotorSpeed(200);
+  mbot.setLeftMotorSpeed(200); 
 
   //Check RGBLeds
   mbot.setLed(0,10,10,10);

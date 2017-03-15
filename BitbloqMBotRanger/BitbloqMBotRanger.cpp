@@ -1,12 +1,10 @@
 #include "Arduino.h"
 
 #include "BitbloqMBotRanger.h"
-//#include <BitbloqDCMotor.h>
 
 
 BitbloqMBotRanger::BitbloqMBotRanger(int lineFollowerPort, int USPort):
         BitbloqAuriga(),
-        usSensor(NULL),
         leftLineFollowerPin(-1),
         rightLineFollowerPin(-1),
         usTriggerPin(-1),
@@ -21,30 +19,11 @@ BitbloqMBotRanger::BitbloqMBotRanger(int lineFollowerPort, int USPort):
 		usTriggerPin = ports[USPort][2]; /// this is weird. There are two components, but only one signal.
 		usEchoPin = ports[USPort][2];
 	}
-        
-    //leftDCMotor = new BitbloqDCMotor(leftDCMotorDir,leftDCMotorPWM);
-    //rightDCMotor = new BitbloqDCMotor(rightDCMotorDir,rightDCMotorPWM);
 }
 
 
 BitbloqMBotRanger::~BitbloqMBotRanger(){
 	
-	//check that all of them are not NULL pointers, delete and set to NULL
-	
-    if(usSensor!=NULL){
-        delete usSensor;
-        usSensor=NULL;
-    }
-    
-    //if(leftDCMotor!=NULL){
-        //delete leftDCMotor;
-        //leftDCMotor=NULL;
-    //}
-    
-//    if(rightDCMotor!=NULL){
-//        delete rightDCMotor;
-//        rightDCMotor=NULL;
-//    }
 }
 
 
@@ -72,13 +51,12 @@ void BitbloqMBotRanger::setup(){
     
     if (usTriggerPin != -1){
 		//initialize usSensor
-		usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
-		usSensor->setup();
+		usSensor.setup(usTriggerPin,usEchoPin);
 	}
         
     //dc motors setup
-    //leftDCMotor->setup();
-    //rightDCMotor->setup();
+    leftDCMotor.setup(49,48,11);
+    rightDCMotor.setup(47,46,10);
 }
 
 
@@ -91,12 +69,12 @@ int BitbloqMBotRanger::readRightLineFollowerSensor() const{
 }
 
 
-int BitbloqMBotRanger::readUSMeasuredDistanceCM() const{
-	return (usSensor != NULL ? usSensor->readDistanceInCM(): - 1 ); //in centimeters
+int BitbloqMBotRanger::readUSMeasuredDistanceCM(){
+	return (usTriggerPin != -1 ? usSensor.readDistanceInCM(): - 1 ); //in centimeters
 }
 
-int BitbloqMBotRanger::readUSMeasuredDistanceIN() const{
-	return (usSensor != NULL ? usSensor->readDistanceInInches() : -1); //in inches
+int BitbloqMBotRanger::readUSMeasuredDistanceIN(){
+	return (usTriggerPin != -1 ? usSensor.readDistanceInInches() : -1); //in inches
 }
     
 void BitbloqMBotRanger::move(int direction, int speed){
@@ -110,25 +88,24 @@ void BitbloqMBotRanger::move(int direction, int speed){
 		leftSpeed = speed;
 		rightSpeed = -speed;
 		
-	}else if(direction == 3){
+	}else if(direction == 4){
 		leftSpeed = -speed; //right
 		rightSpeed = -speed;
-	}else if(direction == 4){
+	}else if(direction == 3){
 		
 		leftSpeed = speed; //left
 		rightSpeed = speed;
 	}
-/*	
-    leftDCMotor->setSpeed(leftSpeed);
-    rightDCMotor->setSpeed(rightSpeed);
-*/
+	
+    leftDCMotor.setSpeed(leftSpeed);
+    rightDCMotor.setSpeed(rightSpeed);
 }
 
 void BitbloqMBotRanger::setRightMotorSpeed(int speed){
-//    rightDCMotor->setSpeed(speed);
+    rightDCMotor.setSpeed(speed);
 }
 
 void BitbloqMBotRanger::setLeftMotorSpeed(int speed){
-//    leftDCMotor->setSpeed(speed);
+    leftDCMotor.setSpeed(speed);
 }
 

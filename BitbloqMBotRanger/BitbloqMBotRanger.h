@@ -28,6 +28,8 @@
 
 #include <BitbloqUS.h>
 #include <BitbloqMeRGBLed.h>
+#include <BitbloqDCMotor.h>
+
 
 class BitbloqMBotRanger:public BitbloqAuriga
 {
@@ -49,13 +51,13 @@ public:
      * gets distance measured by US sensor
      * @return distance in cm
      */
-    int readUSMeasuredDistanceCM() const;
+    int readUSMeasuredDistanceCM();
 
     /**
      * gets distance measured by US sensor
      * @return distance in inches
      */
-    int readUSMeasuredDistanceIN() const;
+    int readUSMeasuredDistanceIN();
 
     /**
      * gets right IR sensor status (digital)
@@ -79,16 +81,14 @@ public:
 
 private:
 
-    BitbloqMeRGBLed* boardLeds;
-
     int usTriggerPin; /// set from port using ports array.
     int usEchoPin; /// set from port using ports array.
     int rightLineFollowerPin; /// set from port using ports array.
     int leftLineFollowerPin; /// set from port using ports array.
 
-    BitbloqUltrasound* usSensor;
-    //BitbloqDCMotor* rightDCMotor;
-    //BitbloqDCMotor* leftDCMotor;
+    BitbloqUltrasound usSensor;
+    BitbloqDCMotor rightDCMotor;
+    BitbloqDCMotor leftDCMotor;
     
     const int rightLightSensor = 2;
     const int leftLightSensor = 1;

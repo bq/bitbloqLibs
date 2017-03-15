@@ -45,16 +45,30 @@ void US::setTimeOut(unsigned long timeOut){
   _timeOut = timeOut;
 }
 
+BitbloqUltrasound::BitbloqUltrasound():
+	_pinTrigger(-1),
+	_pinEcho(-1),
+	_timeOut(-1)
+{
+	
+}
 BitbloqUltrasound::BitbloqUltrasound(int pinTrigger, int pinEcho, unsigned long timeOut):
 	_pinTrigger(pinTrigger),
 	_pinEcho(pinEcho),
 	_timeOut(timeOut)
-	{
+{
+
+}
+
+void BitbloqUltrasound::setup(int pinTrigger, int pinEcho, unsigned long timeOut){
+	_pinTrigger = pinTrigger;
+	_pinEcho = pinEcho;
+	_timeOut = timeOut;
+	setup();
 }
 
 void BitbloqUltrasound::setup()
 {
-
   pinMode( _pinTrigger , OUTPUT );
   pinMode( _pinEcho , INPUT );
 }
@@ -83,11 +97,11 @@ float BitbloqUltrasound::read(){
   return distance;
 }
 
-float BitbloqUltrasound::readDistanceInCM(){
+float BitbloqUltrasound::readDistanceInCM() {
 	return read();
 }
 
-float BitbloqUltrasound::readDistanceInInches(){
+float BitbloqUltrasound::readDistanceInInches() {
 	return 0,393701*read();
 }
 
