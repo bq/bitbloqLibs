@@ -69,11 +69,11 @@ int BitbloqMBotRanger::readRightLineFollowerSensor() const{
 }
 
 
-int BitbloqMBotRanger::readUSMeasuredDistanceCM() const{
+int BitbloqMBotRanger::readUSMeasuredDistanceCM(){
 	return (usTriggerPin != -1 ? usSensor.readDistanceInCM(): - 1 ); //in centimeters
 }
 
-int BitbloqMBotRanger::readUSMeasuredDistanceIN() const{
+int BitbloqMBotRanger::readUSMeasuredDistanceIN(){
 	return (usTriggerPin != -1 ? usSensor.readDistanceInInches() : -1); //in inches
 }
     

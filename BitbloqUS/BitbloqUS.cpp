@@ -97,11 +97,11 @@ float BitbloqUltrasound::read(){
   return distance;
 }
 
-float BitbloqUltrasound::readDistanceInCM() const{
+float BitbloqUltrasound::readDistanceInCM() {
 	return read();
 }
 
-float BitbloqUltrasound::readDistanceInInches() const{
+float BitbloqUltrasound::readDistanceInInches() {
 	return 0,393701*read();
 }
 

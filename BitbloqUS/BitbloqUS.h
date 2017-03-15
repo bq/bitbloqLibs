@@ -10,8 +10,8 @@ public:
 	BitbloqUltrasound();
 	BitbloqUltrasound(int pinTrigger, int pinEcho, unsigned long timeOut = 58000);
 	float read();
-	float readDistanceInCM() const;
-	float readDistanceInInches() const;
+	float readDistanceInCM();
+	float readDistanceInInches();
 	void setTimeOut(unsigned long timeOut);
 	void setup();
 	void setup(int pinTrigger, int pinEcho, unsigned long timeOut = 58000);

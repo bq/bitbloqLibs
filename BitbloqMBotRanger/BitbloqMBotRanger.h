@@ -51,13 +51,13 @@ public:
      * gets distance measured by US sensor
      * @return distance in cm
      */
-    int readUSMeasuredDistanceCM() const;
+    int readUSMeasuredDistanceCM();
 
     /**
      * gets distance measured by US sensor
      * @return distance in inches
      */
-    int readUSMeasuredDistanceIN() const;
+    int readUSMeasuredDistanceIN();
 
     /**
      * gets right IR sensor status (digital)
