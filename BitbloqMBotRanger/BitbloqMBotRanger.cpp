@@ -88,10 +88,10 @@ void BitbloqMBotRanger::move(int direction, int speed){
 		leftSpeed = speed;
 		rightSpeed = -speed;
 		
-	}else if(direction == 3){
+	}else if(direction == 4){
 		leftSpeed = -speed; //right
 		rightSpeed = -speed;
-	}else if(direction == 4){
+	}else if(direction == 3){
 		
 		leftSpeed = speed; //left
 		rightSpeed = speed;

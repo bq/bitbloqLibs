@@ -2,7 +2,7 @@
 #include "BitbloqAuriga.h"
 
 //setting Auriga ports values
-const Port BitbloqAuriga::ports[11] = {Port(-1,-1),Port(4,5),Port(2,3),Port(6,7),Port(8,9),Port(17,16), Port(A15,A10),Port(A14,A9),Port(A13,A8),Port(A12,A7),Port(A11,A6)};
+const Port BitbloqAuriga::ports[11] = {Port(-1,-1),Port(4,5),Port(2,3),Port(6,7),Port(8,9),Port(17,16), Port(A10,A15),Port(A9,A14),Port(A8,A13),Port(A7,A12),Port(A6,A11)};
 
 BitbloqAuriga::BitbloqAuriga():
         powerSensorPin(A4),
