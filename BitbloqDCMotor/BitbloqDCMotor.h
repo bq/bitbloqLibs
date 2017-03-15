@@ -29,7 +29,6 @@ class BitbloqDCMotor
 {
     
     public:
-		BitbloqDCMotor(); //public constructor
         BitbloqDCMotor(int _dirPin, int _pwmPin); //public constructor for motors with direction pin
         BitbloqDCMotor(int _enPin1, int _enPin2, int _pwmPin); //public constructor for motors with 2 control pins
         virtual ~BitbloqDCMotor(){};
@@ -38,8 +37,6 @@ class BitbloqDCMotor
         /**
          * sets pinModes
          */
-        void setup(int _dirPin, int _pwmPin);
-        void setup(int _enPin1, int _enPin2, int _pwmPin);
         void setup();
         
         /**
@@ -49,10 +46,10 @@ class BitbloqDCMotor
         void setSpeed(int _speed);
         
     private:
-        int dirPin;
-        int pwmPin;
-        int enPin1;
-        int enPin2;
+        const int dirPin;
+        const int pwmPin;
+        const int enPin1;
+        const int enPin2;
         int speed;
         int last_speed;
 };
