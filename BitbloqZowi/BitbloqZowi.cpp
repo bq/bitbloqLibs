@@ -629,20 +629,16 @@ int Zowi::getNoise(){
 
 float Zowi::getSensor(String sensorName){
   float result = 0;
-  switch(sensorName){
-    case "buttonA":
+  if (sensorName=="buttonA"){
       result = digitalRead(PIN_AButton);
-    break;
-    case "buttonB":
+  } else if (sensorName=="buttonB"){
       result = digitalRead(PIN_BButton);
-    break;
-    case "sound":
+  } else if (sensorName=="sound"){
       result = getDistance();
-    break;
-    case "us":
+  } else if (sensorName=="us"){
       result = getNoise();
-    break;
   }
+
   return result;
 }
 
