@@ -113,21 +113,26 @@ int BitbloqFreaksCar::readLDRLeft() const{
 void BitbloqFreaksCar::move(int direction, int speed){
 	int leftSpeed = 0;
 	int rightSpeed = 0;
-	if(direction == 1){
+	switch(direction){
+		case 1:
 		leftSpeed = speed; //forward 
 		rightSpeed = -speed;
+		break;
 		
-	}else if(direction == 2){//backward
+		case 2:
 		leftSpeed = -speed;
 		rightSpeed = speed;
+		break;
 		
-	}else if(direction == 3){
+		case 3:
 		leftSpeed = -speed; //right
 		rightSpeed = -speed;
-	}else if(direction == 4){
-		
+		break;
+	
+		case 4:
 		leftSpeed = speed; //left
 		rightSpeed = speed;
+		break;
 	}
 	
     leftDCMotor->setSpeed(leftSpeed);
@@ -143,7 +148,7 @@ void BitbloqFreaksCar::setLeftMotorSpeed(int speed){
 }
 
 byte BitbloqFreaksCar::readIR(int index) const{
-	if (index >=0 && index <4)
+	if (index >=0 && index < 5)
 		return (analogRead(irPinArray[index]) < 650 ? 0 : 1);
 	else
 		return -1;
@@ -151,4 +156,8 @@ byte BitbloqFreaksCar::readIR(int index) const{
 
 void BitbloqFreaksCar::playTone(int note, int beat) const{
 	tone(buzzerPin, note, beat);
+}
+
+byte BitbloqFreaksCar::readEndStop() const{
+	return digitalRead(endStopPin);
 }

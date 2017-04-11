@@ -68,6 +68,7 @@ public:
     void setLeftMotorSpeed(int speed);
     
     void playTone(int note, int beat) const;
+    byte readEndStop() const;
 
 
 private:
