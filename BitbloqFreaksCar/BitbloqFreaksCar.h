@@ -60,22 +60,28 @@ public:
      */
     byte readIR(int index) const;
 
+	int readLDRLeft() const;
+	int readLDRRight() const;
 
     void move(int direction, int speed);
     void setRightMotorSpeed(int speed);
     void setLeftMotorSpeed(int speed);
+    
+    void playTone(int note, int beat) const;
 
 
 private:
     const int usTriggerPin; /// set from port using ports array.
     const int usEchoPin; /// set from port using ports array.
-    const int irPinArray[4]; ///robot has an 4 IR sensors
+    const int irPinArray[5]; ///robot has an 4 IR sensors
     const int buzzerPin;
     const int endStopPin;
     const int DCMotor1Dir;
     const int DCMotor1PWM;
     const int DCMotor2Dir;
     const int DCMotor2PWM;
+    const int ldrRightPin;
+    const int ldrLeftPin;
     BitbloqUltrasound* usSensor;
     BitbloqDCMotor* rightDCMotor;
     BitbloqDCMotor* leftDCMotor;
