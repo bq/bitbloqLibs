@@ -65,7 +65,6 @@
 #include "MeStepper.h"
 #include "MeEncoderMotor.h"
 #include "MeEncoderNew.h"
-#include "MeIR.h"
 #include "MeLEDMatrix.h"
 #include "MeBuzzer.h"
 #include "MeHumitureSensor.h"

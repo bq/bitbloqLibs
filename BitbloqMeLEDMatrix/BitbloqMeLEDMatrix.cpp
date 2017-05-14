@@ -48,7 +48,7 @@ BitbloqMeLEDMatrix::BitbloqMeLEDMatrix(uint8_t SCK_Pin, uint8_t DIN_Pin):
 	
 }
 
-BitbloqMeLEDMatrix::setup(){
+void BitbloqMeLEDMatrix::setup(){
 	pinMode(u8_SCKPin, OUTPUT);
 	pinMode(u8_DINPin, OUTPUT);
 	digitalWrite(u8_SCKPin,HIGH);
