@@ -1,5 +1,5 @@
 /*
- * BitbloqMe7SegmentDisplay.cpp
+ * Bitbloq7SegmentDisplay.cpp
  * 
  * Copyright 2017 Alberto Valero <avalero.valero@bq.com>
  * 
@@ -22,7 +22,7 @@
  */
 
 
-#include "BitbloqMe7SegmentDisplay.h"
+#include "Bitbloq7SegmentDisplay.h"
 
 /* Private variables ---------------------------------------------------------*/
 const uint8_t TubeTab[] PROGMEM = 
@@ -41,14 +41,14 @@ const uint8_t TubeTab[] PROGMEM =
  * \param[in]
  *    clkPin - The CLK pin for Seven-Segment LED module(arduino port).
  */
-BitbloqMe7SegmentDisplay::BitbloqMe7SegmentDisplay(uint8_t dataPin, uint8_t clkPin):
+Bitbloq7SegmentDisplay::Bitbloq7SegmentDisplay(uint8_t dataPin, uint8_t clkPin):
 	_dataPin(dataPin),
 	_clkPin(clkPin)
 {
   
 }
 
-void BitbloqMe7SegmentDisplay::setup(){
+void Bitbloq7SegmentDisplay::setup(){
 	pinMode(_clkPin, OUTPUT);
   pinMode(_dataPin, OUTPUT);
   set();
@@ -66,7 +66,7 @@ void BitbloqMe7SegmentDisplay::setup(){
  *    None
  * \par Others
  */
-void BitbloqMe7SegmentDisplay::clearDisplay(void)
+void Bitbloq7SegmentDisplay::clearDisplay(void)
 {
   uint8_t buf[4] = { ' ', ' ', ' ', ' ' };
   display(buf);
@@ -84,7 +84,7 @@ void BitbloqMe7SegmentDisplay::clearDisplay(void)
  * \others
  *    None
  */
-void BitbloqMe7SegmentDisplay::init(void)
+void Bitbloq7SegmentDisplay::init(void)
 {
   clearDisplay();
 }
@@ -103,7 +103,7 @@ void BitbloqMe7SegmentDisplay::init(void)
  * \others
  *    None
  */
-void BitbloqMe7SegmentDisplay::writeByte(uint8_t wr_data)
+void Bitbloq7SegmentDisplay::writeByte(uint8_t wr_data)
 {
   uint8_t i;
   uint8_t cnt0;
@@ -154,7 +154,7 @@ void BitbloqMe7SegmentDisplay::writeByte(uint8_t wr_data)
  * \others
  *    None
  */
-void BitbloqMe7SegmentDisplay::start(void)
+void Bitbloq7SegmentDisplay::start(void)
 {
   digitalWrite(_clkPin, HIGH); //send start signal to TM1637
   digitalWrite(_dataPin, HIGH);
@@ -176,7 +176,7 @@ void BitbloqMe7SegmentDisplay::start(void)
  * \others
  *    None
  */
-void BitbloqMe7SegmentDisplay::stop(void)
+void Bitbloq7SegmentDisplay::stop(void)
 {
   digitalWrite(_clkPin, LOW);
   digitalWrite(_dataPin, LOW);
@@ -198,7 +198,7 @@ void BitbloqMe7SegmentDisplay::stop(void)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::write(uint8_t SegData[])
+void Bitbloq7SegmentDisplay::write(uint8_t SegData[])
 {
   uint8_t i;
   start();    // Start signal sent to TM1637 from MCU.
@@ -232,7 +232,7 @@ void BitbloqMe7SegmentDisplay::write(uint8_t SegData[])
  * \others
  *    None
  */
-void BitbloqMe7SegmentDisplay::write(uint8_t BitAddr, uint8_t SegData)
+void Bitbloq7SegmentDisplay::write(uint8_t BitAddr, uint8_t SegData)
 {
   start();    // start signal sent to TM1637 from MCU
   writeByte(ADDR_FIXED);
@@ -260,7 +260,7 @@ void BitbloqMe7SegmentDisplay::write(uint8_t BitAddr, uint8_t SegData)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(uint16_t value)
+void Bitbloq7SegmentDisplay::display(uint16_t value)
 {
   display((int16_t)value);
 }
@@ -279,7 +279,7 @@ void BitbloqMe7SegmentDisplay::display(uint16_t value)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(int16_t value)
+void Bitbloq7SegmentDisplay::display(int16_t value)
 {
   display((double)value, 0);
 }
@@ -298,7 +298,7 @@ void BitbloqMe7SegmentDisplay::display(int16_t value)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(float value)
+void Bitbloq7SegmentDisplay::display(float value)
 {
   uint8_t i=0;
   bool isStart = false;
@@ -353,7 +353,7 @@ void BitbloqMe7SegmentDisplay::display(float value)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(long value)
+void Bitbloq7SegmentDisplay::display(long value)
 {
   display((double)value, 0);
 }
@@ -374,7 +374,7 @@ void BitbloqMe7SegmentDisplay::display(long value)
  * \par Others
  *    None
  */
-int16_t BitbloqMe7SegmentDisplay::checkNum(float v,int16_t b)
+int16_t Bitbloq7SegmentDisplay::checkNum(float v,int16_t b)
 {
   if(b>=0)
   {
@@ -408,7 +408,7 @@ int16_t BitbloqMe7SegmentDisplay::checkNum(float v,int16_t b)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(double value, uint8_t digits)
+void Bitbloq7SegmentDisplay::display(double value, uint8_t digits)
 {
 Posotion_1:
   uint8_t buf[4] = { ' ', ' ', ' ', ' ' };
@@ -502,7 +502,7 @@ Posotion_1:
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(uint8_t DispData[])
+void Bitbloq7SegmentDisplay::display(uint8_t DispData[])
 {
   uint8_t SegData[4];
   uint8_t i;
@@ -530,7 +530,7 @@ void BitbloqMe7SegmentDisplay::display(uint8_t DispData[])
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(uint8_t BitAddr, uint8_t DispData)
+void Bitbloq7SegmentDisplay::display(uint8_t BitAddr, uint8_t DispData)
 {
   uint8_t SegData;
 
@@ -564,7 +564,7 @@ void BitbloqMe7SegmentDisplay::display(uint8_t BitAddr, uint8_t DispData)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::display(uint8_t BitAddr, uint8_t DispData, uint8_t point_on)
+void Bitbloq7SegmentDisplay::display(uint8_t BitAddr, uint8_t DispData, uint8_t point_on)
 {
   uint8_t SegData;
 
@@ -592,21 +592,21 @@ void BitbloqMe7SegmentDisplay::display(uint8_t BitAddr, uint8_t DispData, uint8_
  * \par Description
  *    Set brightness, data and address.
  * \param[in]
- *    brightness - Brightness, defined in BitbloqMe7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
+ *    brightness - Brightness, defined in Bitbloq7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
  * \param[in]
  *    SetData - First address for display data
  * \param[in]
  *    SetAddr - First address for display
  * \par Output
- *    Cmd_SetData - Private variable Cmd_SetData of class BitbloqMe7SegmentDisplay.
- *    Cmd_SetAddr - Private variable Cmd_SetAddr of class BitbloqMe7SegmentDisplay.
+ *    Cmd_SetData - Private variable Cmd_SetData of class Bitbloq7SegmentDisplay.
+ *    Cmd_SetAddr - Private variable Cmd_SetAddr of class Bitbloq7SegmentDisplay.
  *    Cmd_DispCtrl - Control command for Me 7 Segment Serial Display module.
  * \return
  *    None
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::set(uint8_t brightness, uint8_t SetData, uint8_t SetAddr)
+void Bitbloq7SegmentDisplay::set(uint8_t brightness, uint8_t SetData, uint8_t SetAddr)
 {
   Cmd_SetData = SetData;
   Cmd_SetAddr = SetAddr;
@@ -619,7 +619,7 @@ void BitbloqMe7SegmentDisplay::set(uint8_t brightness, uint8_t SetData, uint8_t 
  * \par Description
  *    Set brightness.
  * \param[in]
- *    brightness - Brightness, defined in BitbloqMe7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
+ *    brightness - Brightness, defined in Bitbloq7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
  * \par Output
  *    Cmd_DispCtrl - Control command for Me 7 Segment Serial Display module.
  * \return
@@ -627,7 +627,7 @@ void BitbloqMe7SegmentDisplay::set(uint8_t brightness, uint8_t SetData, uint8_t 
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::setBrightness(uint8_t brightness)
+void Bitbloq7SegmentDisplay::setBrightness(uint8_t brightness)
 {
   Cmd_DispCtrl = SEGDIS_ON + brightness;
 }
@@ -646,7 +646,7 @@ void BitbloqMe7SegmentDisplay::setBrightness(uint8_t brightness)
  * \par Others
  *    None
  */
-void BitbloqMe7SegmentDisplay::coding(uint8_t DispData[])
+void Bitbloq7SegmentDisplay::coding(uint8_t DispData[])
 {
   for (uint8_t i = 0; i < 4; i++)
   {
@@ -673,7 +673,7 @@ void BitbloqMe7SegmentDisplay::coding(uint8_t DispData[])
  * \par Others
  *    None
  */
-uint8_t BitbloqMe7SegmentDisplay::coding(uint8_t DispData)
+uint8_t Bitbloq7SegmentDisplay::coding(uint8_t DispData)
 {
   if (DispData >= sizeof(TubeTab) / sizeof(*TubeTab))
   {

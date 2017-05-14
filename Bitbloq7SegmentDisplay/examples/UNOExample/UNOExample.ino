@@ -1,11 +1,9 @@
-#include <BitbloqMe7SegmentDisplay.h>
-#include <BitbloqMPort.h>
-#include <BitbloqMCore.h>
+#include <Bitbloq7SegmentDisplay.h>
 
-const int dataPin = BitbloqMCore::ports[1][1]; 
-const int clockPin = BitbloqMCore::ports[1][2]; 
+const int dataPin = 3; 
+const int clockPin = 4; 
 
-BitbloqMe7SegmentDisplay display(dataPin,clockPin);
+Bitbloq7SegmentDisplay display(dataPin,clockPin);
 
 void setup() {
   display.setup();

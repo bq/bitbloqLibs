@@ -1,5 +1,5 @@
 /*
- * BitbloqBitbloqMe7SegmentDisplay.h
+ * BitbloqBitbloq7SegmentDisplay.h
  * 
  * Copyright 2017 Alberto Valero <avalero.valero@bq.com>
  * 
@@ -21,13 +21,13 @@
  *  DERIVED FROM
  * 
  * \par Copyright (C), 2012-2016, MakeBlock
- * \class   BitbloqMe7SegmentDisplay
+ * \class   Bitbloq7SegmentDisplay
  * \brief   Driver for Me 7-Segment Serial Display module.
- * @file    BitbloqMe7SegmentDisplay.h
+ * @file    Bitbloq7SegmentDisplay.h
  * @author  MakeBlock
  * @version V1.0.5
  * @date    2016/07/27
- * @brief   Header file for BitbloqMe7SegmentDisplay.cpp.
+ * @brief   Header file for Bitbloq7SegmentDisplay.cpp.
  *
  * \par Copyright
  * This software is Copyright (C), 2012-2016, MakeBlock. Use is subject to license \n
@@ -55,8 +55,8 @@
  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef BITBLOQ_ME7SEGMENTDISPLAY_H
-#define BITBLOQ_ME7SEGMENTDISPLAY_H
+#ifndef BITBLOQ_7SEGMENTDISPLAY_H
+#define BITBLOQ_7SEGMENTDISPLAY_H
 
 //************definitions for TM1637*********************
 #include <stdint.h>
@@ -86,14 +86,14 @@ const uint8_t BRIGHTNESS_7 = 7;
 ///@brief Class for numeric display module
 
 /**
- * Class: BitbloqMe7SegmentDisplay
+ * Class: Bitbloq7SegmentDisplay
  * \par Description
- * Declaration of Class BitbloqMe7SegmentDisplay.
+ * Declaration of Class Bitbloq7SegmentDisplay.
  */
-class BitbloqMe7SegmentDisplay
+class Bitbloq7SegmentDisplay
 {
 public:
-  BitbloqMe7SegmentDisplay(uint8_t dataPin, uint8_t clkPin);
+  Bitbloq7SegmentDisplay(uint8_t dataPin, uint8_t clkPin);
   void setup();
 /**
  * \par Function
@@ -115,14 +115,14 @@ public:
  * \par Description
  *    Set brightness, data and address.
  * \param[in]
- *    brightness - Brightness, defined in BitbloqMe7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
+ *    brightness - Brightness, defined in Bitbloq7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
  * \param[in]
  *    SetData - First address for display data
  * \param[in]
  *    SetAddr - First address for display
  * \par Output
- *    Cmd_SetData - Private variable Cmd_SetData of class BitbloqMe7SegmentDisplay.
- *    Cmd_SetAddr - Private variable Cmd_SetAddr of class BitbloqMe7SegmentDisplay.
+ *    Cmd_SetData - Private variable Cmd_SetData of class Bitbloq7SegmentDisplay.
+ *    Cmd_SetAddr - Private variable Cmd_SetAddr of class Bitbloq7SegmentDisplay.
  *    Cmd_DispCtrl - Control command for Me 7 Segment Serial Display module.
  * \return
  *    None
@@ -339,7 +339,7 @@ public:
  * \par Description
  *    Set brightness.
  * \param[in]
- *    brightness - Brightness, defined in BitbloqMe7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
+ *    brightness - Brightness, defined in Bitbloq7SegmentDisplay.h from BRIGHTNESS_0 to BRIGHTNESS_7.
  * \par Output
  *    Cmd_DispCtrl - Control command for Me 7 Segment Serial Display module.
  * \return
