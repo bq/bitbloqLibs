@@ -27,6 +27,7 @@
 
 #include <BitbloqUS.h>
 #include <BitbloqDCMotor.h>
+#include <BitbloqIRControl.h>
 
 class BitbloqFreaksCar
 {
@@ -69,7 +70,8 @@ public:
     
     void playTone(int note, int beat) const;
     byte readEndStop() const;
-
+    
+    char getInfraredControlCommnad();
 
 private:
     const int usTriggerPin; /// set from port using ports array.
@@ -83,9 +85,12 @@ private:
     const int DCMotor2PWM;
     const int ldrRightPin;
     const int ldrLeftPin;
+    const int InfraredReceivePin;
     BitbloqUltrasound* usSensor;
     BitbloqDCMotor* rightDCMotor;
     BitbloqDCMotor* leftDCMotor;
+    BitbloqIRControl* irControl;
+    
 };
 
 #endif

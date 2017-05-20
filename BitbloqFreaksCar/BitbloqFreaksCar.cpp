@@ -30,6 +30,7 @@ BitbloqFreaksCar::BitbloqFreaksCar():
         usSensor(NULL),
         leftDCMotor(NULL),
         rightDCMotor(NULL),
+        irControl(NULL),
         buzzerPin(11),
         usTriggerPin(8),
         usEchoPin(7),
@@ -40,18 +41,25 @@ BitbloqFreaksCar::BitbloqFreaksCar():
         endStopPin(4),
         ldrRightPin(A5),
         ldrLeftPin(A6),
-        irPinArray{A4,A3,A2,A1,A0}
+        irPinArray{A4,A3,A2,A1,A0},
+        InfraredReceivePin(12)
 {
-	usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
+    usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
     leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
     rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
+    irControl = new BitbloqIRControl(InfraredReceivePin);
 }
 
 
 BitbloqFreaksCar::~BitbloqFreaksCar(){
-	
-	//check that all of them are not NULL pointers, delete and set to NULL
-	
+    
+    //check that all of them are not NULL pointers, delete and set to NULL
+    
+    if(irControl != NULL){
+		delete irControl;
+		irControl=NULL;
+	}
+    
     if(usSensor!=NULL){
         delete usSensor;
         usSensor=NULL;
@@ -69,20 +77,20 @@ BitbloqFreaksCar::~BitbloqFreaksCar(){
 }
 
 void BitbloqFreaksCar::setup(){
-	//IR Pins
-	for (int i = 0; i<5; i++){
-		pinMode(irPinArray[i],INPUT);
-	}
-	
-	//LDR PINS
-	pinMode(ldrRightPin,INPUT);
-	pinMode(ldrLeftPin,INPUT);
-	
-	//Buzzer
-	pinMode(buzzerPin,OUTPUT);
+    //IR Pins
+    for (int i = 0; i<5; i++){
+        pinMode(irPinArray[i],INPUT);
+    }
+    
+    //LDR PINS
+    pinMode(ldrRightPin,INPUT);
+    pinMode(ldrLeftPin,INPUT);
+    
+    //Buzzer
+    pinMode(buzzerPin,OUTPUT);
 
-	//US Sensor setup
-	usSensor->setup();
+    //US Sensor setup
+    usSensor->setup();
         
     //dc motors setup
     leftDCMotor->setup();
@@ -90,51 +98,57 @@ void BitbloqFreaksCar::setup(){
     
     //endstop
     pinMode(endStopPin,INPUT);
-
+    
+    //ir remote control
+    irControl->setup();
 }
 
+char BitbloqFreaksCar::getInfraredControlCommnad()
+{
+	return irControl->getInfraredControlCommnad();
+}
 
 int BitbloqFreaksCar::readUSMeasuredDistanceCM() const{
-	return (usSensor != NULL ? usSensor->readDistanceInCM(): - 1 ); //in centimeters
+    return (usSensor != NULL ? usSensor->readDistanceInCM(): - 1 ); //in centimeters
 }
 
 int BitbloqFreaksCar::readUSMeasuredDistanceIN() const{
-	return (usSensor != NULL ? usSensor->readDistanceInInches() : -1); //in inches
+    return (usSensor != NULL ? usSensor->readDistanceInInches() : -1); //in inches
 }
 
 int BitbloqFreaksCar::readLDRRight() const{
-	return analogRead(ldrRightPin);
+    return analogRead(ldrRightPin);
 }
 
 int BitbloqFreaksCar::readLDRLeft() const{
-	return analogRead(ldrLeftPin);
+    return analogRead(ldrLeftPin);
 }
    
 void BitbloqFreaksCar::move(int direction, int speed){
-	int leftSpeed = 0;
-	int rightSpeed = 0;
-	switch(direction){
-		case 1:
-		leftSpeed = speed; //forward 
-		rightSpeed = -speed;
-		break;
-		
-		case 2:
-		leftSpeed = -speed;
-		rightSpeed = speed;
-		break;
-		
-		case 3:
-		leftSpeed = -speed; //right
-		rightSpeed = -speed;
-		break;
-	
-		case 4:
-		leftSpeed = speed; //left
-		rightSpeed = speed;
-		break;
-	}
-	
+    int leftSpeed = 0;
+    int rightSpeed = 0;
+    switch(direction){
+        case 1:
+        leftSpeed = speed; //forward 
+        rightSpeed = -speed;
+        break;
+        
+        case 2:
+        leftSpeed = -speed;
+        rightSpeed = speed;
+        break;
+        
+        case 3:
+        leftSpeed = -speed; //right
+        rightSpeed = -speed;
+        break;
+    
+        case 4:
+        leftSpeed = speed; //left
+        rightSpeed = speed;
+        break;
+    }
+    
     leftDCMotor->setSpeed(leftSpeed);
     rightDCMotor->setSpeed(rightSpeed);
 }
@@ -148,16 +162,16 @@ void BitbloqFreaksCar::setLeftMotorSpeed(int speed){
 }
 
 byte BitbloqFreaksCar::readIR(int index) const{
-	if (index >=0 && index < 5)
-		return (analogRead(irPinArray[index]) < 650 ? 0 : 1);
-	else
-		return -1;
+    if (index >=0 && index < 5)
+        return (analogRead(irPinArray[index]) < 650 ? 0 : 1);
+    else
+        return -1;
 }
 
 void BitbloqFreaksCar::playTone(int note, int beat) const{
-	tone(buzzerPin, note, beat);
+    tone(buzzerPin, note, beat);
 }
 
 byte BitbloqFreaksCar::readEndStop() const{
-	return digitalRead(endStopPin);
+    return digitalRead(endStopPin);
 }

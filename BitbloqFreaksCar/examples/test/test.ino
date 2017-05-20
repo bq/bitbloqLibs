@@ -1,3 +1,8 @@
+#include <IRremoteInt.h>
+#include <IRremote.h>
+
+
+
 #include <BitbloqFreaksCar.h>
 #include <BitbloqUS.h>
 #include <BitbloqDCMotor.h>
@@ -23,9 +28,6 @@ void loop() {
     
     for(int i=0; i<5; i++){
       Serial.println(robot.readIR(i));
-    }
-    
-    
-    
+    }    
     delay(1000);
 }
