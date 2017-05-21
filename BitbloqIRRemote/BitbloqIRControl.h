@@ -36,7 +36,7 @@ public:
 private:
     const int receiverPin;
     int _InfraredReceiveCount;
-    decode_results _InfraredControlCommand;
+    BitbloqDecodeResults _InfraredControlCommand;
     long int _InfraredControlCommand1;
     long int _InfraredControlCommand2;
  };

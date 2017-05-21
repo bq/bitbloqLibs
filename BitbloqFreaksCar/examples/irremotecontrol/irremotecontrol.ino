@@ -9,7 +9,7 @@ BitbloqFreaksCar robot;
 void setup() {
   // put your setup code here, to run once:
   robot.setup();
-  Serial.begin(9600);
+  Serial.begin(9600); 
 }
 
 void loop() {

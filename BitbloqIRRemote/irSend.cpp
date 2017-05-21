@@ -2,7 +2,7 @@
 #include "IRremoteInt.h"
 
 //+=============================================================================
-void  IRsend::sendRaw (const unsigned int buf[],  unsigned int len,  unsigned int hz)
+void  BitbloqIRSend::sendRaw (const unsigned int buf[],  unsigned int len,  unsigned int hz)
 {
 	// Set IR carrier frequency
 	enableIROut(hz);
@@ -19,7 +19,7 @@ void  IRsend::sendRaw (const unsigned int buf[],  unsigned int len,  unsigned in
 // Sends an IR mark for the specified number of microseconds.
 // The mark output is modulated at the PWM frequency.
 //
-void  IRsend::mark (unsigned int time)
+void  BitbloqIRSend::mark (unsigned int time)
 {
 	TIMER_ENABLE_PWM; // Enable pin 3 PWM output
 	if (time > 0) custom_delay_usec(time);
@@ -30,10 +30,10 @@ void  IRsend::mark (unsigned int time)
 // Sends an IR space for the specified number of microseconds.
 // A space is no output, so the PWM output is disabled.
 //
-void  IRsend::space (unsigned int time)
+void  BitbloqIRSend::space (unsigned int time)
 {
 	TIMER_DISABLE_PWM; // Disable pin 3 PWM output
-	if (time > 0) IRsend::custom_delay_usec(time);
+	if (time > 0) BitbloqIRSend::custom_delay_usec(time);
 }
 
 
@@ -52,7 +52,7 @@ void  IRsend::space (unsigned int time)
 // A few hours staring at the ATmega documentation and this will all make sense.
 // See my Secrets of Arduino PWM at http://arcfn.com/2009/07/secrets-of-arduino-pwm.html for details.
 //
-void  IRsend::enableIROut (int khz)
+void  BitbloqIRSend::enableIROut (int khz)
 {
 	// Disable the Timer2 Interrupt (which is used for receiving IR)
 	TIMER_DISABLE_INTR; //Timer2 Overflow Interrupt
@@ -71,7 +71,7 @@ void  IRsend::enableIROut (int khz)
 //+=============================================================================
 // Custom delay function that circumvents Arduino's delayMicroseconds limit
 
-void IRsend::custom_delay_usec(unsigned long uSecs) {
+void BitbloqIRSend::custom_delay_usec(unsigned long uSecs) {
   if (uSecs > 4) {
     unsigned long start = micros();
     unsigned long endMicros = start + uSecs - 4;
