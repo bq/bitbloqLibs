@@ -26,7 +26,7 @@
 
 #include <BitbloqMPort.h>
 #include <BitbloqMeRGBLed.h>
-
+#include <BitbloqIRControl.h>
 
 class BitbloqMCore
 {
@@ -75,6 +75,7 @@ public:
              */
     int readLightSensor() const;
     
+    char getInfraredControlCommnad();
     
      //ports structure of MCore Board.
     static const Port ports[5];
@@ -95,8 +96,9 @@ protected:
     const int DCMotor2Dir;
     const int DCMotor2PWM;
     const int rgbLEDPin;
-    const int IRTransmitter; /// IR transmitter hardwired to board (D3)
-    const int IRReceiver; /// IR receiver hardwired to board (D2)
+    const int IRTransmitterPin; /// IR transmitter hardwired to board (D3)
+    const int IRReceiverPin; /// IR receiver hardwired to board (D2)
+    BitbloqIRControl* irControl; /// Remote IR Control
     
     
    

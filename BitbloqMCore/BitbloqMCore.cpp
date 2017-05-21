@@ -14,14 +14,18 @@ BitbloqMCore::BitbloqMCore():
         DCMotor1Dir(7),
         DCMotor1PWM(6),
         rgbLEDPin(13),
-        IRTransmitter(3),
-        IRReceiver(2)
+        IRTransmitterPin(3),
+        IRReceiverPin(2)
 {
-   
+	irControl = new BitbloqIRControl(IRReceiverPin);
 }
 
 
 BitbloqMCore::~BitbloqMCore(){
+	if(irControl != NULL){
+		delete irControl;
+		irControl=NULL;
+	}
 
 }
 
@@ -30,13 +34,12 @@ void BitbloqMCore::setup(){
     pinMode(lightSensorPin,INPUT);
     pinMode(buttonPin,INPUT);
     
-    //IR Comms
-    pinMode(IRTransmitter,OUTPUT);
-    pinMode(IRReceiver,INPUT);
-    
     //actuators
     pinMode(buzzerPin,OUTPUT);
     boardLeds.setup(rgbLEDPin,2);
+    
+    //ir remote control
+    irControl->setup();
 }
 
 void BitbloqMCore::setLed(int led, int red, int green, int blue){
@@ -48,6 +51,10 @@ void BitbloqMCore::playTone(int note, int beat){
 	tone(buzzerPin, note, beat);
 }
 
+char BitbloqMCore::getInfraredControlCommnad()
+{
+	return irControl->getInfraredControlCommnad();
+}
 
 int BitbloqMCore::readButtonStatus() const{
 	return analogRead(A7);
