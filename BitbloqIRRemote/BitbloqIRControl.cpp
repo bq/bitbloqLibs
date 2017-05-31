@@ -32,6 +32,25 @@ void BitbloqIRControl::setup(){
     pinMode(receiverPin,INPUT_PULLUP);
 }
 
+long int BitbloqIRControl::getRaw(){
+	IRrecv _InfraredReceiveCommand(receiverPin);
+    _InfraredReceiveCommand.enableIRIn();
+    while(1)
+    {
+        if(_InfraredReceiveCommand.decode(&_InfraredControlCommand))
+        {
+            _InfraredControlCommand2=_InfraredControlCommand.value;
+            if(_InfraredControlCommand2>0xFD00FE&&_InfraredControlCommand2<0xFDB050)
+            {
+                _InfraredControlCommand1=_InfraredControlCommand2;
+            }
+          
+        }
+        return _InfraredControlCommand2;
+    }
+    
+}	
+
 char BitbloqIRControl::getInfraredControlCommnad(){
 	IRrecv _InfraredReceiveCommand(receiverPin);
     _InfraredReceiveCommand.enableIRIn();
@@ -46,83 +65,83 @@ char BitbloqIRControl::getInfraredControlCommnad(){
             }
             switch(_InfraredControlCommand2)
             {
-                case 0xFDA05F:
-                return 'F';
+                case -1497820227:
+                return 'F'; //forward
                 break;
             
-                case 0xFDB04F:
-                return 'D';
+                case 1113853081:
+                return 'B'; //backward
                 break;
             
-                case 0xFD10EF:
-                return 'L';
+                case 32049505:
+                return 'L'; //left 
                 break;
                 
-                case 0xFD50AF:
-                return 'R';
+                case -885166211:
+                return 'R'; //right
                 break;
             
-                case 0xFD906F:
-                return 'S';
+                case -1839375523:
+                return 'S'; //OK
                 break;
 
-                case 0xFD708F:
+                case 1811778305:
                 return '0';
                 break;
 
-                case 0xFD08F7:
+                case -555408703:
                 return '1';
                 break;
 
-                case 0xFD8877:
+                case 1868133565:
                 return '2';
                 break;
 
-                case 0xFD48B7:
+                case -1737510107:
                 return '3';
                 break;
 
-                case 0xFD28D7:
+                case -875377411:
                 return '4';
                 break;
 
-                case 0xFDA857:
+                case 629155073:
                 return '5';
                 break;
 
-                case 0xFD6897:
+                case -2048877215:
                 return '6';
                 break;
 
-                case 0xFD18E7:
+                case -949029659:
                 return '7';
                 break;
 
-                case 0xFD9867:
+                case 1474512609:
                 return '8';
                 break;
 
-                case 0xFD58A7:
+                case -1866245375:
                 return '9';
                 break;
 
-                case 0xFD20DF:
+                case 373604801:
                 return '+';
                 break;
 
-                case 0xFD30CF:
+                case -1309689187:
                 return '-';
                 break;
 
-                case 0xFD609F:
-                return 'B';
+                case -799895003:
+                return 'R'; //Return
                 break;
 
-                case 0xFD40BF:
+                case 46690913: //Menu
                 return 'M';
                 break;
 
-                case 0xFD00FF:
+                case -1292968131: //Power ON/FF
                 return 'P';
                 break;
                 

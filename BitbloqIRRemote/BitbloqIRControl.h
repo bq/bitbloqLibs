@@ -31,6 +31,7 @@ class BitbloqIRControl{
 public:
     BitbloqIRControl(int rpin);
     char getInfraredControlCommnad();
+    long int getRaw();
     void setup();
     
 private:

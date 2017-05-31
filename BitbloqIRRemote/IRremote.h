@@ -24,59 +24,6 @@
 #include "IRremoteInt.h"
 
 //------------------------------------------------------------------------------
-// Supported IR protocols
-// Each protocol you include costs memory and, during decode, costs time
-// Disable (set to 0) all the protocols you do not need/want!
-//
-#define DECODE_RC5           1
-#define SEND_RC5             1
-
-#define DECODE_RC6           1
-#define SEND_RC6             1
-
-#define DECODE_NEC           1
-#define SEND_NEC             1
-
-#define DECODE_SONY          1
-#define SEND_SONY            1
-
-#define DECODE_PANASONIC     1
-#define SEND_PANASONIC       1
-
-#define DECODE_JVC           1
-#define SEND_JVC             1
-
-#define DECODE_SAMSUNG       1
-#define SEND_SAMSUNG         1
-
-#define DECODE_WHYNTER       1
-#define SEND_WHYNTER         1
-
-#define DECODE_AIWA_RC_T501  1
-#define SEND_AIWA_RC_T501    1
-
-#define DECODE_LG            1
-#define SEND_LG              1 
-
-#define DECODE_SANYO         1
-#define SEND_SANYO           0 // NOT WRITTEN
-
-#define DECODE_MITSUBISHI    1
-#define SEND_MITSUBISHI      0 // NOT WRITTEN
-
-#define DECODE_DISH          0 // NOT WRITTEN
-#define SEND_DISH            1
-
-#define DECODE_SHARP         0 // NOT WRITTEN
-#define SEND_SHARP           1
-
-#define DECODE_DENON         1
-#define SEND_DENON           1
-
-#define DECODE_PRONTO        0 // This function doe not logically make sense
-#define SEND_PRONTO          1
-
-//------------------------------------------------------------------------------
 // When sending a Pronto code we request to send either the "once" code
 //                                                   or the "repeat" code
 // If the code requested does not exist we can request to fallback on the
@@ -194,75 +141,6 @@ class BitbloqIRSend
 		void  mark        		(unsigned int usec) ;
 		void  space       		(unsigned int usec) ;
 		void  sendRaw     		(const unsigned int buf[],  unsigned int len,  unsigned int hz) ;
-
-		//......................................................................
-#		if SEND_RC5
-			void  sendRC5        (unsigned long data,  int nbits) ;
-#		endif
-#		if SEND_RC6
-			void  sendRC6        (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_NEC
-			void  sendNEC        (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_SONY
-			void  sendSony       (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_PANASONIC
-			void  sendPanasonic  (unsigned int address,  unsigned long data) ;
-#		endif
-		//......................................................................
-#		if SEND_JVC
-			// JVC does NOT repeat by sending a separate code (like NEC does).
-			// The JVC protocol repeats by skipping the header.
-			// To send a JVC repeat signal, send the original code value
-			//   and set 'repeat' to true
-			void  sendJVC        (unsigned long data,  int nbits,  bool repeat) ;
-#		endif
-		//......................................................................
-#		if SEND_SAMSUNG
-			void  sendSAMSUNG    (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_WHYNTER
-			void  sendWhynter    (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_AIWA_RC_T501
-			void  sendAiwaRCT501 (int code) ;
-#		endif
-		//......................................................................
-#		if SEND_LG
-			void  sendLG         (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_SANYO
-			void  sendSanyo      ( ) ; // NOT WRITTEN
-#		endif
-		//......................................................................
-#		if SEND_MISUBISHI
-			void  sendMitsubishi ( ) ; // NOT WRITTEN
-#		endif
-		//......................................................................
-#		if SEND_DISH
-			void  sendDISH       (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_SHARP
-			void  sendSharpRaw   (unsigned long data,  int nbits) ;
-			void  sendSharp      (unsigned int address,  unsigned int command) ;
-#		endif
-		//......................................................................
-#		if SEND_DENON
-			void  sendDenon      (unsigned long data,  int nbits) ;
-#		endif
-		//......................................................................
-#		if SEND_PRONTO
-			void  sendPronto     (char* code,  bool repeat,  bool fallback) ;
-#		endif
 } ;
 
 #endif
