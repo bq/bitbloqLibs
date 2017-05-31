@@ -1,25 +1,25 @@
 /*
  * BitbloqBitbloqMeLEDMatrix.h
- * 
+ *
  * Copyright 2017 Alberto Valero <alberto.valero@bq.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
- * 
+ *
  * DERIVED FROM
- 
+
  * \par Copyright (C), 2012-2016, MakeBlock
  * \class   BitbloqMeLEDMatrix
  * \brief   Driver for Me LED Matrix module.
@@ -51,7 +51,7 @@
  * </pre>
  *
  */
- 
+
 #ifndef BITBLOQ_ME_LED_MATRIX_H_
 #define BITBLOQ_ME_LED_MATRIX_H_
 
@@ -97,10 +97,10 @@ typedef enum
 class BitbloqMeLEDMatrix
 {
 public:
-  
+
 /**
  * Constructor which can call your own function to map to arduino port,
- * you can set any slot for the buzzer device. 
+ * you can set any slot for the buzzer device.
  * \param[in]
  *   SCK_Pin - The SCk of LED Matrix.
  * \param[in]
@@ -128,7 +128,7 @@ public:
  *    None
  */
   void clearScreen();
-  
+
 /**
  * \par Function
  *    setBrightness
@@ -144,7 +144,7 @@ public:
  *    None
  */
   void setBrightness(uint8_t Bright);
-  
+
 /**
  * \par Function
  *    setColorIndex
@@ -160,7 +160,7 @@ public:
  *    None
  */
   void setColorIndex(bool Color_Number);
-  
+
 /**
  * \par Function
  *    drawBitmap
@@ -182,7 +182,7 @@ public:
  *    None
  */
   void drawBitmap(int8_t x, int8_t y, uint8_t Bitmap_Width, uint8_t *Bitmap);
-  
+
 /**
  * \par Function
  *    drawStr
@@ -202,7 +202,7 @@ public:
  *    None
  */
   void drawStr(int16_t X_position, int8_t Y_position, const char *str);
-  
+
 /**
  * \par Function
  *    showClock
@@ -241,6 +241,8 @@ public:
  */
   void showNum(float value,uint8_t = 3);
 
+  void draw(uint8_t pos0, uint8_t pos1, uint8_t pos2, uint8_t pos3, uint8_t pos4, uint8_t pos5, uint8_t pos6, uint8_t pos7, uint8_t pos8, uint8_t pos9, uint8_t pos10, uint8_t pos11, uint8_t pos12, uint8_t pos13, uint8_t pos14, uint8_t pos15);
+
 private:
   const uint8_t u8_SCKPin;
   const uint8_t u8_DINPin;
@@ -270,7 +272,7 @@ private:
  *    None
  */
   void writeByte(uint8_t data);
-  
+
 /**
  * \par Function
  *    writeBytesToAddress
@@ -290,7 +292,7 @@ private:
  *    None
  */
   void writeBytesToAddress(uint8_t Address, const uint8_t *P_data, uint8_t count_of_data);
-  
+
 /**
  * \par Function
  *    showStr
@@ -304,9 +306,6 @@ private:
  *    None
  */
   void showStr();
-  
-  void draw(uint8_t pos0, uint8_t pos1, uint8_t pos2, uint8_t pos3, uint8_t pos4, uint8_t pos5, uint8_t pos6, uint8_t pos7, uint8_t pos8, uint8_t pos9, uint8_t pos10, uint8_t pos11, uint8_t pos12, uint8_t pos13, uint8_t pos14, uint8_t pos15);
-  
 
 };
 
