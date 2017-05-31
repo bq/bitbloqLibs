@@ -120,7 +120,7 @@ int  MATCH_SPACE (int measured_ticks,  int desired_us)
 // As soon as first MARK arrives:
 //   Gap width is recorded; Ready is cleared; New logging starts
 //
-ISR (TIMER_INTR_NAME_MODIFIED)
+ISR (TIMER_INTR_NAME)
 {
 	TIMER_RESET;
 
