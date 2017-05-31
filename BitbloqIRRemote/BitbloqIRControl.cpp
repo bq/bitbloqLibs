@@ -51,7 +51,7 @@ long int BitbloqIRControl::getRaw(){
     
 }	
 
-char BitbloqIRControl::getInfraredControlCommnad(){
+char BitbloqIRControl::getInfraredControlCommand(){
 	IRrecv _InfraredReceiveCommand(receiverPin);
     _InfraredReceiveCommand.enableIRIn();
     while(1)

@@ -103,9 +103,9 @@ void BitbloqFreaksCar::setup(){
     irControl->setup();
 }
 
-char BitbloqFreaksCar::getInfraredControlCommnad()
+char BitbloqFreaksCar::getInfraredControlCommand()
 {
-	return irControl->getInfraredControlCommnad();
+	return irControl->getInfraredControlCommand();
 }
 
 int BitbloqFreaksCar::readUSMeasuredDistanceCM() const{

@@ -13,5 +13,5 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(robot.getInfraredControlCommnad());
+  Serial.println(robot.getInfraredControlCommand());
 }

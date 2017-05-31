@@ -75,7 +75,7 @@ public:
              */
     int readLightSensor() const;
     
-    char getInfraredControlCommnad();
+    char getInfraredControlCommand();
     
      //ports structure of MCore Board.
     static const Port ports[5];

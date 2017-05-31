@@ -51,9 +51,9 @@ void BitbloqMCore::playTone(int note, int beat){
 	tone(buzzerPin, note, beat);
 }
 
-char BitbloqMCore::getInfraredControlCommnad()
+char BitbloqMCore::getInfraredControlCommand()
 {
-	return irControl->getInfraredControlCommnad();
+	return irControl->getInfraredControlCommand();
 }
 
 int BitbloqMCore::readButtonStatus() const{

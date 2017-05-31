@@ -13,6 +13,6 @@ void setup() {
 
 
 void loop() {
-  Serial.println(mcore.getInfraredControlCommnad());
+  Serial.println(mcore.getInfraredControlCommand());
   Serial.println(mcore.irControl->getRaw());
 }

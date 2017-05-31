@@ -71,7 +71,7 @@ public:
     void playTone(int note, int beat) const;
     byte readEndStop() const;
     
-    char getInfraredControlCommnad();
+    char getInfraredControlCommand();
 
 private:
     const int usTriggerPin; /// set from port using ports array.
