@@ -11,7 +11,7 @@ const int DIN_Pin = BitbloqMCore::ports[1][2];
 
 BitbloqMeLEDMatrix ledMatrix(SCK_Pin,DIN_Pin);
 
-char *s = "Hi";
+String s = "Hi";
 
 void setup() {
   ledMatrix.setup();

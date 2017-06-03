@@ -202,6 +202,7 @@ public:
  *    None
  */
   void drawStr(int16_t X_position, int8_t Y_position, const char *str);
+  void drawStr(int16_t X_position, int8_t Y_position, String str);
 
 /**
  * \par Function

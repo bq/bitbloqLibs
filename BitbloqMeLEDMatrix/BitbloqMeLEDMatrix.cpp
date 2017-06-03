@@ -301,6 +301,10 @@ void BitbloqMeLEDMatrix::drawBitmap(int8_t x, int8_t y, uint8_t Bitmap_Width, ui
  * \par Others
  *    None
  */
+void BitbloqMeLEDMatrix::drawStr(int16_t X_position, int8_t Y_position, String str)
+{
+	drawStr(X_position, Y_position, str.c_str());
+}
 void BitbloqMeLEDMatrix::drawStr(int16_t X_position, int8_t Y_position, const char *str)
 {
     b_Draw_Str_Flag = 1;
