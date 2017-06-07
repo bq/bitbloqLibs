@@ -123,6 +123,30 @@ int BitbloqFreaksCar::readLDRRight() const{
 int BitbloqFreaksCar::readLDRLeft() const{
     return analogRead(ldrLeftPin);
 }
+
+bool BitbloqFreaksCar::getLightRange(int side, int range){
+
+  int read;
+
+  if (side > 0){
+    read = analogRead(ldrLeftPin);
+  }
+  else {
+    read = analogRead(ldrRightPin);
+  }
+
+  if (read > MEDIUM_HIGH_LIGHT && range == HIGH_LIGHT){
+    return true;
+  }
+  else if (read <= MEDIUM_HIGH_LIGHT && read >= LOW_MEDIUM_LIGHT && range == MEDIUM_LIGHT){
+    return true;
+  }
+  else if (read < LOW_MEDIUM_LIGHT && range == LOW_LIGHT) {
+    return true;
+  }
+
+  return false;
+}
    
 void BitbloqFreaksCar::move(int direction, int speed){
     int leftSpeed = 0;

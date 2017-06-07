@@ -29,6 +29,14 @@
 #include <BitbloqDCMotor.h>
 #include <BitbloqIRControl.h>
 
+// Constants
+#define LOW_MEDIUM_LIGHT  166 //500*1/3
+#define MEDIUM_HIGH_LIGHT 333 //500*2/3
+
+#define LOW_LIGHT    0
+#define MEDIUM_LIGHT 1
+#define HIGH_LIGHT   2
+
 class BitbloqFreaksCar
 {
 
@@ -63,6 +71,7 @@ public:
 
 	int readLDRLeft() const;
 	int readLDRRight() const;
+	bool getLightRange(int side, int range);
 
     void move(int direction, int speed);
     void setRightMotorSpeed(int speed);
