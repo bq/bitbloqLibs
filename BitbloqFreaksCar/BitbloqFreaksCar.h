@@ -30,6 +30,9 @@
 #include <BitbloqIRControl.h>
 
 // Constants
+#define LEFT         1
+#define RIGHT        -1
+
 #define LOW_MEDIUM_LIGHT  166 //500*1/3
 #define MEDIUM_HIGH_LIGHT 333 //500*2/3
 
