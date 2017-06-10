@@ -47,7 +47,7 @@ BitbloqFreaksCar::BitbloqFreaksCar():
     usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
     leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
     rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
-    irControl = new BitbloqIRControl(InfraredReceivePin);
+    irControl = new Bitbloq::ElecfreaksIRControl(InfraredReceivePin);
 }
 
 

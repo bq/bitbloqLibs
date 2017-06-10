@@ -26,7 +26,7 @@
 
 #include <BitbloqMPort.h>
 #include <BitbloqMeRGBLed.h>
-#include <BitbloqIRControl.h>
+#include <BitbloqMakeblockIRControl.h>
 
 class BitbloqMCore
 {
@@ -82,7 +82,7 @@ public:
     
 	BitbloqMeRGBLed boardLeds;
 	
-	BitbloqIRControl* irControl; /// Remote IR Control
+	Bitbloq::MakeblockIRControl* irControl; /// Remote IR Control
     
 protected:
     // void portsInit();

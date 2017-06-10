@@ -27,7 +27,7 @@
 
 #include <BitbloqUS.h>
 #include <BitbloqDCMotor.h>
-#include <BitbloqIRControl.h>
+#include <ElecFreaksIRControl.h>
 
 // Constants
 #define LEFT         1
@@ -101,7 +101,7 @@ private:
     BitbloqUltrasound* usSensor;
     BitbloqDCMotor* rightDCMotor;
     BitbloqDCMotor* leftDCMotor;
-    BitbloqIRControl* irControl;
+    Bitbloq::ElecFreaksIRControl* irControl;
     
 };
 
