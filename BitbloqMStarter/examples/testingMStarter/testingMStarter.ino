@@ -1,4 +1,4 @@
-#include <BitbloqMOrion.h>
+#include <BitbloqOrion.h>
 #include <BitbloqMStarter.h>
 
 BitbloqMStarter mbot;
@@ -14,9 +14,7 @@ void setup() {
 void loop() {
 
   //Check Buzzer
-  if (mbot.isButtonPushed()){
-      mbot.playTone(200,100);
-  }
+  mbot.playTone(200,100);
   
   //Check Line Follower
   Serial.print("right line follower: ");
@@ -29,15 +27,12 @@ void loop() {
   Serial.println(mbot.readUSMeasuredDistanceCM());
 
   //Check DC Motor
-  if(mbot.isButtonPushed()){
     mbot.setRightMotorSpeed(200);
     mbot.setLeftMotorSpeed(200);
-  }else{
+    delay(5000);
     mbot.setRightMotorSpeed(0);
     mbot.setLeftMotorSpeed(0);
-  } 
-
-  delay(1000);  
+    delay(5000); 
 
 }
 

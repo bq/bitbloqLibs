@@ -24,15 +24,16 @@
 #ifndef BITBLOQDCMOTOR_H
 #define BITBLOQDCMOTOR_H
 
+namespace Bitbloq{
 
-class BitbloqDCMotor 
+class DCMotor 
 {
     
     public:
-		BitbloqDCMotor(); //public constructor
-        BitbloqDCMotor(int _dirPin, int _pwmPin); //public constructor for motors with direction pin
-        BitbloqDCMotor(int _enPin1, int _enPin2, int _pwmPin); //public constructor for motors with 2 control pins
-        virtual ~BitbloqDCMotor(){};
+		DCMotor(); //public constructor
+        DCMotor(int _dirPin, int _pwmPin); //public constructor for motors with direction pin
+        DCMotor(int _enPin1, int _enPin2, int _pwmPin); //public constructor for motors with 2 control pins
+        virtual ~DCMotor(){};
         
         
         /**
@@ -56,5 +57,7 @@ class BitbloqDCMotor
         int speed;
         int last_speed;
 };
+
+} //end namespace
 
 #endif

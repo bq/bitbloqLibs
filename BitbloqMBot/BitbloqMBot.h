@@ -89,8 +89,8 @@ private:
     int leftLineFollowerPin; /// set from port using ports array.
 
     BitbloqUltrasound* usSensor;
-    BitbloqDCMotor* rightDCMotor;
-    BitbloqDCMotor* leftDCMotor;
+    Bitbloq::DCMotor* rightDCMotor;
+    Bitbloq::DCMotor* leftDCMotor;
 };
 
 #endif

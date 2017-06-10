@@ -44,8 +44,8 @@ BitbloqMStarter::BitbloqMStarter(int lineFollowerPort, int USPort):
 		usEchoPin = ports[USPort][2];
 	}
     
-    leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
-    rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
+    leftDCMotor = new Bitbloq::DCMotor(DCMotor2Dir,DCMotor2PWM);
+    rightDCMotor = new Bitbloq::DCMotor(DCMotor1Dir,DCMotor1PWM);
 }
 
 
