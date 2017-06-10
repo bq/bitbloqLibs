@@ -23,6 +23,8 @@
 //
 #include "IRremoteInt.h"
 
+namespace Bitbloq{
+
 //------------------------------------------------------------------------------
 // When sending a Pronto code we request to send either the "once" code
 //                                                   or the "repeat" code
@@ -91,7 +93,7 @@ int  MATCH_SPACE (int measured_ticks, int desired_us) ;
 //------------------------------------------------------------------------------
 // Results returned from the decoder
 //
-class BitbloqDecodeResults
+class DecodeResults
 {
 	public:
 		decode_type_t          decode_type;  // UNKNOWN, NEC, SONY, RC5, ...
@@ -118,23 +120,23 @@ class IRrecv
 		IRrecv (int recvpin, int blinkpin);
 
 		void  blink13    (int blinkflag) ;
-		int   decode     (BitbloqDecodeResults *results) ;
+		int   decode     (DecodeResults *results) ;
 		void  enableIRIn ( ) ;
 		bool  isIdle     ( ) ;
 		void  resume     ( ) ;
 
 	private:
-		long  decodeHash (BitbloqDecodeResults *results) ;
+		long  decodeHash (DecodeResults *results) ;
 		int   compare    (unsigned int oldval, unsigned int newval) ;
 } ;
 
 //------------------------------------------------------------------------------
 // Main class for sending IR
 //
-class BitbloqIRSend
+class IRSend
 {
 	public:
-		BitbloqIRSend () { }
+		IRSend () { }
 
 		void  custom_delay_usec (unsigned long uSecs);
 		void  enableIROut 		(int khz) ;
@@ -142,5 +144,7 @@ class BitbloqIRSend
 		void  space       		(unsigned int usec) ;
 		void  sendRaw     		(const unsigned int buf[],  unsigned int len,  unsigned int hz) ;
 } ;
+
+} //end namespace
 
 #endif

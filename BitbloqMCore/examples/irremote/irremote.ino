@@ -1,6 +1,6 @@
-#include <IRremoteInt.h>
-#include <IRremote.h>
-#include <BitbloqIRControl.h>
+//#include <IRremoteInt.h>
+//#include <IRremote.h>
+//#include <BitbloqIRControl.h>
 
 #include <BitbloqMCore.h>
 
@@ -10,6 +10,7 @@ void setup() {
   mcore.setup();
   Serial.begin(9600);
 }
+
 
 
 void loop() {

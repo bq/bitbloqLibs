@@ -24,7 +24,7 @@
 #ifndef BITBLOQELECFREAKSIRCONTROL_H
 #define BITBLOQELECFREAKSIRCONTROL_H
 
-#include "BitbloqIRControl.h"
+#include <BitbloqIRControl.h>
 
 namespace Bitbloq{
 

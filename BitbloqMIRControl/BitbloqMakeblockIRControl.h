@@ -24,7 +24,7 @@
 #ifndef BITBLOQMAKEBLOCKIRCONTROL_H
 #define BITBLOQMAKEBLOCKIRCONTROL_H
 
-#include "BitbloqIRControl.h"
+#include <BitbloqIRControl.h>
 
 namespace Bitbloq{
 
