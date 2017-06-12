@@ -83,6 +83,7 @@ public:
     void playTone(int note, int beat) const;
     byte readEndStop() const;
     
+    Bitbloq::ElecfreaksIRControl* irControl;
     char getInfraredControlCommand();
 
 private:
@@ -101,7 +102,6 @@ private:
     BitbloqUltrasound* usSensor;
     Bitbloq::DCMotor* rightDCMotor;
     Bitbloq::DCMotor* leftDCMotor;
-    Bitbloq::ElecfreaksIRControl* irControl;
     
 };
 
