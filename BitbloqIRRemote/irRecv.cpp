@@ -6,7 +6,10 @@
 // Returns 0 if no data ready, 1 if data ready.
 // Results of decoding are stored in results
 //
-int  IRrecv::decode (BitbloqDecodeResults *results)
+
+namespace Bitbloq{
+
+int  IRrecv::decode (Bitbloq::DecodeResults *results)
 {
 	results->rawbuf   = irparams.rawbuf;
 	results->rawlen   = irparams.rawlen;
@@ -127,7 +130,7 @@ int  IRrecv::compare (unsigned int oldval,  unsigned int newval)
 #define FNV_PRIME_32 16777619
 #define FNV_BASIS_32 2166136261
 
-long  IRrecv::decodeHash (BitbloqDecodeResults *results)
+long  IRrecv::decodeHash (Bitbloq::DecodeResults *results)
 {
 	long  hash = FNV_BASIS_32;
 
@@ -146,3 +149,5 @@ long  IRrecv::decodeHash (BitbloqDecodeResults *results)
 
 	return true;
 }
+
+} //end namespace

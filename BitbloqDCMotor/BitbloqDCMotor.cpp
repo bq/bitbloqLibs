@@ -25,7 +25,9 @@
 #include <Arduino.h>
 #include "BitbloqDCMotor.h"
 
-BitbloqDCMotor::BitbloqDCMotor():
+namespace Bitbloq{
+
+DCMotor::DCMotor():
 	dirPin(-1),
 	enPin1(-1),
     enPin2(-1)
@@ -33,7 +35,7 @@ BitbloqDCMotor::BitbloqDCMotor():
 
 }
 
-BitbloqDCMotor::BitbloqDCMotor(int _dirPin, int _pwmPin):
+DCMotor::DCMotor(int _dirPin, int _pwmPin):
     dirPin(_dirPin),
     pwmPin(_pwmPin),
     enPin1(-1),
@@ -42,13 +44,13 @@ BitbloqDCMotor::BitbloqDCMotor(int _dirPin, int _pwmPin):
     
 }
 
-void BitbloqDCMotor::setup(int _dirPin, int _pwmPin){
+void DCMotor::setup(int _dirPin, int _pwmPin){
 	dirPin = _dirPin;
 	pwmPin = _pwmPin;
 	setup();
 }
 
-BitbloqDCMotor::BitbloqDCMotor(int _enPin1, int _enPin2, int _pwmPin):
+DCMotor::DCMotor(int _enPin1, int _enPin2, int _pwmPin):
 	dirPin(-1),
     pwmPin(_pwmPin),
     enPin1(_enPin1),
@@ -57,7 +59,7 @@ BitbloqDCMotor::BitbloqDCMotor(int _enPin1, int _enPin2, int _pwmPin):
 	
 }
 
-void BitbloqDCMotor::setup(int _enPin1, int _enPin2, int _pwmPin){
+void DCMotor::setup(int _enPin1, int _enPin2, int _pwmPin){
 	enPin1 = _enPin1;
 	enPin2 = _enPin2;
 	pwmPin = _pwmPin;
@@ -65,7 +67,7 @@ void BitbloqDCMotor::setup(int _enPin1, int _enPin2, int _pwmPin){
 }
 
 
-void BitbloqDCMotor::setup(){
+void DCMotor::setup(){
     
     if (dirPin > 0) pinMode(dirPin,OUTPUT); //motors with direction pin
     
@@ -75,7 +77,7 @@ void BitbloqDCMotor::setup(){
     pinMode(pwmPin,OUTPUT);
 }
 
-void BitbloqDCMotor::setSpeed(int _speed){
+void DCMotor::setSpeed(int _speed){
     
     //speed in [-255, 255]
     speed	= _speed > 255 ? 255 : _speed;
@@ -108,3 +110,5 @@ void BitbloqDCMotor::setSpeed(int _speed){
 	}
 		
 }
+
+} //end namespace

@@ -20,6 +20,8 @@
 #	include "IRremote.h"
 #endif // TEST
 
+namespace Bitbloq{
+
 //+=============================================================================
 // Check for a valid hex digit
 //
@@ -166,6 +168,8 @@ int  main ( )
 	return 0;
 }
 
+} //end namespace
+
 #endif // TEST
 
 #endif // SEND_PRONTO
@@ -239,6 +243,9 @@ int  main ( )
 
 #define IRPRONTO
 #include "IRremoteInt.h"  // The Arduino IRremote library defines USECPERTICK
+
+
+namespace Bitbloq{
 
 //------------------------------------------------------------------------------
 // Source: https://www.google.co.uk/search?q=DENON+MASTER+IR+Hex+Command+Sheet
@@ -509,5 +516,7 @@ int  main ( )
 
 	return 0;
 }
+
+} // end namespace
 
 #endif //0

@@ -17,6 +17,8 @@
 #ifndef IRremoteint_h
 #define IRremoteint_h
 
+namespace Bitbloq{
+
 //------------------------------------------------------------------------------
 // Include the right Arduino header
 //
@@ -599,4 +601,7 @@ EXTERN  volatile irparams_t  irparams;
 #else
 #	error "Internal code configuration error, no known IR_USE_TIMER# defined\n"
 #endif
+
+} //end namespace
+
 #endif

@@ -27,7 +27,7 @@
 
 #include <BitbloqUS.h>
 #include <BitbloqDCMotor.h>
-#include <BitbloqIRControl.h>
+#include <BitbloqElecFreaksIRControl.h>
 
 // Constants
 #define LEFT         1
@@ -83,6 +83,7 @@ public:
     void playTone(int note, int beat) const;
     byte readEndStop() const;
     
+    Bitbloq::ElecfreaksIRControl* irControl;
     char getInfraredControlCommand();
 
 private:
@@ -99,9 +100,8 @@ private:
     const int ldrLeftPin;
     const int InfraredReceivePin;
     BitbloqUltrasound* usSensor;
-    BitbloqDCMotor* rightDCMotor;
-    BitbloqDCMotor* leftDCMotor;
-    BitbloqIRControl* irControl;
+    Bitbloq::DCMotor* rightDCMotor;
+    Bitbloq::DCMotor* leftDCMotor;
     
 };
 

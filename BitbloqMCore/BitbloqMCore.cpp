@@ -17,7 +17,7 @@ BitbloqMCore::BitbloqMCore():
         IRTransmitterPin(3),
         IRReceiverPin(2)
 {
-	irControl = new BitbloqIRControl(IRReceiverPin);
+	irControl = new Bitbloq::MakeblockIRControl(IRReceiverPin);
 }
 
 

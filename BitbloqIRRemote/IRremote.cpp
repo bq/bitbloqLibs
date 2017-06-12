@@ -26,6 +26,8 @@
 #	include "IRremoteInt.h"
 #undef IR_GLOBAL
 
+namespace Bitbloq{
+
 //+=============================================================================
 // The match functions were (apparently) originally MACROs to improve code speed
 //   (although this would have bloated the code) hence the names being CAPS
@@ -191,3 +193,5 @@ ISR (TIMER_INTR_NAME)
 				else BLINKLED_OFF() ;   // if no user defined LED pin, turn default LED pin for the hardware on
 	}
 }
+
+} //end namespace

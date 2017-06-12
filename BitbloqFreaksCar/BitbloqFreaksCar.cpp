@@ -45,9 +45,9 @@ BitbloqFreaksCar::BitbloqFreaksCar():
         InfraredReceivePin(12)
 {
     usSensor = new BitbloqUltrasound(usTriggerPin,usEchoPin);
-    leftDCMotor = new BitbloqDCMotor(DCMotor2Dir,DCMotor2PWM);
-    rightDCMotor = new BitbloqDCMotor(DCMotor1Dir,DCMotor1PWM);
-    irControl = new BitbloqIRControl(InfraredReceivePin);
+    leftDCMotor = new Bitbloq::DCMotor(DCMotor2Dir,DCMotor2PWM);
+    rightDCMotor = new Bitbloq::DCMotor(DCMotor1Dir,DCMotor1PWM);
+    irControl = new Bitbloq::ElecfreaksIRControl(InfraredReceivePin);
 }
 
 
@@ -152,29 +152,34 @@ void BitbloqFreaksCar::move(int direction, int speed){
     int leftSpeed = 0;
     int rightSpeed = 0;
     switch(direction){
+        case 0: //stop
+		leftSpeed = 255;
+		rightSpeed = 255;
+		break;
+        
         case 1:
-        leftSpeed = speed; //forward 
-        rightSpeed = -speed;
+        leftSpeed = 255 - speed; //forward 
+        rightSpeed = 255 - speed;
         break;
         
-        case 2:
+        case 2: //backward
         leftSpeed = -speed;
-        rightSpeed = speed;
+        rightSpeed = -speed;
         break;
         
-        case 3:
+        case 3: 
         leftSpeed = -speed; //right
-        rightSpeed = -speed;
+        rightSpeed = 255-speed;
         break;
     
         case 4:
-        leftSpeed = speed; //left
-        rightSpeed = speed;
+        leftSpeed = 255-speed; //left
+        rightSpeed = -speed;
         break;
     }
     
-    setLeftMotorSpeed(leftSpeed);
-    setRightMotorSpeed(rightSpeed);
+	setLeftMotorSpeed(leftSpeed);
+	setRightMotorSpeed(rightSpeed);
 }
 
 void BitbloqFreaksCar::setRightMotorSpeed(int speed){

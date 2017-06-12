@@ -23,16 +23,18 @@
 
 #include "BitbloqIRControl.h"
 
-BitbloqIRControl::BitbloqIRControl(int pin):
-	receiverPin(pin)
-{}
+namespace Bitbloq{
 
-void BitbloqIRControl::setup(){
+IRControl::IRControl(int pin):receiverPin(pin)
+{
+}
+
+void IRControl::setup(){
 	//infrared receiver
     pinMode(receiverPin,INPUT_PULLUP);
 }
 
-long int BitbloqIRControl::getRaw(){
+long int IRControl::getRaw(){
 	IRrecv _InfraredReceiveCommand(receiverPin);
     _InfraredReceiveCommand.enableIRIn();
     while(1)
@@ -51,7 +53,7 @@ long int BitbloqIRControl::getRaw(){
 
 }
 
-char BitbloqIRControl::getInfraredControlCommand(){
+/*char IRControl::getInfraredControlCommand(){
 	IRrecv _InfraredReceiveCommand(receiverPin);
     _InfraredReceiveCommand.enableIRIn();
     while(1)
@@ -196,4 +198,6 @@ char BitbloqIRControl::getInfraredControlCommand(){
             }
         }
     }
-}
+}*/
+
+} //end namespace

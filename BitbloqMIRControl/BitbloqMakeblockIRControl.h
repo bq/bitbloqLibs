@@ -1,5 +1,5 @@
 /*
- * BitbloqIRControl.h
+ * BitbloqMakeblockIRControl.h
  * 
  * Copyright 2017 Alberto Valero <avalero.valero@bq.com>
  * 
@@ -21,29 +21,19 @@
  * 
  */
  
-#ifndef BITBLOQIRCONTROL_H
-#define BITBLOQIRCONTROL_H
- 
-#include "IRremoteInt.h"
-#include "IRremote.h" 
+#ifndef BITBLOQMAKEBLOCKIRCONTROL_H
+#define BITBLOQMAKEBLOCKIRCONTROL_H
+
+#include <BitbloqIRControl.h>
 
 namespace Bitbloq{
 
-class IRControl{
+class MakeblockIRControl : public IRControl{
 public:
-    IRControl(int rpin);
-    //char getInfraredControlCommand();
-    long int getRaw();
-    void setup();
-    
-protected:
-    const int receiverPin;
-    int _InfraredReceiveCount;
-    Bitbloq::DecodeResults _InfraredControlCommand;
-    long int _InfraredControlCommand1;
-    long int _InfraredControlCommand2;
- };
- 
+    MakeblockIRControl(int rpin);
+    char getInfraredControlCommand();
+};
+
 } //end namespace
 
 #endif

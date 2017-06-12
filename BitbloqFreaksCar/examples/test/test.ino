@@ -1,8 +1,7 @@
 #include <IRremoteInt.h>
 #include <IRremote.h>
-
-
-
+#include <BitbloqElecFreaksIRControl.h>
+#include <BitbloqIRControl.h>
 #include <BitbloqFreaksCar.h>
 #include <BitbloqUS.h>
 #include <BitbloqDCMotor.h>
