@@ -22,8 +22,8 @@
  */
 
 
-#ifndef BITBLOQMBOTV1_H
-#define BITBLOQMBOTV1_H
+#ifndef BITBLOQMBOT_H
+#define BITBLOQMBOT_H
 
 #include <BitbloqMCore.h>
 #include <BitbloqUS.h>
@@ -31,12 +31,12 @@
 
 // class predeclaration
 
-class BitbloqMBotV1:public BitbloqMCore
+class BitbloqMBot:public BitbloqMCore
 {
 
 public:
-    BitbloqMBotV1(int lineFollowerPort=-1, int USPort=-1); // public constructor
-    virtual ~BitbloqMBotV1(); // virtual public destructor
+    BitbloqMBot(int lineFollowerPort=-1, int USPort=-1); // public constructor
+    virtual ~BitbloqMBot(); // virtual public destructor
     
     void setLineFollowerPort(int port);
     void setUSPort(int port);
