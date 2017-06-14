@@ -22,11 +22,11 @@
  */
 
 #include "Arduino.h"
-#include "BitbloqMBotV1.h"
+#include "BitbloqMBot.h"
 
 
 
-BitbloqMBotV1::BitbloqMBotV1(int lineFollowerPort, int USPort):
+BitbloqMBot::BitbloqMBot(int lineFollowerPort, int USPort):
         BitbloqMCore(),
         usSensor(NULL),
         leftLineFollowerPin(-1),
@@ -49,7 +49,7 @@ BitbloqMBotV1::BitbloqMBotV1(int lineFollowerPort, int USPort):
 }
 
 
-BitbloqMBotV1::~BitbloqMBotV1(){
+BitbloqMBot::~BitbloqMBot(){
 	
 	//check that all of them are not NULL pointers, delete and set to NULL
 	
@@ -69,17 +69,17 @@ BitbloqMBotV1::~BitbloqMBotV1(){
     }
 }
 
-void BitbloqMBotV1::setLineFollowerPort(int port){
+void BitbloqMBot::setLineFollowerPort(int port){
     rightLineFollowerPin = ports[port][1];
     leftLineFollowerPin = ports[port][2];
 }
 
-void BitbloqMBotV1::setUSPort(int port){
+void BitbloqMBot::setUSPort(int port){
     usTriggerPin = ports[port][2]; /// this is weird. There are two components, but only one signal.
     usEchoPin = ports[port][2];
 }
 
-void BitbloqMBotV1::setup(){
+void BitbloqMBot::setup(){
     BitbloqMCore::setup();
 
 	//set PinMode if pins are defined (otherwise pins = -1)
@@ -100,24 +100,24 @@ void BitbloqMBotV1::setup(){
     rightDCMotor->setup();
 }
 
-int BitbloqMBotV1::readLeftLineFollowerSensor() const{
+int BitbloqMBot::readLeftLineFollowerSensor() const{
     return (leftLineFollowerPin != -1 ? digitalRead(leftLineFollowerPin) : -1) ;
 }
 
-int BitbloqMBotV1::readRightLineFollowerSensor() const{
+int BitbloqMBot::readRightLineFollowerSensor() const{
     return (leftLineFollowerPin != -1 ? digitalRead(rightLineFollowerPin) : -1 );
 }
 
 
-int BitbloqMBotV1::readUSMeasuredDistanceCM() const{
+int BitbloqMBot::readUSMeasuredDistanceCM() const{
 	return (usSensor != NULL ? usSensor->readDistanceInCM(): - 1 ); //in centimeters
 }
 
-int BitbloqMBotV1::readUSMeasuredDistanceIN() const{
+int BitbloqMBot::readUSMeasuredDistanceIN() const{
 	return (usSensor != NULL ? usSensor->readDistanceInInches() : -1); //in inches
 }
     
-void BitbloqMBotV1::move(int direction, int speed){
+void BitbloqMBot::move(int direction, int speed){
 	int leftSpeed = 0;
 	int rightSpeed = 0;
 	if(direction == 1){
@@ -141,11 +141,11 @@ void BitbloqMBotV1::move(int direction, int speed){
     rightDCMotor->setSpeed(rightSpeed);
 }
 
-void BitbloqMBotV1::setRightMotorSpeed(int speed){
+void BitbloqMBot::setRightMotorSpeed(int speed){
     rightDCMotor->setSpeed(speed);
 }
 
-void BitbloqMBotV1::setLeftMotorSpeed(int speed){
+void BitbloqMBot::setLeftMotorSpeed(int speed){
     leftDCMotor->setSpeed(speed);
 }
 
