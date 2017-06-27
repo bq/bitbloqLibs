@@ -22,8 +22,8 @@
  */
 
 
-#ifndef BITBLOQMBOT_H
-#define BITBLOQMBOT_H
+#ifndef BITBLOQMBOTV2_H
+#define BITBLOQMBOTV2_H
 
 #include <BitbloqMCore.h>
 #include <BitbloqUS.h>

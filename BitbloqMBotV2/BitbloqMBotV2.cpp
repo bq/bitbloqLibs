@@ -22,7 +22,7 @@
  */
 
 #include "Arduino.h"
-#include "BitbloqMBot.h"
+#include "BitbloqMBotV2.h"
 
 
 
