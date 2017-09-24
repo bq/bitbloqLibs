@@ -55,8 +55,8 @@ void BitbloqMBotRanger::setup(){
 	}
         
     //dc motors setup
-    leftDCMotor.setup(49,48,11);
-    rightDCMotor.setup(47,46,10);
+    rightDCMotor.setup(48,49,11);
+    leftDCMotor.setup(47,46,10);
 }
 
 
@@ -80,25 +80,22 @@ int BitbloqMBotRanger::readUSMeasuredDistanceIN(){
 void BitbloqMBotRanger::move(int direction, int speed){
 	int leftSpeed = 0;
 	int rightSpeed = 0;
-	if(direction == 1){
-		leftSpeed = -speed; //forward
+	if(direction == 1){ //forward
+		leftSpeed = speed; 
 		rightSpeed = speed;
-		
-	}else if(direction == 2){
-		leftSpeed = speed;
-		rightSpeed = -speed;
-		
-	}else if(direction == 4){
-		leftSpeed = -speed; //right
-		rightSpeed = -speed;
-	}else if(direction == 3){
-		
-		leftSpeed = speed; //left
+	}else if(direction == 2){ //backwards
+		leftSpeed = -speed;
+		rightSpeed = -speed;	
+	}else if(direction == 3){ //left
+		leftSpeed = -speed; 
 		rightSpeed = speed;
+	}else if(direction == 4){ //right
+		leftSpeed = speed; 
+		rightSpeed = -speed;
 	}
-	
-    leftDCMotor.setSpeed(leftSpeed);
-    rightDCMotor.setSpeed(rightSpeed);
+
+    setLeftMotorSpeed(leftSpeed);
+    setRightMotorSpeed(rightSpeed);
 }
 
 void BitbloqMBotRanger::setRightMotorSpeed(int speed){
