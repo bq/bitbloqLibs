@@ -11,7 +11,8 @@ BitbloqAuriga::BitbloqAuriga():
         soundSensorPin(A1),
         temperatureSensorPin(A0),
         RGBLedsPin(44),
-        buzzerPin(45)
+        buzzerPin(45),
+        gyro(ports[1][1], ports[1][2],0x69)
 {
 }
 
@@ -29,11 +30,16 @@ void BitbloqAuriga::setup(){
     pinMode(temperatureSensorPin,INPUT);
     pinMode(buzzerPin,OUTPUT);
     boardLeds.setup(RGBLedsPin,12);
+    gyro.begin();
 }
 
+
+/**
+ * Returns 1 when powered on and 0 when powered off
+ */
 int BitbloqAuriga::readPowerStatus() const{
-    return analogRead(powerSensorPin);
-    //TODO
+    return digitalRead(powerSensorPin);
+    
 }
 
 void BitbloqAuriga::setLed(int led, int red, int green, int blue){
@@ -47,12 +53,10 @@ void BitbloqAuriga::playTone(int note, int beat){
 
 int BitbloqAuriga::readTemperature(){
     return analogRead(temperatureSensorPin);
-    //TODO
 }
 
 int BitbloqAuriga::readSoundLevel() const{
     return analogRead(soundSensorPin);
-    //TODO
 }
     
 int BitbloqAuriga::readLightSensor(int number) const{

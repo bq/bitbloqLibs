@@ -26,6 +26,7 @@
 
 #include <BitbloqMPort.h>
 #include <BitbloqMeRGBLed.h>
+#include <BitbloqGyro.h>
 
 class BitbloqAuriga
 {
@@ -65,19 +66,19 @@ public:
     
     /**
      * get power status
-     * @return power status 0 to 1023
+     * @return power status 0 (powered off)  1 (powered on)
      */ 
     int readPowerStatus() const;
     
     /**
      * gets Temperature
-     * @return Temperature
+     * @return Temperature (0 - 1023) the greater the hotter
     */
     int readTemperature();
     
     /**
      * gets sound level
-     * @return sounds level
+     * @return sounds level (0 - 1023) the greater the louder
      */
     int readSoundLevel() const; 
 
@@ -85,10 +86,106 @@ public:
      //ports structure of MakeBlock Auriga Board.
     static const Port ports[11];
 
+	/**
+ * \par Function
+ *   getAngleX
+ * \par Description
+ *   Get the angle value of X-axis.
+ * \param[in]
+ *   None
+ * \par Output
+ *   None
+ * \return
+ *   The angle value of X-axis
+ * \par Others
+ *   X-axis angle value is calculated by complementary filter.
+ */
+  double getAngleX(void){gyro.update(); return gyro.getAngleX();}
 
+/**
+ * \par Function
+ *   getAngleY
+ * \par Description
+ *   Get the angle value of Y-axis.
+ * \param[in]
+ *   None
+ * \par Output
+ *   None
+ * \return
+ *   The angle value of Y-axis
+ * \par Others
+ *   Y-axis angle value is calculated by complementary filter.
+ */
+  double getAngleY(void){gyro.update(); return gyro.getAngleY();}
+
+/**
+ * \par Function
+ *   getAngleZ
+ * \par Description
+ *   Get the angle value of Z-axis.
+ * \param[in]
+ *   None
+ * \par Output
+ *   None
+ * \return
+ *   The angle value of Z-axis
+ * \par Others
+ *   Z-axis angle value is integral of Z-axis angular velocity.
+ */
+  double getAngleZ(void){gyro.update(); return gyro.getAngleZ();}
+
+/**
+ * \par Function
+ *   getGyroX
+ * \par Description
+ *   Get the data of gyroXrate.
+ * \param[in]
+ *   None
+ * \par Output
+ *   None
+ * \return
+ *   The data of gyroXrate
+ * \par Others
+ *   None
+ */
+  double getGyroX(void){gyro.update(); return gyro.getGyroX();}
+
+/**
+ * \par Function
+ *   getGyroY
+ * \par Description
+ *   Get the data of gyroYrate.
+ * \param[in]
+ *   None
+ * \par Output
+ *   None
+ * \return
+ *   The data of gyroYrate
+ * \par Others
+ *   None
+ */
+  double getGyroY(void){gyro.update(); return gyro.getGyroY();}
+
+/**
+ * \par Function
+ *   getAngle
+ * \par Description
+ *   Get the angle value of setting axis.
+ * \param[in]
+ *   index - Axis settings(1:X-axis, 2:Y-axis, 3:Z-axis)
+ * \par Output
+ *   None
+ * \return
+ *   The angle value of setting axis
+ * \par Others
+ *   Z-axis angle value is integral of Z-axis angular velocity.
+ */
+  double getAngle(uint8_t index){gyro.update(); return gyro.getAngle(index);}
 
 protected:
 
+	Bitbloq::Gyro gyro;
+	
     BitbloqMeRGBLed boardLeds;
 
     const int powerSensorPin; 
