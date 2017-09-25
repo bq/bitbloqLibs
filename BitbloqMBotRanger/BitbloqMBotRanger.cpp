@@ -86,12 +86,12 @@ void BitbloqMBotRanger::move(int direction, int speed){
 	}else if(direction == 2){ //backwards
 		leftSpeed = -speed;
 		rightSpeed = -speed;	
-	}else if(direction == 3){ //left
-		leftSpeed = -speed; 
-		rightSpeed = speed;
-	}else if(direction == 4){ //right
+	}else if(direction == 3){ //right
 		leftSpeed = speed; 
 		rightSpeed = -speed;
+	}else if(direction == 4){ //left
+		leftSpeed = -speed; 
+		rightSpeed = speed;
 	}
 
     setLeftMotorSpeed(leftSpeed);
