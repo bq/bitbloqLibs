@@ -178,6 +178,11 @@ void BitbloqMeLEDMatrix::clearScreen()
     {
         u8_Display_Buffer[i] = 0x00;
     }
+    
+    for(uint8_t i=0;i<128;i++)
+    {
+        drawing[i] = 0;
+    }
 
     b_Color_Index = 1;
     b_Draw_Str_Flag = 0;
@@ -720,3 +725,24 @@ void BitbloqMeLEDMatrix::draw(uint8_t pos0, uint8_t pos1, uint8_t pos2, uint8_t 
 	uint8_t m[16] = {pos0,pos1,pos2,pos3,pos4,pos5,pos6,pos7,pos8,pos9,pos10,pos11,pos12,pos13,pos14,pos15};
 	drawBitmap(0, 0, sizeof(m), m);
 }
+
+void BitbloqMeLEDMatrix::drawLed(uint8_t x, uint8_t y, bool value){
+	if(x <= 16 && y <= 8){
+		uint8_t pos = x+16*y;
+		drawing[pos] = value;
+		
+		uint8_t m[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		
+		for (int i=0;i<16;i++){
+			uint8_t result = 0;
+			for (int c=0; c<8; c++){
+				result = result + drawing[i+16*c] * pow(2,c);
+			}
+			m[i] = result;
+		}
+		
+		m[0]=8;
+		drawBitmap(0, 0, sizeof(m), m);
+	}
+}
+	
