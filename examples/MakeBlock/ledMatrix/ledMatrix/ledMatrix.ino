@@ -34,6 +34,9 @@ void loop() {
   ledMatrix.drawLine(16,0,0,8);
   delay(1000);
 
+  ledMatrix.drawCircumference(8,4,4);
+  delay(1000);
+
   /*int x = 2;
   int y = 3;
   uint8_t pos = (x-1)+16*(y-1);

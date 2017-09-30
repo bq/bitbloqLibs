@@ -762,15 +762,15 @@ void BitbloqMeLEDMatrix::drawRectangle(uint8_t x, uint8_t y, uint8_t lx, uint8_t
 	for (uint8_t i = x ; i <= x + lx ; i++){
 		uint8_t pos1 = (i-1)+16*(y-1);
 		uint8_t pos2 = (i-1)+16*(y+ly-1);
-		if(pos1 < 128) drawing[pos1] = 1;
-		if(pos1 < 128) drawing[pos2] = 1;
+		if(pos1 < 128 && pos1 >= 0) drawing[pos1] = 1;
+		if(pos2 < 128 && pos2 >= 0) drawing[pos2] = 1;
 	}
 	
 	for (uint8_t i = y ; i <= y + ly ; i++){
 		uint8_t pos1 = (x-1)+16*(i-1);
 		uint8_t pos2 = (x+lx-1)+16*(i-1);
-		if(pos1 < 128) drawing[pos1] = 1;
-		if(pos1 < 128) drawing[pos2] = 1;
+		if(pos1 < 128 && pos1 >= 0) drawing[pos1] = 1;
+		if(pos2 < 128 && pos2 >= 0) drawing[pos2] = 1;
 	}
 	
 	updateDrawing();
@@ -790,7 +790,26 @@ void BitbloqMeLEDMatrix::drawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2
 		uint8_t y = y1 + i*inc_y; 
 		
 		uint8_t pos = (x-1)+16*(y-1);
-		if(pos < 128) drawing[pos] = 1;
+		if(pos < 128 && pos >= 0) drawing[pos] = 1;
+	}
+		
+	
+	updateDrawing();
+}
+
+void BitbloqMeLEDMatrix::drawCircumference(int xc, int yc, int r){
+	
+	clearScreen();
+	
+	float step = r*4;
+	float angle_step = PI*2/step;
+	
+	for (int i = 0 ; i < step ; i++){
+		float x = xc + r*cos(angle_step*i);
+		float y = yc + r*sin(angle_step*i); 
+
+		int pos = (x-1)+16*(y-1);
+		if(pos < 128 && pos >= 0) drawing[pos] = 1;
 	}
 		
 	
