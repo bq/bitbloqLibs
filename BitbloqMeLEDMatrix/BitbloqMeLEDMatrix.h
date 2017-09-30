@@ -247,6 +247,10 @@ public:
   
   void drawLed(uint8_t x, uint8_t y, bool value);
   
+  void drawRectangle(uint8_t x, uint8_t y, uint8_t lx, uint8_t ly);
+  void drawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+  void drawCircle(uint8_t x, uint8_t y, uint8_t r);
+  
 private:
   const uint8_t u8_SCKPin;
   const uint8_t u8_DINPin;
@@ -255,7 +259,8 @@ private:
   bool b_Draw_Str_Flag;
 
   uint8_t u8_Display_Buffer[LED_BUFFER_SIZE];
-  uint8_t drawing[128];
+  bool drawing[128];
+  uint8_t pow2[8];
 
   int16_t i16_Str_Display_X_Position;
   int8_t i8_Str_Display_Y_Position;
@@ -313,6 +318,8 @@ private:
  *    None
  */
   void showStr();
+  
+  void updateDrawing();
 
 };
 
