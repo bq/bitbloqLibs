@@ -752,7 +752,7 @@ void BitbloqMeLEDMatrix::drawRectangle(uint8_t x, uint8_t y, uint8_t lx, uint8_t
     for (uint8_t i = x; i < x + lx; i++)
     {
         uint8_t pos1 = (i - 1) + 16 * (y - 1);
-        uint8_t pos2 = (i - 1) + 16 * (y + ly - 1);
+        uint8_t pos2 = (i - 1) + 16 * (y + ly - 2);
         if (pos1 < 128 && pos1 >= 0)
             drawing[pos1] = 1;
         if (pos2 < 128 && pos2 >= 0)
@@ -762,7 +762,7 @@ void BitbloqMeLEDMatrix::drawRectangle(uint8_t x, uint8_t y, uint8_t lx, uint8_t
     for (uint8_t i = y; i < y + ly; i++)
     {
         uint8_t pos1 = (x - 1) + 16 * (i - 1);
-        uint8_t pos2 = (x + lx - 1) + 16 * (i - 1);
+        uint8_t pos2 = (x + lx - 2) + 16 * (i - 1);
         if (pos1 < 128 && pos1 >= 0)
             drawing[pos1] = 1;
         if (pos2 < 128 && pos2 >= 0)
