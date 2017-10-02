@@ -244,6 +244,13 @@ public:
 
   void draw(uint8_t pos0, uint8_t pos1, uint8_t pos2, uint8_t pos3, uint8_t pos4, uint8_t pos5, uint8_t pos6, uint8_t pos7, uint8_t pos8, uint8_t pos9, uint8_t pos10, uint8_t pos11, uint8_t pos12, uint8_t pos13, uint8_t pos14, uint8_t pos15);
 
+  
+  void drawLed(uint8_t x, uint8_t y, bool value);
+  
+  void drawRectangle(uint8_t x, uint8_t y, uint8_t lx, uint8_t ly);
+  void drawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+  void drawCircumference(int xc, int yc, int r);
+  
 private:
   const uint8_t u8_SCKPin;
   const uint8_t u8_DINPin;
@@ -252,11 +259,15 @@ private:
   bool b_Draw_Str_Flag;
 
   uint8_t u8_Display_Buffer[LED_BUFFER_SIZE];
+  bool drawing[128];
+  uint8_t pow2[8];
 
   int16_t i16_Str_Display_X_Position;
   int8_t i8_Str_Display_Y_Position;
   int16_t i16_Number_of_Character_of_Str;
   char i8_Str_Display_Buffer[STRING_DISPLAY_BUFFER_SIZE];
+  
+  
 
 /**
  * \par Function
@@ -307,6 +318,8 @@ private:
  *    None
  */
   void showStr();
+  
+  void updateDrawing();
 
 };
 

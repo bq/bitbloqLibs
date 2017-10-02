@@ -30,6 +30,9 @@
  * @brief   Header for BitbloqMeLEDMatrix.cpp module
  */
  
+#include <stdlib.h>     /* abs */
+
+ 
 #include "BitbloqMeLEDMatrix.h"
 #include "BitbloqMeLEDMatrixData.h"
 
@@ -43,7 +46,8 @@
  */
 BitbloqMeLEDMatrix::BitbloqMeLEDMatrix(uint8_t SCK_Pin, uint8_t DIN_Pin):
 	u8_SCKPin(SCK_Pin),
-	u8_DINPin(DIN_Pin)
+	u8_DINPin(DIN_Pin),
+	pow2{1,2,4,8,16,32,64,128}
 {
 	
 }
@@ -178,6 +182,13 @@ void BitbloqMeLEDMatrix::clearScreen()
     {
         u8_Display_Buffer[i] = 0x00;
     }
+    
+    for(uint8_t i=0;i<128;i++)
+    {
+        drawing[i] = 0;
+    }
+    
+    
 
     b_Color_Index = 1;
     b_Draw_Str_Flag = 0;
@@ -719,4 +730,88 @@ Posotion_1:
 void BitbloqMeLEDMatrix::draw(uint8_t pos0, uint8_t pos1, uint8_t pos2, uint8_t pos3, uint8_t pos4, uint8_t pos5, uint8_t pos6, uint8_t pos7, uint8_t pos8, uint8_t pos9, uint8_t pos10, uint8_t pos11, uint8_t pos12, uint8_t pos13, uint8_t pos14, uint8_t pos15){
 	uint8_t m[16] = {pos0,pos1,pos2,pos3,pos4,pos5,pos6,pos7,pos8,pos9,pos10,pos11,pos12,pos13,pos14,pos15};
 	drawBitmap(0, 0, sizeof(m), m);
+}
+
+void BitbloqMeLEDMatrix::drawLed(uint8_t x, uint8_t y, bool value){
+	if(x <= 16 && y <= 8 && x > 0 && y > 0){
+		uint8_t pos = (x-1)+16*(y-1);
+		drawing[pos] = value;
+		updateDrawing();
+		
+		
+	}
+}
+
+void BitbloqMeLEDMatrix::updateDrawing(){
+	uint8_t m[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		
+	for (int i=0;i<16;i++){
+		uint8_t result = 0;
+		for (int c=0; c<8; c++){
+			result = result + drawing[i+16*c] * pow2[c];	
+		}
+		m[i] = result;
+	}		
+	drawBitmap(0, 0, sizeof(m), m);
+}
+
+void BitbloqMeLEDMatrix::drawRectangle(uint8_t x, uint8_t y, uint8_t lx, uint8_t ly){
+	
+	clearScreen();
+	
+	for (uint8_t i = x ; i <= x + lx ; i++){
+		uint8_t pos1 = (i-1)+16*(y-1);
+		uint8_t pos2 = (i-1)+16*(y+ly-1);
+		if(pos1 < 128 && pos1 >= 0) drawing[pos1] = 1;
+		if(pos2 < 128 && pos2 >= 0) drawing[pos2] = 1;
+	}
+	
+	for (uint8_t i = y ; i <= y + ly ; i++){
+		uint8_t pos1 = (x-1)+16*(i-1);
+		uint8_t pos2 = (x+lx-1)+16*(i-1);
+		if(pos1 < 128 && pos1 >= 0) drawing[pos1] = 1;
+		if(pos2 < 128 && pos2 >= 0) drawing[pos2] = 1;
+	}
+	
+	updateDrawing();
+}	
+
+void BitbloqMeLEDMatrix::drawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2){
+	
+	clearScreen();
+	
+	float step = abs(x2-x1)>abs(y2-y1)?abs(x2-x1):abs(y2-y1);
+	
+	float inc_x = (x2-x1)/step;
+	float inc_y = (y2-y1)/step;
+	
+	for (uint8_t i = 0 ; i <= step ; i++){
+		uint8_t x = x1 + i*inc_x;
+		uint8_t y = y1 + i*inc_y; 
+		
+		uint8_t pos = (x-1)+16*(y-1);
+		if(pos < 128 && pos >= 0) drawing[pos] = 1;
+	}
+		
+	
+	updateDrawing();
+}
+
+void BitbloqMeLEDMatrix::drawCircumference(int xc, int yc, int r){
+	
+	clearScreen();
+	
+	float step = r*4;
+	float angle_step = PI*2/step;
+	
+	for (int i = 0 ; i < step ; i++){
+		float x = xc + r*cos(angle_step*i);
+		float y = yc + r*sin(angle_step*i); 
+
+		int pos = (x-1)+16*(y-1);
+		if(pos < 128 && pos >= 0) drawing[pos] = 1;
+	}
+		
+	
+	updateDrawing();
 }
