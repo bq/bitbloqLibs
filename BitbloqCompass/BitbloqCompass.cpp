@@ -1,11 +1,81 @@
 /*
  * BitbloqCompass.cpp
-  /* Private variables ---------------------------------------------------------*/
-  volatile uint8_t Compass::_keyPin = 0;
-  volatile uint8_t Compass::_ledPin = 0;
+ *
+ * Copyright 2017 Alberto Valero <alberto.valero@bq.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ * DERIVED FROM
+ * \par Copyright (C), 2012-2016, MakeBlock
+ * \class   Compass
+ * \brief   Driver for Compass module.
+ * @file    Compass.h
+ * @author  MakeBlock
+ * @version V1.0.1
+ * @date    2015/09/08
+ * @brief   Header for Compass.cpp module.
+ *
+ * \par Copyright
+ * This software is Copyright (C), 2012-2016, MakeBlock. Use is subject to license \n
+ * conditions. The main licensing options available are GPL V2 or Commercial: \n
+ *
+ * \par Open Source Licensing GPL V2
+ * This is the appropriate option if you want to share the source code of your \n
+ * application with everyone you distribute it to, and you also want to give them \n
+ * the right to share who uses it. If you wish to use this software under Open \n
+ * Source Licensing, you must contribute all your source code to the open source \n
+ * community in accordance with the GPL Version 2 when your application is \n
+ * distributed. See http://www.gnu.org/copyleft/gpl.html
+ *
+ * \par Description
+ * This file is a drive for Compass module, It supports Compass V1.0 device provided
+ * by MakeBlock.
+ *
+ * \par Method List:
+ *
+ *    1. void Compass::setpin(uint8_t keyPin, uint8_t ledPin)
+ *    2. void Compass::setup(void)
+ *    3. bool Compass::testConnection(void)
+ *    4. double Compass::getAngle(void)
+ *    5. int16_t Compass::getHeadingX(void)
+ *    6. int16_t Compass::getHeadingY(void)
+ *    7. int16_t Compass::getHeadingZ(void)
+ *    8. int16_t Compass::getHeading(int16_t *x, int16_t *y, int16_t *z)
+ *
+ * \par History:
+ * <pre>
+ * `<Author>`         `<Time>`        `<Version>`        `<Descr>`
+ * Lawrence         2015/09/03           1.0.0       Rebuild the old lib.
+ * Lawrence         2015/09/08           1.0.1       Added some comments and macros.
+ * </pre>
+ *
+ */
 
-  /* Private functions ---------------------------------------------------------*/
-  /**
+/* Includes ------------------------------------------------------------------*/
+#include "BitbloqCompass.h"
+#include <avr/wdt.h>
+
+namespace Bitbloq{
+
+/* Private variables ---------------------------------------------------------*/
+volatile uint8_t Compass::_keyPin = 0;
+volatile uint8_t Compass::_ledPin = 0;
+
+/* Private functions ---------------------------------------------------------*/
+/**
  * Alternate Constructor which can call your own function to map the _keyPin and _ledPin to arduino port,
  * no pins are used or initialized here
  * \param[in]
@@ -13,15 +83,15 @@
  * \param[in]
  *   ledPin - arduino gpio number
  */
-  Compass::Compass(uint8_t keyPin, uint8_t ledPin)
-  {
-    Device_Address = COMPASS_DEFAULT_ADDRESS;
-    Calibration_Flag = false;
-    _keyPin = keyPin;
-    _ledPin = ledPin;
-  }
+Compass::Compass(uint8_t keyPin, uint8_t ledPin)
+{
+  Device_Address = COMPASS_DEFAULT_ADDRESS;
+  Calibration_Flag = false;
+  _keyPin = keyPin;
+  _ledPin = ledPin;
+}
 
-  /**
+/**
  * Alternate Constructor which can call your own function to map the _keyPin and _ledPin to arduino port
  * and change the i2c device address, no pins are used or initialized here
  * \param[in]
@@ -31,15 +101,15 @@
  * \param[in]
  *   address - the i2c address you want to set
  */
-  Compass::Compass(uint8_t keyPin, uint8_t ledPin, uint8_t address)
-  {
-    Device_Address = address;
-    Calibration_Flag = false;
-    _keyPin = keyPin;
-    _ledPin = ledPin;
-  }
+Compass::Compass(uint8_t keyPin, uint8_t ledPin, uint8_t address)
+{
+  Device_Address = address;
+  Calibration_Flag = false;
+  _keyPin = keyPin;
+  _ledPin = ledPin;
+}
 
-  /**
+/**
  * \par Function
  *   setpin
  * \par Description
@@ -55,13 +125,13 @@
  * \par Others
  *   Set global variable _KeyPin, _ledPin, s1 and s2
  */
-  void Compass::setpin(uint8_t keyPin, uint8_t ledPin)
-  {
-    _keyPin = keyPin;
-    _ledPin = ledPin;
-  }
+void Compass::setpin(uint8_t keyPin, uint8_t ledPin)
+{
+  _keyPin = keyPin;
+  _ledPin = ledPin;
+}
 
-  /**
+/**
  * \par Function
  *   setup
  * \par Description
@@ -75,26 +145,26 @@
  * \par Others
  *   You can check the HMC5883 datasheet for the macro definition.
  */
-  void Compass::setup(void)
-  {
-    Wire.begin();
+void Compass::setup(void)
+{
+  Wire.begin();
 
-    pinMode(_ledPin, OUTPUT);
-    digitalWrite(_ledPin, HIGH);
+  pinMode(_ledPin, OUTPUT);
+  digitalWrite(_ledPin, HIGH);
 
-    // write CONFIG_A register
-    writeReg(COMPASS_RA_CONFIG_A, COMPASS_AVERAGING_8 | COMPASS_RATE_15 | COMPASS_BIAS_NORMAL);
-    // write CONFIG_B register
-    writeReg(COMPASS_RA_CONFIG_B, COMPASS_GAIN_1090);
-    // write MODE register
-    Measurement_Mode = COMPASS_MODE_SINGLE;
-    writeReg(COMPASS_RA_MODE, Measurement_Mode);
+  // write CONFIG_A register
+  writeReg(COMPASS_RA_CONFIG_A, COMPASS_AVERAGING_8 | COMPASS_RATE_15 | COMPASS_BIAS_NORMAL);
+  // write CONFIG_B register
+  writeReg(COMPASS_RA_CONFIG_B, COMPASS_GAIN_1090);
+  // write MODE register
+  Measurement_Mode = COMPASS_MODE_SINGLE;
+  writeReg(COMPASS_RA_MODE, Measurement_Mode);
 
-    read_EEPROM_Buffer();
-    deviceCalibration();
-  }
+  read_EEPROM_Buffer();
+  deviceCalibration();
+}
 
-  /**
+/**
  * \par Function
  *   testConnection
  * \par Description
@@ -108,16 +178,16 @@
  * \par Others
  *   You can check the HMC5883 datasheet for the identification code.
  */
-  bool Compass::testConnection(void)
+bool Compass::testConnection(void)
+{
+  if(readData(COMPASS_RA_ID_A, buffer, 3) == 0) 
   {
-    if (readData(COMPASS_RA_ID_A, buffer, 3) == 0)
-    {
-      return (buffer[0] == 'H' && buffer[1] == '4' && buffer[2] == '3');
-    }
-    return false;
+    return (buffer[0] == 'H' && buffer[1] == '4' && buffer[2] == '3');
   }
+  return false;
+}
 
-  /**
+/**
  * \par Function
  *   getAngle
  * \par Description
@@ -131,53 +201,53 @@
  * \par Others
  *   Will return a correct angle when you keep the Compass working in the plane which have calibrated.
  */
-  float Compass::getAngle(void)
+double Compass::getAngle(void)
+{
+  int16_t cx,cy,cz;
+  double compass_angle;
+  int8_t return_value = 0;
+  deviceCalibration();  
+  return_value = getHeading(&cx, &cy, &cz);
+  if(return_value != 0)
   {
-    int16_t cx, cy, cz;
-    double compass_angle;
-    int8_t return_value = 0;
-    deviceCalibration();
-    return_value = getHeading(&cx, &cy, &cz);
-    if (return_value != 0)
-    {
-      return (double)return_value;
-    }
-    if (Calibration_Flag == true)
-    {
-      cx = (cx + Cal_parameter.X_excursion) * Cal_parameter.X_gain;
-      cy = (cy + Cal_parameter.Y_excursion) * Cal_parameter.Y_gain;
-      cz = (cz + Cal_parameter.Z_excursion) * Cal_parameter.Z_gain;
+    return (double)return_value;
+  }  
+  if(Calibration_Flag == true)
+  {
+    cx = (cx + Cal_parameter.X_excursion) * Cal_parameter.X_gain;
+    cy = (cy + Cal_parameter.Y_excursion) * Cal_parameter.Y_gain;
+    cz = (cz + Cal_parameter.Z_excursion) * Cal_parameter.Z_gain;  
 
-      if (Cal_parameter.Rotation_Axis == 1) //X_Axis
-      {
-        compass_angle = atan2((double)cy, (double)cz);
-      }
-      else if (Cal_parameter.Rotation_Axis == 2) //Y_Axis
-      {
-        compass_angle = atan2((double)cx, (double)cz);
-      }
-      else if (Cal_parameter.Rotation_Axis == 3) //Z_Axis
-      {
-        compass_angle = atan2((double)cy, (double)cx);
-      }
-    }
-    else
+    if(Cal_parameter.Rotation_Axis == 1)  //X_Axis
     {
-      compass_angle = atan2((double)cy, (double)cx);
+      compass_angle = atan2( (double)cy, (double)cz );
     }
-
-    if (compass_angle < 0)
+    else if(Cal_parameter.Rotation_Axis == 2)  //Y_Axis
     {
-      compass_angle = (compass_angle + 2 * COMPASS_PI) * 180 / COMPASS_PI;
+      compass_angle = atan2( (double)cx, (double)cz );
     }
-    else
+    else if(Cal_parameter.Rotation_Axis == 3)  //Z_Axis
     {
-      compass_angle = compass_angle * 180 / COMPASS_PI;
+      compass_angle = atan2( (double)cy, (double)cx );
     }
-    return compass_angle;
   }
+  else
+  {
+    compass_angle = atan2( (double)cy, (double)cx );
+  }  
 
-  /**
+  if(compass_angle < 0)
+  {
+    compass_angle = (compass_angle + 2 * COMPASS_PI) * 180 / COMPASS_PI;
+  }
+  else
+  {
+    compass_angle = compass_angle * 180 / COMPASS_PI;
+  }
+  return compass_angle;
+}
+
+/**
  * \par Function
  *   getHeadingX
  * \par Description
@@ -191,19 +261,20 @@
  * \par Others
  *   The sensor value is a 16 bits signed integer.
  */
-  int16_t Compass::getHeadingX(void)
+int16_t Compass::getHeadingX(void)
+{
+  int8_t return_value = 0;
+  deviceCalibration();
+  return_value = readData( COMPASS_RA_DATAX_H, buffer, 2 );
+  if(return_value != 0)
   {
-    int8_t return_value = 0;
-    deviceCalibration();
-    return_value = readData(COMPASS_RA_DATAX_H, buffer, 2);
-    if (return_value != 0)
-    {
-      return return_value;
-    }
-    if (Measurement_Mode == COMPASS_MODE_SINGLE)
-      float writeReg(COMPASS_RA_MODE, COMPASS_MODE_SINGLE);
+    return return_value;
   }
-  return (((int16_t)buffer[0]) << 8) | buffer[1];
+  if( Measurement_Mode == COMPASS_MODE_SINGLE )
+  {
+    writeReg( COMPASS_RA_MODE, COMPASS_MODE_SINGLE );
+  } 
+  return ( ( (int16_t)buffer[0] ) << 8 ) | buffer[1];
 }
 
 /**
@@ -225,15 +296,15 @@ int16_t Compass::getHeadingY(void)
   int8_t return_value = 0;
   deviceCalibration();
   return_value = readData(COMPASS_RA_DATAY_H, buffer, 2);
-  if (return_value != 0)
+  if(return_value != 0)
   {
     return return_value;
   }
-  if (Measurement_Mode == COMPASS_MODE_SINGLE)
+  if(Measurement_Mode == COMPASS_MODE_SINGLE)
   {
     writeReg(COMPASS_RA_MODE, COMPASS_MODE_SINGLE);
-  }
-  return (((int16_t)buffer[0]) << 8) | buffer[1];
+  } 
+  return ( ( (int16_t)buffer[0] ) << 8) | buffer[1];
 }
 
 /**
@@ -244,7 +315,7 @@ int16_t Compass::getHeadingY(void)
  * \param[in]
  *   None
  * \par Output
- *   Non (float)e
+ *   None
  * \return
  *   The sensor value of Z-axis. If error, will return a error code.
  * \par Others
@@ -255,15 +326,15 @@ int16_t Compass::getHeadingZ(void)
   int8_t return_value = 0;
   deviceCalibration();
   return_value = readData(COMPASS_RA_DATAZ_H, buffer, 2);
-  if (return_value != 0)
+  if(return_value != 0)
   {
     return return_value;
   }
-  if (Measurement_Mode == COMPASS_MODE_SINGLE)
+  if(Measurement_Mode == COMPASS_MODE_SINGLE)
   {
     writeReg(COMPASS_RA_MODE, COMPASS_MODE_SINGLE);
-  }
-  return (((int16_t)buffer[0]) << 8) | buffer[1];
+  }     
+  return ( ( (int16_t)buffer[0] ) << 8) | buffer[1];
 }
 
 /**
@@ -289,17 +360,17 @@ int16_t Compass::getHeading(int16_t *x, int16_t *y, int16_t *z)
   int8_t return_value = 0;
   deviceCalibration();
   return_value = readData(COMPASS_RA_DATAX_H, buffer, 6);
-  if (return_value != 0)
+  if(return_value != 0)
   {
     return return_value;
   }
-  if (Measurement_Mode == COMPASS_MODE_SINGLE)
+  if(Measurement_Mode == COMPASS_MODE_SINGLE)
   {
     writeReg(COMPASS_RA_MODE, COMPASS_MODE_SINGLE);
-  }
-  *x = (((int16_t)buffer[0]) << 8) | buffer[1];
-  *y = (((int16_t)buffer[4]) << 8) | buffer[5];
-  *z = (((int16_t)buffer[2]) << 8) | buffer[3];
+  } 
+  *x = ( ( (int16_t)buffer[0] ) << 8) | buffer[1];
+  *y = ( ( (int16_t)buffer[4] ) << 8) | buffer[5];
+  *z = ( ( (int16_t)buffer[2] ) << 8) | buffer[3];
   return return_value;
 }
 
@@ -330,7 +401,7 @@ int8_t Compass::writeReg(int16_t reg, uint8_t data)
 {
   int8_t return_value = 0;
   return_value = writeData(reg, &data, 1);
-  return (return_value);
+  return(return_value);
 }
 
 /**
@@ -362,14 +433,14 @@ int8_t Compass::writeData(uint8_t start, const uint8_t *pData, uint8_t size)
 {
   int8_t return_value = 0;
   Wire.beginTransmission(Device_Address);
-  return_value = Wire.write(start); /* write the start address */
-  if (return_value != 1)
+  return_value = Wire.write(start);                  /* write the start address */
+  if(return_value != 1)
   {
-    return (I2C_ERROR);
+    return(I2C_ERROR);
   }
-  Wire.write(pData, size);                   /* write data bytes */
-  return_value = Wire.endTransmission(true); /* release the I2C-bus */
-  return (return_value);                     //return : no error
+  Wire.write(pData, size);            /* write data bytes */
+  return_value = Wire.endTransmission(true);     /* release the I2C-bus */
+  return(return_value); //return : no error                           
 }
 
 /**
@@ -403,28 +474,28 @@ int8_t Compass::readData(uint8_t start, uint8_t *buffer, uint8_t size)
   int8_t return_value = 0;
   Wire.beginTransmission(Device_Address);
   return_value = Wire.write(start);
-  if (return_value != 1)
+  if(return_value != 1)
   {
-    return (I2C_ERROR);
+    return(I2C_ERROR);
   }
   return_value = Wire.endTransmission(false); /* hold the I2C-bus */
-  if (return_value != 0)
+  if(return_value != 0)
   {
-    return (return_value);
+    return(return_value);
   }
   delayMicroseconds(1);
   /* Third parameter is true: relase I2C-bus after data is read. */
-  Wire.requestFrom(Device_Address, size, (uint8_t) true);
-  while (Wire.available() && i < size)
+  Wire.requestFrom(Device_Address, size, (uint8_t)true);
+  while(Wire.available() && i < size)
   {
     buffer[i++] = Wire.read();
   }
   delayMicroseconds(1);
-  if (i != size)
+  if(i != size)
   {
-    return (I2C_ERROR);
+    return(I2C_ERROR);
   }
-  return (0); /* return : no error */
+  return(0); /* return : no error */
 }
 
 /**
@@ -446,37 +517,37 @@ int8_t Compass::readData(uint8_t start, uint8_t *buffer, uint8_t size)
 void Compass::deviceCalibration(void)
 {
   pinMode(_keyPin, INPUT_PULLUP);
-  if (digitalRead(_keyPin) == 0)
+  if(digitalRead(_keyPin) == 0)
   {
-    delay(10);
+  	delay(10);
     pinMode(_keyPin, INPUT_PULLUP);
-    if (digitalRead(_keyPin) == 0)
-    {
-      if (testConnection() == false)
+    if(digitalRead(_keyPin) == 0)
+  	{
+      if(testConnection()==false)
       {
 #ifdef COMPASS_SERIAL_DEBUG
         Serial.println("It is not Me Compass!!!!!");
 #endif
         return;
-      }
-      long time_num, cal_time;
+      }  
+      long time_num,cal_time;
       bool LED_state = 0;
-      int16_t X_num, Y_num, Z_num;
+      int16_t X_num,Y_num,Z_num;
       int16_t X_max = -32768;
       int16_t X_min = 32767;
       int16_t Y_max = -32768;
       int16_t Y_min = 32767;
       int16_t Z_max = -32768;
       int16_t Z_min = 32767;
-      int16_t X_abs, Y_abs, Z_abs;
+      int16_t X_abs,Y_abs,Z_abs;  
 #ifdef COMPASS_SERIAL_DEBUG
       Serial.println("Compass calibration !!!");
-#endif
+#endif  
       time_num = millis();
       pinMode(_keyPin, INPUT_PULLUP);
-      while (digitalRead(_keyPin) == 0)
+      while(digitalRead(_keyPin) == 0)
       {
-        if (millis() - time_num > 200) //control the LED
+        if( millis() - time_num > 200 )   //control the LED
         {
           wdt_reset();
           time_num = millis();
@@ -487,15 +558,15 @@ void Compass::deviceCalibration(void)
           Serial.println("You can free the KEY now ");
 #endif
         }
-      }
+      }  
 #ifdef COMPASS_SERIAL_DEBUG
       Serial.println("collecting value.....");
-#endif
-      delay(100);
+#endif  
+      delay(100);  
       cal_time = millis();
       do
       {
-        if (millis() - time_num > 200) //control the LED
+        if(millis() - time_num > 200)   //control the LED
         {
           wdt_reset();
           time_num = millis();
@@ -503,90 +574,76 @@ void Compass::deviceCalibration(void)
           pinMode(_ledPin, OUTPUT);
           digitalWrite(_ledPin, LED_state);
         }
-        if (millis() - cal_time > 10)
+        if(millis() - cal_time > 10)
         {
           wdt_reset();
-          getHeading(&X_num, &Y_num, &Z_num);
-          if (X_num < X_min)
+          getHeading(&X_num,&Y_num,&Z_num);  
+          if(X_num < X_min)
           {
             X_min = X_num;
           }
-          else if (X_num > X_max)
+          else if(X_num > X_max)
           {
             X_max = X_num;
-          }
-          if (Y_num < Y_min)
+          }  
+          if(Y_num < Y_min)
           {
             Y_min = Y_num;
           }
-          else if (Y_num > Y_max)
+          else if(Y_num > Y_max)
           {
             Y_max = Y_num;
-          }
-          if (Z_num < Z_min)
+          }  
+          if(Z_num < Z_min)
           {
             Z_min = Z_num;
           }
-          else if (Z_num > Z_max)
+          else if(Z_num > Z_max)
           {
             Z_max = Z_num;
           }
         }
-      } while (digitalRead(_keyPin) == 1);
+      }
+      while(digitalRead(_keyPin) == 1);
       pinMode(_ledPin, OUTPUT);
       digitalWrite(_ledPin, LOW);
 
-      Cal_parameter.X_excursion = -((float)X_max + (float)X_min) / 2;
-      Cal_parameter.Y_excursion = -((float)Y_max + (float)Y_min) / 2;
-      Cal_parameter.Z_excursion = -((float)Z_max + (float)Z_min) / 2;
+      Cal_parameter.X_excursion = -( (float)X_max + (float)X_min ) / 2;
+      Cal_parameter.Y_excursion = -( (float)Y_max + (float)Y_min ) / 2;
+      Cal_parameter.Z_excursion = -( (float)Z_max + (float)Z_min ) / 2;
       Cal_parameter.X_gain = 1;
-      Cal_parameter.Y_gain = ((float)Y_max - (float)Y_min) / ((float)X_max - (float)X_min);
-      Cal_parameter.Z_gain = ((float)Z_max - (float)Z_min) / ((float)X_max - (float)X_min);
-      X_abs = abs(X_max - X_min);
-      Y_abs = abs(Y_max - Y_min);
-      Z_abs = abs(Z_max - Z_min);
-      if (X_abs <= Y_abs && X_abs <= Z_abs)
+      Cal_parameter.Y_gain = ( (float)Y_max - (float)Y_min ) / ( (float)X_max - (float)X_min );
+      Cal_parameter.Z_gain = ( (float)Z_max - (float)Z_min ) / ( (float)X_max - (float)X_min );  
+      X_abs = abs(X_max-X_min);
+      Y_abs = abs(Y_max-Y_min);
+      Z_abs = abs(Z_max-Z_min);  
+      if(X_abs<=Y_abs && X_abs<=Z_abs)
       {
-        Cal_parameter.Rotation_Axis = 1; //X_Axis
+        Cal_parameter.Rotation_Axis=1;  //X_Axis
       }
-      else if (Y_abs <= X_abs && Y_abs <= Z_abs)
+      else if(Y_abs<=X_abs && Y_abs<=Z_abs)
       {
-        Cal_parameter.Rotation_Axis = 2; //Y_Axis
+        Cal_parameter.Rotation_Axis=2;  //Y_Axis
       }
       else
       {
-        Cal_parameter.Rotation_Axis = 3; //Z_Axis
-      }
+        Cal_parameter.Rotation_Axis=3;  //Z_Axis
+      }  
 #ifdef COMPASS_SERIAL_DEBUG
       Serial.println("Print Calibration Parameter:");
-      Serial.print("X_excursion: ");
-      Serial.print(Cal_parameter.X_excursion, 1);
-      Serial.println(" ");
-      Serial.print("Y_excursion: ");
-      Serial.print(Cal_parameter.Y_excursion, 1);
-      Serial.println(" ");
-      Serial.print("Z_excursion: ");
-      Serial.print(Cal_parameter.Z_excursion, 1);
-      Serial.println(" ");
-      Serial.print("X_gain: ");
-      Serial.print(Cal_parameter.X_gain, 1);
-      Serial.println(" ");
-      Serial.print("Y_gain: ");
-      Serial.print(Cal_parameter.Y_gain, 1);
-      Serial.println(" ");
-      Serial.print("Z_gain: ");
-      Serial.print(Cal_parameter.Z_gain, 1);
-      Serial.println(" ");
-      Serial.print("Axis = ");
-      Serial.print(Cal_parameter.Rotation_Axis);
-      Serial.println(" ");
-#endif
-      write_EEPROM_Buffer(&Cal_parameter);
+      Serial.print("X_excursion: "); Serial.print(Cal_parameter.X_excursion,1); Serial.println(" ");
+      Serial.print("Y_excursion: "); Serial.print(Cal_parameter.Y_excursion,1); Serial.println(" ");
+      Serial.print("Z_excursion: "); Serial.print(Cal_parameter.Z_excursion,1); Serial.println(" ");
+      Serial.print("X_gain: ");      Serial.print(Cal_parameter.X_gain,1);      Serial.println(" ");
+      Serial.print("Y_gain: ");      Serial.print(Cal_parameter.Y_gain,1);      Serial.println(" ");
+      Serial.print("Z_gain: ");      Serial.print(Cal_parameter.Z_gain,1);      Serial.println(" "); 
+      Serial.print("Axis = ");       Serial.print(Cal_parameter.Rotation_Axis);      Serial.println(" ");
+#endif  
+      write_EEPROM_Buffer(&Cal_parameter);  
       pinMode(_ledPin, OUTPUT);
       digitalWrite(_ledPin, HIGH);
       pinMode(_keyPin, INPUT_PULLUP);
-      while (digitalRead(_keyPin) == 0)
-        ;
+      while(digitalRead(_keyPin) == 0);
       wdt_reset();
       delay(100);
     }
@@ -612,63 +669,6 @@ void Compass::read_EEPROM_Buffer(void)
 {
   uint8_t verify_number;
   uint8_t parameter_buffer[sizeof(Compass_Calibration_Parameter)];
-  struct Compass_Calibration_Parameter *parameter_pointer;
-
-  for (int address = 0x00; address < sizeof(Compass_Calibration_Parameter); address++)
-  {
-    parameter_buffer[address] = EEPROM.read(START_ADDRESS_OF_EEPROM_BUFFER + address);
-  }
-  parameter_pointer = (struct Compass_Calibration_Parameter *)parameter_buffer;
-  verify_number = (uint8_t)(parameter_pointer->X_excursion + parameter_pointer->Y_excursion + parameter_pointer->Z_excursion + parameter_pointer->X_gain + parameter_pointer->Y_gain + parameter_pointer->Z_gain + parameter_pointer->Rotation_Axis + 0xaa);
-  if (verify_number == parameter_pointer->verify_flag)
-  {
-#ifdef COMPASS_SERIAL_DEBUG
-    Serial.println("Verify number is true!!!");
-#endif
-    Cal_parameter = (*parameter_pointer);
-    Calibration_Flag = true;
-  }
-  else
-  {
-#ifdef COMPASS_SERIAL_DEBUG
-    Serial.println("Verify number is false!!!");
-#endif
-    Calibration_Flag = false;
-  }
-}
-
-/**
- * \par Function
- *   write_EEPROM_Buffer
- * \par Description
- *   Write some calculated calibration parameters to the EEPROM. 
- * \param[in]
- *   parameter_pointer - the address of a struct have stored some calculated calibration parameters.
- * \par Output
- *   None
- * \return
- *   None.
- * \par Others
- *   Calibration parameters will be saved in the EEPROM of the MCU.
- *   Call the arduino official EEPROM library.
- */
-void Compass::write_EEPROM_Buffer(struct Compass_Calibration_Parameter *parameter_pointer)
-{
-  uint8_t *buffer_pointer;
-  uint8_t verify_number;
-  parameter_pointer->verify_flag = (uint8_t)(parameter_pointer->X_excursion + parameter_pointer->Y_excursion + parameter_pointer->Z_excursion + parameter_pointer->X_gain + parameter_pointer->Y_gain + parameter_pointer->Z_gain + parameter_pointer->Rotation_Axis + 0xaa);
-  buffer_pointer = (uint8_t *)parameter_pointer;
-  for (int address = 0x00; address < sizeof(Compass_Calibration_Parameter); address++)
-  {
-    EEPROM.write(START_ADDRESS_OF_EEPROM_BUFFER + address, *(buffer_pointer + address));
-  }
-  Calibration_Flag = true;
-#ifdef COMPASS_SERIAL_DEBUG
-  Serial.println("Write EEPROM Buffer Success!!!");
-#endif
-}
-
-} //end namespace
   struct Compass_Calibration_Parameter *parameter_pointer;
     
   for(int address =0x00; address<sizeof(Compass_Calibration_Parameter); address++)
