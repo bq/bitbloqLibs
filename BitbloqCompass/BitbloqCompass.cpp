@@ -201,7 +201,7 @@ bool Compass::testConnection(void)
  * \par Others
  *   Will return a correct angle when you keep the Compass working in the plane which have calibrated.
  */
-double Compass::getAngle(void)
+float Compass::getAngle(void)
 {
   int16_t cx,cy,cz;
   double compass_angle;
@@ -244,7 +244,7 @@ double Compass::getAngle(void)
   {
     compass_angle = compass_angle * 180 / COMPASS_PI;
   }
-  return compass_angle;
+  return (float) compass_angle;
 }
 
 /**

@@ -261,7 +261,7 @@ public:
  * \par Others
  *   Will return a correct angle when you keep the Compass working in the plane which have calibrated.
  */
-  double getAngle(void);  
+  float getAngle(void);  
 
 /**
  * \par Function
