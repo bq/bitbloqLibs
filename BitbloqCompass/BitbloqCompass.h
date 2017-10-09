@@ -72,7 +72,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <Arduino.h>
-#include "MeConfig.h"
+#include <Wire.h>
+#include <EEPROM.h>
+//#include "MeConfig.h"
 
 /* Exported macro ------------------------------------------------------------*/
 //#define COMPASS_SERIAL_DEBUG
