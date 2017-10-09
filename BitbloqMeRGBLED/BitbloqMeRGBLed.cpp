@@ -221,6 +221,12 @@ void BitbloqMeRGBLed::show(void)
   delay(1);
 }
 
+void BitbloqMeRGBLed::showColor(uint8_t index, uint8_t red, uint8_t green, uint8_t blue)
+{
+  setColor(index, red, green, blue);
+  show();
+}
+
 
 /**
  * Destructor which can call your own function, it will release the LED buffer

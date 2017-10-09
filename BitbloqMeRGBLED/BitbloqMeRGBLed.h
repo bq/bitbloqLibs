@@ -72,6 +72,7 @@ class BitbloqMeRGBLed
         bool setColorAt(uint8_t index, uint8_t red, uint8_t green, uint8_t blue);
         bool setColor(uint8_t index, uint8_t red, uint8_t green, uint8_t blue);
         void show(void);
+        void showColor(uint8_t index, uint8_t red, uint8_t green, uint8_t blue);
 
     private:
         uint16_t count_led;
