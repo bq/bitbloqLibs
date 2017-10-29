@@ -16,4 +16,25 @@ private:
 	float _pinButton;
 };
 
+namespace Bitbloq{
+
+class Joystick
+{
+public:
+	Joystick(int pinX, int pinY, int pinButton);
+	void setup();
+	int * read();
+	int readX() const;
+	int readY() const;
+	int readButton() const;
+private:
+	uint8_t _pinX;
+	uint8_t _pinY;
+	uint8_t _pinButton;
+	
+	int readings[3];
+};
+
+} //end namespace
+
 #endif //JOYSTICK_H
