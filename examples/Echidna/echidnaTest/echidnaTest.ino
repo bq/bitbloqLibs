@@ -22,8 +22,10 @@ void loop() {
     echidna.setRGBcolor(0,255,0);
   }
 
-  Serial.print("X: ");Serial.println(echidna.readJoystickX());
-  Serial.print("Y: ");Serial.println(echidna.readJoystickY());
+  Serial.print("Joystick X: ");Serial.println(echidna.readJoystickX());
+  Serial.print("Joystick Y: ");Serial.println(echidna.readJoystickY());
+  Serial.print("Acc X: ");Serial.println(echidna.readAccX());
+  Serial.print("Acc Y: ");Serial.println(echidna.readAccY());
   Serial.print("Boton: ");Serial.println(echidna.readJoystickButton());
   Serial.print("Luz: "); Serial.println(echidna.readLightSensor());
 
