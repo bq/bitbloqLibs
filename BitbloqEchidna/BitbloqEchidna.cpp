@@ -10,7 +10,9 @@ Echidna::Echidna():
         button1_pin(3),
         button2_pin(2),
         buzzer_pin(10),
-        ldr_pin(A5)
+        ldr_pin(A5),
+        accX_pin(A2),
+        accY_pin(A3)
 {
 }
 
@@ -28,6 +30,8 @@ void Echidna::setup(){
     pinMode(button2_pin,INPUT);
     pinMode(buzzer_pin,OUTPUT);
     pinMode(ldr_pin,INPUT);
+    pinMode(accX_pin,INPUT);
+    pinMode(accY_pin, INPUT);
     rgbLed.setup();
     joystick.setup();
 }

@@ -78,6 +78,8 @@ public:
 	unsigned int readJoystickY()const {return joystick.readY();}
 	bool readJoystickButton()const {return joystick.readButton();}
 	
+	unsigned int readAccX() const {return analogRead(accX_pin);}
+	unsigned int readAccY() const {return analogRead(accY_pin);}
 	
 	
 protected:
@@ -85,6 +87,8 @@ protected:
 	const uint8_t button1_pin, button2_pin;
 	const uint8_t ldr_pin;
 	const uint8_t buzzer_pin;
+	const uint8_t accX_pin, accY_pin;
+
 	Bitbloq::RGBLed rgbLed;
 	Bitbloq::Joystick joystick;
 };
