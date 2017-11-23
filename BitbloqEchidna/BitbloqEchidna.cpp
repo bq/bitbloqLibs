@@ -7,8 +7,8 @@ const uint8_t Echidna::led_pin[3] = {11,12,13};
 Echidna::Echidna():
         rgbLed(9,5,6),
         joystick(A0,A1,2),
-        button1_pin(3),
-        button2_pin(2),
+        button1_pin(2),
+        button2_pin(3),
         buzzer_pin(10),
         ldr_pin(A5),
         accX_pin(A2),
