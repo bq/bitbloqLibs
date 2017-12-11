@@ -41,6 +41,8 @@
 //#define NRF52_DISABLE_INT
 #endif
 
+namespace Bitbloq{
+
 // Constructor when length, pin and type are known at compile-time:
 Adafruit_NeoPixel::Adafruit_NeoPixel(uint16_t n, uint8_t p, neoPixelType t) :
   begun(false), brightness(0), pixels(NULL), endTime(0)  
@@ -2096,3 +2098,5 @@ uint8_t Adafruit_NeoPixel::getBrightness(void) const {
 void Adafruit_NeoPixel::clear() {
   memset(pixels, 0, numBytes);
 }
+
+} //end Namespace

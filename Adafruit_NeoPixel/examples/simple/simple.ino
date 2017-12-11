@@ -9,7 +9,7 @@
 const int pin = 5;
 const int num = 1;
 
-Adafruit_NeoPixel rgbLed = Adafruit_NeoPixel(num, pin, NEO_GRB + NEO_KHZ800);
+Bitbloq::Adafruit_NeoPixel rgbLed = Bitbloq::Adafruit_NeoPixel(num, pin, NEO_GRB + NEO_KHZ800);
 
 
 void setup() {

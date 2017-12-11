@@ -26,6 +26,9 @@
  #include <pins_arduino.h>
 #endif
 
+
+namespace Bitbloq{
+
 // The order of primary colors in the NeoPixel data stream can vary
 // among device types, manufacturers and even different revisions of
 // the same item.  The third parameter to the Adafruit_NeoPixel
@@ -113,6 +116,7 @@ typedef uint16_t neoPixelType;
 typedef uint8_t  neoPixelType;
 #endif
 
+
 class Adafruit_NeoPixel {
 
  public:
@@ -176,5 +180,7 @@ class Adafruit_NeoPixel {
     pinMask;       // Output PORT bitmask
 #endif
 };
+
+}//end namespace
 
 #endif // ADAFRUIT_NEOPIXEL_H
