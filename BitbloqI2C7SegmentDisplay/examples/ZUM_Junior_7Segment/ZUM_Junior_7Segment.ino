@@ -3,7 +3,7 @@
 
 
 int i2cport = Bitbloq::BQZUMJunior::i2cPorts['A'];
-Bitbloq::ZUMJunior::I2C7SegmentDisplay segmentDisplay(i2cport);
+Bitbloq::I2C7SegmentDisplay segmentDisplay(i2cport);
 
 void setup() {
   segmentDisplay.setup();

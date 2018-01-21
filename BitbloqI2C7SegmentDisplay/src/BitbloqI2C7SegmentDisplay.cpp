@@ -1,9 +1,33 @@
+/*
+ * BitbloqI2C7SegmentDisplay.cpp
+ * 
+ * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * 
+ * 
+ */
+
+
 /***************************************************
 
 	BQ -- ZUM Junior 7 Segment Display TCA9535
 	
 ***************************************************/
-#define DEBUG
+//#define DEBUG
 
 #if ARDUINO >= 100
  #include "Arduino.h"
@@ -15,28 +39,27 @@
 
 #include <BitbloqI2C7SegmentDisplay.h>
 
-namespace Bitbloq{ namespace ZUMJunior{
+namespace Bitbloq{
 
 
 // Instantiate I2C7SegmentDisplay class
-I2C7SegmentDisplay::I2C7SegmentDisplay(uint8_t p):i2cp(p)
+I2C7SegmentDisplay::I2C7SegmentDisplay(uint8_t p):segmentdisplay_i2cport(p)
 {
+	
 }
 
 void I2C7SegmentDisplay::setup(){
 	//try to begin 10 times
 	for (int i=0;i<10;i++){
-		if(begin(i2cp)) break;
+		if(begin()) break;
 		delay(10);
 	}
 }
 
-SegmentStat I2C7SegmentDisplay::begin(uint8_t ui8_i2cport)
+SegmentStat I2C7SegmentDisplay::begin()
 {
 	uint8_t ui8_Data = 0;
 	uint8_t ui8_Conf = 0;
-	
-	segmentdisplay_i2cport = ui8_i2cport;
 	
 	switch (segmentdisplay_i2cport) {
 		case 0:
@@ -404,4 +427,4 @@ uint8_t I2C7SegmentDisplay::readRegister(uint8_t ui8_Reg)
   return ui8_data;
 }
 
-}} //end namespace Bitbloq::ZUMJunior
+} //end namespace Bitbloq
