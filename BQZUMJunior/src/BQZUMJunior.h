@@ -1,5 +1,5 @@
 /*
- * BitbloqZUMJunior.h
+ * BQZUMJunior.h
  *
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  *
@@ -21,19 +21,19 @@
  *
  */
 
-#ifndef BITBLOQZUMJUNIOR_H
-#define BITBLOQZUMJUNIOR_H
+#ifndef BQZUMJUNIOR_H
+#define BQZUMJUNIOR_H
 
-#include <BitbloqMPort.h>
+#include "BQZUMJuniorPorts.h"
 
-namespace Bitbloq{
+namespace BQ{
 
-class BQZUMJunior
+class ZUMJunior
 {
 
 public:
-    BQZUMJunior(); // public constructor
-    virtual ~BQZUMJunior(); // virtual public destructor
+    ZUMJunior(); // public constructor
+    virtual ~ZUMJunior(); // virtual public destructor
 
     /**
      * Sets pinmode of sensors and actuators (as in standard Arduino setup)
@@ -50,8 +50,8 @@ public:
 
 
      //ports structure of MakeBlock Orion Board.
-    static const Bitbloq::ZUMJunior::Port ports[7];
-    static const Bitbloq::ZUMJunior::I2CPorts i2cPorts;
+    static const ZUMJuniorPorts ports;
+    static const ZUMJuniorI2CPorts i2cPorts;
 
 protected:
 

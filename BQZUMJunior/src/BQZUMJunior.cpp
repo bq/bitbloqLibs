@@ -1,5 +1,5 @@
 /*
- * BitbloqZUMJunior.cpp
+ * BQZUMJunior.cpp
  *
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  *
@@ -24,32 +24,33 @@
 
 
 #include "Arduino.h"
-#include "BitbloqZUMJunior.h"
+#include "BQZUMJunior.h"
 
 
-namespace Bitbloq{
+namespace BQ{
 
-const Bitbloq::ZUMJunior::Port BQZUMJunior::ports[7] = {Bitbloq::ZUMJunior::Port(-1,-1), Bitbloq::ZUMJunior::Port(A3,3),Bitbloq::ZUMJunior::Port(A2,9),Bitbloq::ZUMJunior::Port(A5,A4),Bitbloq::ZUMJunior::Port(22,23),Bitbloq::ZUMJunior::Port(A1,6),Bitbloq::ZUMJunior::Port(A0,5)};
-const Bitbloq::ZUMJunior::I2CPorts BQZUMJunior::i2cPorts(0,1);
+const ZUMJuniorPort ports[6] = {ZUMJuniorPort(A3,3),ZUMJuniorPort(A2,9),ZUMJuniorPort(A5,A4),ZUMJuniorPort(22,23),ZUMJuniorPort(A1,6),ZUMJuniorPort(A0,5)};
+const ZUMJuniorPorts ZUMJunior::ports = ZUMJuniorPorts(ports);
+const ZUMJuniorI2CPorts ZUMJunior::i2cPorts(0,1);
 
-BQZUMJunior::BQZUMJunior():
+ZUMJunior::ZUMJunior():
         buzzerPin(4)
 {
     //Nothing here
 }
  
 
-BQZUMJunior::~BQZUMJunior(){
+ZUMJunior::~ZUMJunior(){
 	//Nothing here
 }
 
-void BQZUMJunior::setup(){    
+void ZUMJunior::setup(){    
     //actuators
     pinMode(buzzerPin,OUTPUT);
 }
 
 
-void BQZUMJunior::playTone(int note, int beat){
+void ZUMJunior::playTone(int note, int beat){
 	tone(buzzerPin, note, beat);
 }
 
