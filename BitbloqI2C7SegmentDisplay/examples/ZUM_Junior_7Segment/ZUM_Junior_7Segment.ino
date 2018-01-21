@@ -2,7 +2,7 @@
 #include <BitbloqI2C7SegmentDisplay.h>
 
 
-int i2cport = Bitbloq::BQZUMJunior::i2cPorts[3];
+int i2cport = Bitbloq::BQZUMJunior::i2cPorts['A'];
 Bitbloq::ZUMJunior::I2C7SegmentDisplay segmentDisplay(i2cport);
 
 void setup() {

@@ -101,10 +101,10 @@ class I2CPorts
 	
 	const int operator[](size_t index) const{
 		switch(index){
-			case 3:
+			case 'A':
 				return p1;
 				break;
-			case 4:
+			case 'B':
 				return p2;
 				break;
 			default:
