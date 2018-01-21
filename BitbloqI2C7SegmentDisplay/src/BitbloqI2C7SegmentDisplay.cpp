@@ -19,8 +19,16 @@ namespace Bitbloq{ namespace ZUMJunior{
 
 
 // Instantiate I2C7SegmentDisplay class
-I2C7SegmentDisplay::I2C7SegmentDisplay(void)
+I2C7SegmentDisplay::I2C7SegmentDisplay(uint8_t p):i2cp(p)
 {
+}
+
+void I2C7SegmentDisplay::setup(){
+	//try to begin 10 times
+	for (int i=0;i<10;i++){
+		if(begin(i2cp)) break;
+		delay(10);
+	}
 }
 
 SegmentStat I2C7SegmentDisplay::begin(uint8_t ui8_i2cport)

@@ -90,14 +90,16 @@ typedef enum {
 
 class I2C7SegmentDisplay {
 	public:
-		I2C7SegmentDisplay(void);
-		SegmentStat	begin(uint8_t ui8_i2cport);
-		void		display(uint8_t i_disp1, uint8_t i_disp0);
-		void		displayChar(char c_disp1, char c_disp0);
+		I2C7SegmentDisplay(uint8_t p);
+		void setup();
+		void display(uint8_t i_disp1, uint8_t i_disp0);
+		void displayChar(char c_disp1, char c_disp0);
 	
 	private:
-		int		segmentdisplay_i2cport;
-		void	writeRegister(uint8_t ui8_Reg, uint8_t ui8_data);
+		const int i2cp;
+		SegmentStat	begin(uint8_t ui8_i2cport);
+		int	segmentdisplay_i2cport;
+		void writeRegister(uint8_t ui8_Reg, uint8_t ui8_data);
 		uint8_t	readRegister(uint8_t ui8_Reg);
 };
 

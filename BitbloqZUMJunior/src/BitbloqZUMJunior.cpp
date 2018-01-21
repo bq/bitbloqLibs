@@ -1,5 +1,5 @@
 /*
- * BitbloqZUMJunior.h
+ * BitbloqZUMJunior.cpp
  *
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  *
@@ -21,42 +21,36 @@
  *
  */
 
-#ifndef BITBLOQZUMJUNIOR_H
-#define BITBLOQZUMJUNIOR_H
 
-#include <BitbloqMPort.h>
+
+#include "Arduino.h"
+#include "BitbloqZUMJunior.h"
+
 
 namespace Bitbloq{
 
-class ZUMJunior
+const Bitbloq::ZUMJunior::Port BQZUMJunior::ports[7] = {Bitbloq::ZUMJunior::Port(-1,-1), Bitbloq::ZUMJunior::Port(A3,3),Bitbloq::ZUMJunior::Port(A2,9),Bitbloq::ZUMJunior::Port(A5,A4),Bitbloq::ZUMJunior::Port(22,23),Bitbloq::ZUMJunior::Port(A1,6),Bitbloq::ZUMJunior::Port(A0,5)};
+const Bitbloq::ZUMJunior::I2CPorts BQZUMJunior::i2cPorts(0,1);
+
+BQZUMJunior::BQZUMJunior():
+        buzzerPin(4)
 {
+    //Nothing here
+}
+ 
 
-public:
-    ZUMJunior(); // public constructor
-    virtual ~ZUMJunior(); // virtual public destructor
+BQZUMJunior::~BQZUMJunior(){
+	//Nothing here
+}
 
-    /**
-     * Sets pinmode of sensors and actuators (as in standard Arduino setup)
-     */
-    void setup();
-
-    
-    /**
-     * Play tone
-     * @param note note frequency
-     * @param beat time active
-     */
-    void playTone(int note, int beat);
+void BQZUMJunior::setup(){    
+    //actuators
+    pinMode(buzzerPin,OUTPUT);
+}
 
 
-     //ports structure of MakeBlock Orion Board.
-    static const Port ports[9];
-
-protected:
-
-    const int buzzerPin; /// pin where the buzzer is connected. It is hardwired on the board (D8) 
-};
+void BQZUMJunior::playTone(int note, int beat){
+	tone(buzzerPin, note, beat);
+}
 
 } //end namespace
-
-#endif

@@ -1,24 +1,20 @@
+#include <BitbloqZUMJunior.h>
 #include <BitbloqI2C7SegmentDisplay.h>
 
-Bitbloq::ZUMJunior::I2C7SegmentDisplay SegmentDisplay;
-char c_caracter = 48;
+
+int i2cport = Bitbloq::BQZUMJunior::i2cPorts[3];
+Bitbloq::ZUMJunior::I2C7SegmentDisplay segmentDisplay(i2cport);
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-
-  SegmentDisplay.begin(1);
-
-  SegmentDisplay.displayChar('b','q');
-
+  segmentDisplay.setup();
+  segmentDisplay.displayChar('b','q');
   delay(1000);
-
-  SegmentDisplay.displayChar(' ',' ');
+  segmentDisplay.displayChar(' ',' ');
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  SegmentDisplay.displayChar(c_caracter,c_caracter+1);
+  static char c_caracter = 48;
+  segmentDisplay.displayChar(c_caracter,c_caracter+1);
   c_caracter++;
   if ((c_caracter > 57) & (c_caracter < 65)){
     c_caracter = 65;  

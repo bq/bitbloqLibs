@@ -25,7 +25,7 @@
  #define BITBLOQMPORT
  
 /**
- * Port struct for MakeBlock Boards
+ * Port struct for PortBased Boards Boards
  */
 class Port
 {
@@ -53,5 +53,66 @@ class Port
 		}
 	}
 };
+
+namespace Bitbloq{ namespace ZUMJunior{
+
+/**
+ * Port struct for PortBased Boards Boards
+ */
+class Port
+{
+	public:
+	
+	Port(int a, int b)
+	{
+		s1 = a;
+		s2 = b;
+	}	
+	virtual ~Port(){}
+	
+	int s1, s2;
+	
+	const int operator[](size_t index) const{
+		switch(index){
+			case 1:
+				return s1;
+				break;
+			case 2:
+				return s2;
+				break;
+			default:
+				return -1;
+		}
+	}
+};
+
+class I2CPorts
+{
+	public:
+	
+	I2CPorts(int _p1, int _p2)
+	{
+		p1 = _p1;
+		p2 = _p2;
+	}	
+	virtual ~I2CPorts(){}
+	
+	int p1, p2;
+	
+	const int operator[](size_t index) const{
+		switch(index){
+			case 3:
+				return p1;
+				break;
+			case 4:
+				return p2;
+				break;
+			default:
+				return -1;
+		}
+	}
+};
+
+}} //end namespace Bitbloq::ZUMJunior
     
 #endif
