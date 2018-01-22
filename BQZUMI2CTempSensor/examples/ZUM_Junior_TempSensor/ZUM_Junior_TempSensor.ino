@@ -1,10 +1,11 @@
+#include <BQZUMI2CTempSensor.h>
 #include <BQZUMJunior.h>
+#include <BQZUMJuniorPorts.h>
 
-#include <BitbloqI2CTempSensor.h>
 
 
 int i2cport = BQ::ZUMJunior::i2cPorts['A'];
-Bitbloq::I2CTempSensor tempSensor(i2cport);
+BQ::ZUM::I2CTempSensor tempSensor(i2cport);
 
 void setup() {
   Serial.begin(9600); 
@@ -18,4 +19,3 @@ void loop() {
   Serial.println(f_Temperature);
   delay(1000);
 }
-

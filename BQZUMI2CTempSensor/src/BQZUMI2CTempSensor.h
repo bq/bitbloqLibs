@@ -1,5 +1,5 @@
 /*
- * BitbloqI2CTempSensor.h
+ * BQZUMI2CTempSensor.h
  * 
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  * 
@@ -28,13 +28,13 @@
 ***************************************************/
 
 
-#ifndef BITBLOQI2CTEMPSENSOR_H
-#define BITBLOQI2CTEMPSENSOR_H
+#ifndef BQZUMI2CTEMPSENSOR_H
+#define BQZUMI2CTEMPSENSOR_H
 
 #ifndef NCT75_h
 #define NCT75_h
 
-namespace Bitbloq{
+namespace BQ{ namespace ZUM{
 
 #define NCT75_ADDR            0x48
 #define NCT75_THYST_DEFAULT   0x4B00
@@ -80,7 +80,7 @@ class	I2CTempSensor {
 		TempStat	begin();
 };
 
-} //end namespace Bitbloq
+}} //end namespace BQ::ZUM
 
 #endif
 #endif

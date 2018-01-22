@@ -1,5 +1,5 @@
 /*
- * BitbloqI2CTempSensor.h
+ * BQZUMI2CTempSensor.cpp
  * 
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  * 
@@ -37,9 +37,9 @@
 
 #include <Wire.h>
 
-#include "BitbloqI2CTempSensor.h"
+#include "BQZUMI2CTempSensor.h"
 
-namespace Bitbloq{
+namespace BQ{ namespace ZUM{
 
 // Instantiate I2CTempSensor class
 I2CTempSensor::I2CTempSensor(uint8_t ui8_i2cport):tempsens_i2cport(ui8_i2cport)
@@ -139,5 +139,5 @@ uint16_t I2CTempSensor::getID()
 	return ui16_ID;
 }
 
-} //end namespace Bitbloq
+}} //end namespace BQ::ZUM
 
