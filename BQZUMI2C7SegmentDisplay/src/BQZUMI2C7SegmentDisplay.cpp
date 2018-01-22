@@ -1,5 +1,5 @@
 /*
- * BitbloqI2C7SegmentDisplay.cpp
+ * BQZUMI2C7SegmentDisplay.cpp
  * 
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  * 
@@ -37,9 +37,9 @@
 
 #include <Wire.h>
 
-#include <BitbloqI2C7SegmentDisplay.h>
+#include <BQZUMI2C7SegmentDisplay.h>
 
-namespace Bitbloq{
+namespace BQ{ namespace ZUM{
 
 
 // Instantiate I2C7SegmentDisplay class
@@ -427,4 +427,4 @@ uint8_t I2C7SegmentDisplay::readRegister(uint8_t ui8_Reg)
   return ui8_data;
 }
 
-} //end namespace Bitbloq
+}} //end namespace BQ::ZUM

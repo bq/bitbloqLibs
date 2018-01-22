@@ -1,9 +1,8 @@
-#include <BitbloqZUMJunior.h>
-#include <BitbloqI2C7SegmentDisplay.h>
+#include <BQZUMJunior.h>
+#include <BQZUMI2C7SegmentDisplay.h>
 
-
-int i2cport = Bitbloq::BQZUMJunior::i2cPorts['A'];
-Bitbloq::I2C7SegmentDisplay segmentDisplay(i2cport);
+int i2cport = BQ::ZUMJunior::i2cPorts['A'];
+BQ::ZUM::I2C7SegmentDisplay segmentDisplay(i2cport);
 
 void setup() {
   segmentDisplay.setup();

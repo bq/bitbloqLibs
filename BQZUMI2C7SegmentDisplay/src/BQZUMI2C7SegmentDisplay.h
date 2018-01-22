@@ -7,7 +7,7 @@
 #ifndef BITBLOQI2C7SEGMENT_H
 #define BITBLOQI2C7SEGMENT_H
 
-namespace Bitbloq{ 
+namespace BQ{ namespace ZUM{
 
 #ifndef TCA9535_h
 #define TCA9535_h
@@ -103,7 +103,7 @@ class I2C7SegmentDisplay {
 		uint8_t	readRegister(uint8_t ui8_Reg);
 };
 
-} //end namespace Bitbloq
+}} //end namespace BQ::ZUM
 
 #endif
 #endif

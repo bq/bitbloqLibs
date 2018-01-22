@@ -26,7 +26,7 @@
 
 #include "BQZUMJuniorPorts.h"
 
-namespace BQ{
+namespace BQ{ 
 
 class ZUMJunior
 {

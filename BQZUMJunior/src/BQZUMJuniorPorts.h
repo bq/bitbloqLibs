@@ -24,6 +24,8 @@
 #ifndef BQZUMJUNIORPORTS_H
 #define BQZUMJUNIORPORTS_H
 
+#define debug
+
 namespace BQ{
 
 class ZUMJuniorPort
@@ -48,6 +50,9 @@ class ZUMJuniorPort
 	int s1, s2;
 	
 	const int operator[](size_t index) const{
+		#ifdef debug
+		Serial.print("Port index: "); Serial.println(index);
+		#endif
 		switch(index){
 			case 1:
 				return s1;
@@ -103,11 +108,15 @@ class ZUMJuniorPorts
 	virtual ~ZUMJuniorPorts(){}
 	
 	const ZUMJuniorPort operator[](size_t index) const{
+		#ifdef debug
+		Serial.print("Ports index: "); Serial.println(index);
+		#endif
 		switch(index){
 			case 1:
 			case 2:
 			case 3:
 			case 4:
+				
 				return ports[index -1];
 				break;
 			case 'A':
