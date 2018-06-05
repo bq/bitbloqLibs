@@ -10,7 +10,7 @@ In order to use these libraries with the Arduino IDE, clone this repo inside you
 
 - Clone project
    ```
-   git clone http://github.com/bq/bitbloqLibs.git
+   git clone http://github.com/bitbloq/bitbloqLibs.git
    ```
 - Add your library and the examples you deem necessary
 - Make a pull request to this repository with your changes.  [How to create a pull request](https://help.github.com/articles/creating-a-pull-request/).
