@@ -3,6 +3,7 @@
  * 
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  *                Pablo García <pablo.garcia@bq.com> 
+ * 								Jorge Campo <jorge.campo@bq.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -114,9 +115,25 @@ uint16_t I2CALPSSensor::getDistance(void)
 	uint8_t		ui8_dataL;
 	uint8_t		ui8_dataH;
 	uint16_t	ui16_distance;
+	int		i_test = 22;
+	int 		i_min = 0;
+	int		i_max = 44;
+	int intervals[] = {4094, 2840, 2045, 1585, 1200, 1020, 775, 660, 555, 485, 427, 378, 337, 302, 277, 250, 225, 208, 190, 174, 161, 150, 140, 130, 121, 113, 105, 98, 91, 85, 80, 76, 72, 68, 65, 62, 59, 56, 53, 50, 48, 46, 44, 42, 40, 38};
 	readRegister(VCNL4200_REG_PS_DATA, &ui8_dataL, &ui8_dataH);
 	ui16_distance = (ui8_dataH << 8) + ui8_dataL;
-	return ui16_distance;
+
+	if ( ui16_distance == 0 ) return 0;
+	if ( ui16_distance == 4095 ) return 5;
+	if ( ui16_distance <= 37 ) return 50;
+	while ( i_max != i_min + 1 ) {
+		if ( ui16_distance >= intervals[i_test] ) {
+		    i_max = i_test;
+		} else {
+		    i_min = i_test;    
+		}
+		i_test = floor(( i_max + i_min ) / 2);
+  }
+	return i_max + 5;
 }
 
 float I2CALPSSensor::getAL(void)
