@@ -3,6 +3,7 @@
  *
  * Copyright 2018 Alberto Valero <alberto.valero@bq.com>
  *                Pablo García <pablo.garcia@bq.com>
+ * 								Jorge Campo <jorge.campo@bq.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -184,7 +185,7 @@ I2CColorSensor::Colors I2CColorSensor::whichColor(){
 	float	f_BlueAverage	= 0;
 	float	f_ClearAverage	= 0;
 
-	for(int i_Cont=0;i_Cont<100;i_Cont++){
+	for(int i_Cont=0;i_Cont<30;i_Cont++){
 		getColor(&f_Red, &f_Green, &f_Blue, &f_Clear);
 		f_RedAverage+=f_Red;
 		f_GreenAverage+=f_Green;
@@ -192,30 +193,19 @@ I2CColorSensor::Colors I2CColorSensor::whichColor(){
 		f_ClearAverage+=f_Clear;
 	}
 
-  f_RedAverage		= f_RedAverage/100;
-  f_GreenAverage	= f_GreenAverage/100;
-  f_BlueAverage		= f_BlueAverage/100;
-  f_ClearAverage	= f_ClearAverage/100;
+  f_RedAverage		= f_RedAverage/30;
+  f_GreenAverage	= f_GreenAverage/30;
+  f_BlueAverage		= f_BlueAverage/30;
+  f_ClearAverage	= f_ClearAverage/30;
 
-  #ifdef DEBUG
-  Serial.print("COLOR Red:");
-  Serial.print(f_RedAverage);
-  Serial.print("\tGreen:");
-  Serial.print(f_GreenAverage);
-  Serial.print("\tBlue:");
-  Serial.print(f_BlueAverage);
-  Serial.print("\tClear:");
-  Serial.print(f_ClearAverage);
-  Serial.println();
-  #endif //DEBUG
-
-  if ( (f_RedAverage > 130) && (f_GreenAverage > 130) && (f_BlueAverage > 130) ) return I2CColorSensor::WHITE;
-  if ( (f_RedAverage < 50) && (f_GreenAverage < 50) && (f_BlueAverage < 50) ) return I2CColorSensor::BLACK;
+  if ( (f_RedAverage > 170) && (f_GreenAverage > 170) && (f_BlueAverage > 170) ) return I2CColorSensor::WHITE;
+  if ( (f_RedAverage < 10) && (f_GreenAverage < 10) && (f_BlueAverage < 10) ) return I2CColorSensor::BLACK;
   if ( f_RedAverage > (f_GreenAverage+f_BlueAverage)) return I2CColorSensor::RED;
-  if ( f_GreenAverage > (f_RedAverage + f_BlueAverage)) return I2CColorSensor::GREEN;
-  if ( f_BlueAverage > (f_GreenAverage + f_RedAverage)) return I2CColorSensor::BLUE;
-  if ( (f_RedAverage > 130) || (f_GreenAverage > 130) || (f_BlueAverage > 130) ) return I2CColorSensor::WHITE;
+  if ( f_GreenAverage > (f_RedAverage + f_BlueAverage)*0.8) return I2CColorSensor::GREEN;
+  if ( f_BlueAverage > (f_GreenAverage + f_RedAverage)*0.8) return I2CColorSensor::BLUE;
+  if ( (f_RedAverage > 170) || (f_GreenAverage > 170) || (f_BlueAverage > 170) ) return I2CColorSensor::WHITE;
   if ( (f_RedAverage < 50) || (f_GreenAverage < 50) || (f_BlueAverage < 50) ) return I2CColorSensor::BLACK;
+
   return I2CColorSensor::WHITE;
 }
 
