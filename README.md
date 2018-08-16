@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/bq/bitbloqLibs.png?label=ready&title=Ready)](https://waffle.io/bq/bitbloqLibs)
 # bitbloqLibs
 Arduino libraries being used by [bitbloq](http://bitbloq.bq.com)
 
