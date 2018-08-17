@@ -1,0 +1,85 @@
+{
+	"uno": {
+			"board": "arduino:avr:uno",
+			"id":[
+							{"productID": 67, "vendorID": 9025},
+							{"productID": 1, "vendorID": 9025},
+							{"productID": 67, "vendorID": 10755},
+							{"productID": 579, "vendorID": 9025},
+							{"productID": 1, "vendorID": 9025},
+							{"productID": 60000, "vendorID": 4292},
+							{"productID": 29987, "vendorID": 6790}
+					]
+			},
+
+	"ArduinoUNO": {
+	"board": "arduino:avr:uno",
+	"id":[
+			{"productID": 67, "vendorID": 9025},
+			{"productID": 1, "vendorID": 9025},
+			{"productID": 67, "vendorID": 10755},
+			{"productID": 579, "vendorID": 9025}
+		]
+	},
+	"FreaduinoUNO":{    
+		"board": "arduino:avr:uno",
+		"id":[
+				{"productID": 1, "vendorID": 9025}
+			]
+		
+		},
+
+		"ArduinoMega2560":{    
+		"board": "arduino:avr:mega:cpu=atmega2560",
+		"id":[
+				{"productID": 16, "vendorID": 9025},
+				{"productID": 66, "vendorID": 9025},
+				{"productID": 16, "vendorID": 10755},
+				{"productID": 66, "vendorID": 10755},
+				{"productID": 16, "vendorID": 9025},
+				{"productID": 66, "vendorID": 10755}
+			]
+		},
+
+		"mega":{
+				"board": "arduino:avr:mega:cpu=atmega2560",
+				"id":[
+								{"productID": 16, "vendorID": 9025},
+								{"productID": 66, "vendorID": 9025},
+								{"productID": 16, "vendorID": 10755},
+								{"productID": 66, "vendorID": 10755},
+								{"productID": 16, "vendorID": 9025},
+								{"productID": 66, "vendorID": 10755},
+								{"productID": 29987, "vendorID": 6790}
+						]
+				},
+
+	"zumjunior":{    
+		"board": "BQ:avr:zum_junior",
+		"id":[
+				{"productID": 60000, "vendorID": 4292}
+			]
+		
+		},
+
+	"zumCore":{    
+		"board": "arduino:avr:bt:cpu=atmega328",
+		"id":[
+				{"productID": 24577, "vendorID": 1027}
+			]
+		},
+		
+	"bt328":{    
+		"board": "arduino:avr:bt:cpu=atmega328",
+		"id":[
+				{"productID": 24577, "vendorID": 1027}
+			]
+		},
+		
+	"zumcore2":{    
+		"board": "BQ:avr:zum_core2",
+		"id":[
+				{"productID": 60000, "vendorID": 4292}
+			]
+	}
+}
